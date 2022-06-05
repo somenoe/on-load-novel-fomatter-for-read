@@ -162,6 +162,9 @@ function replacing(doc) {
         .replace(/Aht/g, "Ahhk")
         .replace(/Ara/g, "Ahh")
         .replace(/Etto/g, "Hmm")
+        // [^\w\s] = not in \w, not in \s
+        .replace(/Ee([^\w\s])/g, "Eh$1")
+        .replace(/Aa([^\w\s])/g, "Ah$1")
         .replace(/Mmmhmm|Mmhmm| mmmhmm| mmhmm/g, "Mmm-hmm")
 
         .replace(/Hmpf|Hmph|Hmhm/g, "Hmm")
