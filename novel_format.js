@@ -1,5 +1,5 @@
-// version 95
-console.log("version 95");
+// version 96
+console.log("version 96");
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
 function replacing(doc) {
     doc = doc
@@ -360,4 +360,4 @@ if (window.location.hostname == 'allnovelfull.com')
     allnovelfull();
 // incomplete
 if (window.location.hostname == 'others.net') process("novel-content", "content", "arrticle");
-// version 95
+// version 96
