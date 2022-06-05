@@ -1,6 +1,7 @@
 // version 96
 console.log("version 96");
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
+// TODO: group repalce line to separate function
 function replacing(doc) {
     doc = doc
         // remove abrr tag
@@ -76,8 +77,8 @@ function replacing(doc) {
 
         // Japanese Symbol
 
-        .replace(/“|「/g, "「 ")
-        .replace(/”|」/g, " 」")
+        // .replace(/“|「/g, "「 ")
+        // .replace(/”|」/g, " 」")
         .replace(/\[/g, "『 ")
         .replace(/\]/g, " 』")
 
@@ -187,9 +188,9 @@ function replacing(doc) {
         .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
         .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
         .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
-        .replace(/( |\?|\!|\.|,|…)([a|e|i|o|u|A|E|O|U])ah– /g, " $2h– ")
-        .replace(/( |\?|\!|\.|,|…)([a|e|i|o|u|A|E|O|U])ah– /g, " $2h– ")
-        .replace(/( |\?|\!|\.|,|…)([a|e|i|o|u|A|E|O|U])ah– /g, " $2h– ")
+        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
+        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
+        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
         .replace(/Wh-wh| wh-wh|Wh, wh| wh, wh|Wh- wh| wh- wh|Wh– wh| wh– wh|Wh– Wh/g, " Wha– Wh")
         .replace(/Th-th| th-th|Th, th| th, th|Th- th| th- th|Th– th| th– th|Th– Th/g, " Ta– Th")
         // please read what it stand for
@@ -229,25 +230,25 @@ function replacing(doc) {
 function ordinal_number(doc) {
     return doc
         .replace(/([2-9])([0-9])(st|nd|rd|th| st| nd| rd| th)/, "$10 $2$3")
-        .replace(/(1st|1 st)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "First$2")
-        .replace(/(2nd|2 nd)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Second$2")
-        .replace(/(3rd|3 rd)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Third$2")
-        .replace(/(4th|4 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Fourth$2")
-        .replace(/(5th|5 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Fifth$2")
-        .replace(/(6th|6 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Sixth$2")
-        .replace(/(7th|7 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Seventh$2")
-        .replace(/(8th|8 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Eighth$2")
-        .replace(/(9th|9 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Ninth$2")
-        .replace(/(10th|10 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Tenth$2")
-        .replace(/(11th|11 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Eleventh$2")
-        .replace(/(12th|12 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Twelfth$2")
-        .replace(/(13th|12 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Thirteenth$2")
-        .replace(/(14th|14 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Fourteenth$2")
-        .replace(/(15th|15 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Fifteenth$2")
-        .replace(/(16th|16 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Sixteenth$2")
-        .replace(/(17th|17 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Seventeenth$2")
-        .replace(/(18th|18 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Eighteenth$2")
-        .replace(/(19th|19 th)( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/, "Nineteenth$2")
+        .replace(/(1st|1 st)([^\w])/, "First$2")
+        .replace(/(2nd|2 nd)([^\w])/, "Second$2")
+        .replace(/(3rd|3 rd)([^\w])/, "Third$2")
+        .replace(/(4th|4 th)([^\w])/, "Fourth$2")
+        .replace(/(5th|5 th)([^\w])/, "Fifth$2")
+        .replace(/(6th|6 th)([^\w])/, "Sixth$2")
+        .replace(/(7th|7 th)([^\w])/, "Seventh$2")
+        .replace(/(8th|8 th)([^\w])/, "Eighth$2")
+        .replace(/(9th|9 th)([^\w])/, "Ninth$2")
+        .replace(/(10th|10 th)([^\w])/, "Tenth$2")
+        .replace(/(11th|11 th)([^\w])/, "Eleventh$2")
+        .replace(/(12th|12 th)([^\w])/, "Twelfth$2")
+        .replace(/(13th|12 th)([^\w])/, "Thirteenth$2")
+        .replace(/(14th|14 th)([^\w])/, "Fourteenth$2")
+        .replace(/(15th|15 th)([^\w])/, "Fifteenth$2")
+        .replace(/(16th|16 th)([^\w])/, "Sixteenth$2")
+        .replace(/(17th|17 th)([^\w])/, "Seventeenth$2")
+        .replace(/(18th|18 th)([^\w])/, "Eighteenth$2")
+        .replace(/(19th|19 th)([^\w])/, "Nineteenth$2")
         ;
 }
 function hide_all_except(children, except) {
