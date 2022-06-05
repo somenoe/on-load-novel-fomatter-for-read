@@ -1,0 +1,41 @@
+{
+  "TODO": [
+    "//TODO: edit the display detaail",
+    "//TODO: stop using with shortcut keys like Adblock",
+    "//TODO: take script from GitHub to update eveyr reload",
+    "//TODO: deploy to offical Extension market",
+    "//TODO: "
+  ],
+  "name": "NASA Picture of the day viewer",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
+  "description": "A chromium extension to show NASA's Picture of the Day.",
+  "icons": {
+    "16": "icons/nasapod16x16.png",
+    "32": "icons/nasapod32x32.png",
+    "48": "icons/nasapod48x48.png",
+    "128": "icons/nasapod128x128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "content-scripts/content.js",
+        "novel_format.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.jpeg"
+  ]
+}
