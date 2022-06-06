@@ -77,8 +77,10 @@ function replacing(doc) {
 
         // Japanese Symbol
 
-        // .replace(/“|「/g, "「 ")
-        // .replace(/”|」/g, " 」")
+        // .replace(/“/g, "「 ")
+        // .replace(/”/g, " 」")
+        .replace(/「/g, "「 ")
+        .replace(/」/g, " 」")
         .replace(/\[/g, "『 ")
         .replace(/\]/g, " 』")
 
