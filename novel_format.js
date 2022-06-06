@@ -313,6 +313,7 @@ function japanese_quote_symbol(doc) {
             '<span aria-hidden="true" >$1</span>$2<span aria-hidden="true" >$3</span>'
         )
         .replace(/\.([」|】|』|）])/g, ". $1")
+        .replace(/([\w]) ([」|】|』|）])([^\w])/g, "$1. $1 $2")
         .replace(
             /([\.| |])([「|【|『|（])/g,
             '<span aria-hidden="true" >$1</span>$2'
