@@ -6,6 +6,7 @@ function replacing(doc) {
     doc = doc
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
+        .replace(/<br>/g, "</p><p>")
         // Nothing But SPace
         .replace(/&nbsp;|<p>&nbsp;<\/p>/g, " ")
 
@@ -286,21 +287,21 @@ function japanese_quote_symbol(doc) {
     console.log("[log]: change to japanese quote style");
     const japanese_open_quote = doc.match(/「/g);
     const japanese_close_quote = doc.match(/」/g);
-    const english_open_quote = doc.match(/“/g);
-    const english_close_quote = doc.match(/”/g);
 
     // mainly use english quote symbol ("")
     if (japanese_open_quote == null && japanese_close_quote == null) {
         console.log("[log]: ENG style");
         doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
     }
-    // mainly use japanese quote symbol ("")
-    if (japanese_open_quote != null && japanese_close_quote != null)
-        if (english_open_quote != null && english_close_quote != null)
-            if (japanese_open_quote.length + japanese_close_quote.length > english_open_quote.length + english_close_quote.length) {
-                console.log("[log]: JP style");
-                doc = doc.replace(/“/g, "『 ").replace(/”/g, " 』");
-            }
+    // const english_open_quote = doc.match(/“/g);
+    // const english_close_quote = doc.match(/”/g);
+    // // mainly use japanese quote symbol ("")
+    // if (japanese_open_quote != null && japanese_close_quote != null)
+    //     if (english_open_quote != null && english_close_quote != null)
+    //         if (japanese_open_quote.length + japanese_close_quote.length > english_open_quote.length + english_close_quote.length) {
+    //             console.log("[log]: JP style");
+    //             doc = doc.replace(/“/g, "『 ").replace(/”/g, " 』");
+    //         }
     doc = doc
         .replace(/\[/g, "『 ")
         .replace(/\]/g, " 』")
