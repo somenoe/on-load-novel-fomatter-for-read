@@ -159,7 +159,7 @@ function naming(doc) {
             .replace(/Snoc/g, "Noc")
             .replace(/Sylv/g, "Silv")
             .replace(/Taci/g, "Tashi")
-            .replace(/Imeraria/g, "Maria")
+            .replace(/Imeraria|Imeria/g, "Maria")
             .replace(/Mia([ |?|!|\.|,|…])/g, "Miah$1")
             .replace(/Roel/g, "Ro-el")
             .replace(/Yekaterina/g, "Katerina")
