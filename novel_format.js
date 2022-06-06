@@ -440,9 +440,6 @@ function infinitenoveltranslations() {
     // show only content
     if (parent.children[0].style.display != "none") {
         hide_all(parent.children);
-        // hide_all(target.children);
-        // add_child(parent, target);
-        // add_child(target, content);
         add_child(parent, content);
         hide(content.children[2]);
         hide(content.children[content.children.length - 2]);
@@ -469,8 +466,13 @@ function main() {
         infinitenoveltranslations();
     if (window.location.hostname == "allnovelfull.com") allnovelfull();
     // incomplete
-    if (window.location.hostname == "others.net")
-        process("novel-content", "content", "arrticle");
+    if (window.location.hostname == 'i.meguminovel.com') {
+        font_styling();
+        const parent = document.getElementsByTagName("body")[0];
+        const content = document.getElementsByClassName("thecontent")[0];
+        hide_all(parent.children);
+        add_child(parent, content);
+    }
 }
 main();
 // version 96
