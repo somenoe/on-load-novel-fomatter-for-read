@@ -11,7 +11,7 @@ function replacing(doc) {
 
         .replace(/("|[A-Z]|[a-z])──([A-Z]|[a-z])/g, "$1– $2")
 
-        .replace(/ \./g, ".")
+        .replace(/ \.|・/g, ".")
         .replace(/\.\(|\. \(/g, "(")
         .replace(/-|—-|—–|──|---------------/g, "–")
         .replace(/-|—-|—–|──/g, "–")
@@ -29,10 +29,6 @@ function replacing(doc) {
         .replace(/\?\./g, "?")
         .replace(/\?\./g, "?")
         .replace(/\.]/g, "]")
-        .replace(/\> …\<|\>… \<|\> … \</g, ">…<")
-        .replace(/\.\.\.|……|… …|\.\.|…\./g, "…")
-        .replace(/\.\.\.|……|…\.|\.\.|…\./g, "…")
-        .replace(/\.\.\.|……|…\.|\.\.|…\./g, "…")
         // .replace(/\*/g, "–")
         .replace(/——|—─/g, "—")
         .replace(/——|—─/g, "—")
@@ -73,6 +69,7 @@ function replacing(doc) {
 function ellipsis(doc) {
     return (
         doc
+            .replace(/(\.…)+|(…\.)+|(\.\.\.)+|(\. \. \.)+|…+/g, "…")
             // arrangement of ellipsis(…)
             .replace(/([\wé]) …( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/g, "$1…$2")
             .replace(/( |\?|\!|\.|,|…|\"|\'|\)|\(|\>)… ([\wé])/g, "$1…$2")
