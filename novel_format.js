@@ -78,6 +78,7 @@ function ellipsis(doc) {
             .replace(/( |\?|\!|\.|,|…|\"|\'|\)|\(|\>)… ([\wé])/g, "$1…$2")
             .replace(/(\w) (…|… )([^\w\s])/g, "$1… $3")
             .replace(/([^\w\s])(…| …) (\w)/g, "$1 …$3")
+            .replace(/([\?\!])(…| …)(^\w)/g, "$1… $3")
             .replace(/([A-Z]) … ([a-z])/g, "$1… $2")
             .replace(/([a-z]) … ([A-Z])/g, "$1 …$2")
             .replace(/([a-z]) … ([a-z])/g, "$1… $2")
@@ -229,7 +230,7 @@ function exclamation(doc) {
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
             .replace(/Ara/g, "Ahh")
-            .replace(/Etto/g, "Hmm")
+            .replace(/Etto|Ano/g, "Uhh")
             // [^\w\s] = not in \w, not in \s
             .replace(/Ee([^\w\s])/g, "Eh$1")
             .replace(/Aa([^\w\s])/g, "Ah$1")
