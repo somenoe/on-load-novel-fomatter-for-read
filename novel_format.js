@@ -46,8 +46,7 @@ function replacing(doc) {
 
         // please read what it stand for
         .replace(/PDA/g, "LoveLove")
-        // hidden
-        .replace(/\>(| )(Chapter|[0-9] repl)/g, " hidden> ")
+
         // delete dupulicate space
         .replace(/   /g, " ")
         .replace(/  /g, " ")
