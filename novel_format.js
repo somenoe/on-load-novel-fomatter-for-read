@@ -6,21 +6,19 @@ function replacing(doc) {
     doc = doc
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1<\/i>")
-        // .replace(/<abbr .+<\/abbr>/g, "fOUNd")
         // Nothing But SPace
         .replace(/&nbsp;|<p>&nbsp;<\/p>/g, " ")
-        .replace(/<span style=\"font-weight:400;\">…/g, "…")
-        // text error
-        // .replace(/\.([a-z])\.([a-z])\.([a-z])/g, "$1$2$3")
-        // .replace(/\.([a-z])\.([a-z])/g, "$1$2")
 
         .replace(/("|[A-Z]|[a-z])──([A-Z]|[a-z])/g, "$1– $2")
 
-        // exclamtion
         .replace(/ \./g, ".")
         .replace(/\.\(|\. \(/g, "\(")
-        .replace(/-|—-|—–|──|---------------/g, "–").replace(/-|—-|—–|──/g, "–").replace(/-|—-|—–|──/g, "–")
-        .replace(/-|—-|—–|──/g, "–").replace(/-|—-|—–|──/g, "–").replace(/-|—-|—–|──/g, "–")
+        .replace(/-|—-|—–|──|---------------/g, "–")
+        .replace(/-|—-|—–|──/g, "–")
+        .replace(/-|—-|—–|──/g, "–")
+        .replace(/-|—-|—–|──/g, "–")
+        .replace(/-|—-|—–|──/g, "–")
+        .replace(/-|—-|—–|──/g, "–")
         .replace(/!!/g, "!")
         .replace(/!\./g, "!")
         .replace(/·/g, ".")
@@ -32,10 +30,59 @@ function replacing(doc) {
         .replace(/\?\./g, "?")
         .replace(/\.]/g, "]")
         .replace(/\> …\<|\>… \<|\> … \</g, ">…<")
-        .replace(/\.\.\.|……|… …|\.\.|…\./g, "…").replace(/\.\.\.|……|…\.|\.\.|…\./g, "…").replace(/\.\.\.|……|…\.|\.\.|…\./g, "…")
+        .replace(/\.\.\.|……|… …|\.\.|…\./g, "…")
+        .replace(/\.\.\.|……|…\.|\.\.|…\./g, "…")
+        .replace(/\.\.\.|……|…\.|\.\.|…\./g, "…")
         // .replace(/\*/g, "–")
-        .replace(/——|—─/g, "—").replace(/——|—─/g, "—").replace(/——|—─/g, "—").replace(/——|—─/g, "—")
-        .replace(/~|~~/g, "〜").replace(/〜〜/g, "〜")
+        .replace(/——|—─/g, "—")
+        .replace(/——|—─/g, "—")
+        .replace(/——|—─/g, "—")
+        .replace(/——|—─/g, "—")
+        .replace(/~|~~/g, "〜")
+        .replace(/〜〜/g, "〜")
+        // arrangement of …
+        .replace(/([\wé]) …( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/g, "$1…$2")
+        .replace(/( |\?|\!|\.|,|…|\"|\'|\)|\(|\>)… ([\wé])/g, "$1…$2")
+
+        // easy to read with just short (-)
+        .replace(/([\wé])–([\wé])/g, "$1-$2")
+        .replace(/([\wé])–([\wé])/g, "$1-$2")
+        .replace(/([\wé])–([\wé])/g, "$1-$2")
+        .replace(/–-/g, "-")
+
+        // please read what it stand for
+        .replace(/PDA/g, "LoveLove")
+        // hidden
+        .replace(/\>(| )(Chapter|[0-9] repl)/g, " hidden> ")
+        // delete dupulicate space
+        .replace(/   /g, " ")
+        .replace(/  /g, " ")
+        .replace(/  /g, " ")
+        .replace(/  /g, " ")
+        // for easy to read number
+        .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
+        .replace(/『 [0-9] 』/g, "⋆ ")
+        // transtlation note
+        .replace(/T\/N:|Ο/g, "")
+        // fantasy currency
+        .replace(/([0-9]) R/g, "$1 Riel")
+        // just delete it
+        .replace(/\?\?\?|\>─\</g, "")
+        ;
+    doc = partition(doc);
+    doc = naming(doc);
+    doc = unreadablize(doc);
+    doc = stutter(doc);
+    doc = exclamation(doc);
+    doc = quote_symbol(doc);
+    doc = japanese_quote_symbol(doc);
+    doc = ordinal_number(doc);
+    return doc;
+}
+function partition(doc) {
+    return doc
+        // delete hr
+        .replace(/<hr>/g, "")
         // TODO use match caste with partition (like "unreadablize")
         .replace(/\<p\>[…|–|* * *|\- \- \-|\-\-\-|━|—| —|&amp;]\<\/p\>/g, "\<hr class=\"solid\">")
         .replace(/－ － －|───|–––|<p>─<\/p>|<p> —<\/p>|─ ─ ─|– – –|◆◇◆◇◆|◇|⍚|<p>\.<\/p>|<p>&nbsp;\.<\/p>|#######/g, "\<hr class=\"solid\">")
@@ -46,68 +93,12 @@ function replacing(doc) {
         .replace(/\<hr class=\"solid\">\<hr class=\"solid\">/g, "\<hr class=\"solid\">")
         .replace(/\<hr class=\"solid\">\<hr class=\"solid\">/g, "\<hr class=\"solid\">")
         .replace(/\<hr class=\"solid\">\<hr class=\"solid\">/g, "\<hr class=\"solid\">")
+        // partition
+        .replace(/<p>([\?\!…\*–―-\s]+|–o–)<\/p>/g, "\<hr class=\"solid\">")
 
-        // Quote symbol
-        .replace(/“/g, " “")
-        .replace(/”/g, "” ")
-        .replace(/  /g, " ")
-        .replace(/``/g, "\"")
-        // .replace(/``|“|”/g, "\"")
-        .replace(/\"\./g, ".\"")
-        .replace(/([!|?])\"/g, "$1 \"")
-        // in paragraph quote init
-        .replace(/([!|?|,|\.]) \"([A-Z]|…|─)/g, "$1“$2")
-        .replace(/ \"([A-Z]|[a-z]|[0-9])/g, " “$1")
-        .replace(/([A-Z]|[a-z]|[0-9])\" /g, "$1” ")
-        .replace(/\>\"/g, "\>“")
-        .replace(/\"\<\//g, "”\<\/")
-        .replace(/([\.|,|\?|\!| \?| \!|…|─|–|〜])\"/g, "$1”")
-        .replace(/.\" ([A-Z])/g, ".” $1")
-        .replace(/. \"([A-Z])/g, ". “$1")
-        .replace(/([ |\>])\'/g, "$1‘")
-        .replace(/\'([ |\.|,|\<])/g, "’$1")
-
-        // except Apostrophe
-        .replace(/([A-Z]|[a-z])’([A-Z]|[a-z])/g, "$1APosTroPhe$2")
-        .replace(/([A-Z]|[a-z])‘([A-Z]|[a-z])/g, "$1APosTroPhe$2")
-        // .replace(/s’ /g, "sAPosTroPhes ")
-        // .replace(/ ‘|‘/g, "『 ")
-        // .replace(/’|’ /g, " 』")
-        .replace(/APosTroPhe/g, "’")
-
-        // Japanese Symbol
-
-        // .replace(/“/g, "「 ")
-        // .replace(/”/g, " 」")
-        .replace(/「/g, "「 ")
-        .replace(/」/g, " 」")
-        .replace(/\[/g, "『 ")
-        .replace(/\]/g, " 』")
-
-        // .replace(/\[/g, "「 ")
-        // .replace(/\]/g, " 」")
-        // .replace(/“/g, "『 ")
-        // .replace(/”/g, " 』")
-
-        // .replace(/\)/g, " ）")
-        // .replace(/\(/g, "（ ")
-        .replace(/([」|】]) /g, "$1")
-        .replace(/ ([「|【])/g, "$1")
-
-        .replace(/  」…/g, " 「 …")
-        .replace(/([\.|])([」|】|』|）])([\.| |])/g, "<span aria-hidden=\"true\" >$1<\/span>$2<span aria-hidden=\"true\" >$3<\/span>")
-        .replace(/\.([」|】|』|）])/g, "\. $1")
-        .replace(/([\.| |])([「|【|『|（])/g, "<span aria-hidden=\"true\" >$1<\/span>$2")
-        .replace(/>  ([「|【|『])/g, "> $1 ")
-
-        // arrangement of …
-        .replace(/([\wé]) …( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/g, "$1…$2")
-        .replace(/( |\?|\!|\.|,|…|\"|\'|\)|\(|\>)… ([\wé])/g, "$1…$2")
-
-        // easy to read with just short (-)
-        .replace(/([\wé])–([\wé])/g, "$1-$2").replace(/([\wé])–([\wé])/g, "$1-$2").replace(/([\wé])–([\wé])/g, "$1-$2")
-        .replace(/–-/g, "-")
-
+}
+function naming(doc) {
+    return doc
         // Korean
         // .replace(/Su-hyeun/g, "Jin-woo")
         .replace(/Sunyoung/g, "Sun-young")
@@ -158,6 +149,39 @@ function replacing(doc) {
         .replace(/Souma|Soma/g, "Shoma")
         .replace(/Yoash/g, "Yohan")
         .replace(/otome game|Otome game/g, "Romance game")
+}
+function unreadablize(doc) {
+    return doc
+        // unreadablize editor and translator thought
+        .replace(/(\(EN: .+\)|\(TN: .+\))/g, "<span aria-hidden=\"true\" >$1<\/span>")
+        // unreadablize inside bracket()
+        .replace(/(\(.+\))/g, "<span aria-hidden=\"true\" >$1<\/span>")
+        // unreadablize name front quote // !OVERWORK: it work EVERYWHERE, not just strat of paragraph
+        .replace(/([A-Z][\wé]*):/g, "<span aria-hidden=\"true\" >$1:<\/span>")
+        // unreadablize silent symbol
+        .replace(/([「 ]+[\?\!…]+[ 」]+)/g, "<span aria-hidden=\"true\" >$1<\/span>")
+        // unreadablize these symbol
+        .replace(/([*\$#@]+)/g, "<span aria-hidden=\"true\" >$1<\/span>")
+
+}
+function stutter(doc) {
+    return doc
+        // stutter
+        .replace(/( |\?|\!|\.|,|…)([A-Za-z])[\─\-\–]([A-Za-z])/g, "$1$2ah– $3")
+        .replace(/( |\?|\!|\.|,|…)(Wh|wh|Th|th)[\─\-\–](Wh|wh|Th|th)/g, "$1$2ah– $3")
+        // .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh), /g, " $1ah– ")
+        .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
+        .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
+        .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
+        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
+        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
+        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
+        .replace(/Wh-wh| wh-wh|Wh, wh| wh, wh|Wh- wh| wh- wh|Wh– wh| wh– wh|Wh– Wh/g, " Wha– Wh")
+        .replace(/Th-th| th-th|Th, th| th, th|Th- th| th- th|Th– th| th– th|Th– Th/g, " Ta– Th")
+
+}
+function exclamation(doc) {
+    return doc
         // exclamation sound
         .replace(/ nn([ |?|!|\.|,|…])/g, " neun$1")
         .replace(/Aa([〜|,|!|?])/g, "Ah$1")
@@ -169,7 +193,6 @@ function replacing(doc) {
         .replace(/Ee([^\w\s])/g, "Eh$1")
         .replace(/Aa([^\w\s])/g, "Ah$1")
         .replace(/Mmmhmm|Mmhmm| mmmhmm| mmhmm/g, "Mmm-hmm")
-
         .replace(/Hmpf|Hmph|Hmhm/g, "Hmm")
         .replace(/ hm([ |\.|,|\!|\?|…])|Hm([ |\.|,|\!|\?|…])/g, " Hmm$1$2")
         .replace(/Kreuk|Keuk|Kuek/g, "Kwuk")
@@ -183,50 +206,68 @@ function replacing(doc) {
         .replace(/Seug/g, "Shug")
         .replace(/Tsk| tsk| tch|Tch/g, "Shi")
         .replace(/Un([?|!|\.|,|…])/g, "Eun$1")
-        // stutter
-        .replace(/( |\?|\!|\.|,|…)([A-Za-z])[\─\-\–]([A-Za-z])/g, "$1$2ah– $3")
-        .replace(/( |\?|\!|\.|,|…)(Wh|wh|Th|th)[\─\-\–](Wh|wh|Th|th)/g, "$1$2ah– $3")
-        // .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh), /g, " $1ah– ")
-        .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
-        .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
-        .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
-        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
-        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
-        .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
-        .replace(/Wh-wh| wh-wh|Wh, wh| wh, wh|Wh- wh| wh- wh|Wh– wh| wh– wh|Wh– Wh/g, " Wha– Wh")
-        .replace(/Th-th| th-th|Th, th| th, th|Th- th| th- th|Th– th| th– th|Th– Th/g, " Ta– Th")
-        // please read what it stand for
-        .replace(/PDA/g, "LoveLove")
-        // hidden
-        .replace(/\>(| )(Chapter|[0-9] repl)/g, " hidden> ")
-        // delete dupulicate space
-        .replace(/   /g, " ").replace(/  /g, " ").replace(/  /g, " ").replace(/  /g, " ")
-        // for easy to read number
-        .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
-        .replace(/『 [0-9] 』/g, "⋆ ")
-        // transtlation note
-        .replace(/T\/N:|Ο/g, "")
-        // fantasy currency
-        .replace(/([0-9]) R/g, "$1 Riel")
-        // just delete it
-        .replace(/\?\?\?|\>─\</g, "")
-        // unreadablize editor and translator thought
-        .replace(/(\(EN: .+\)|\(TN: .+\))/g, "<span aria-hidden=\"true\" >$1<\/span>")
-        // unreadablize inside bracket()
-        .replace(/(\(.+\))/g, "<span aria-hidden=\"true\" >$1<\/span>")
-        // unreadablize name front quote // !OVERWORK: it work EVERYWHERE, not just strat of paragraph
-        .replace(/([A-Z][\wé]*):/g, "<span aria-hidden=\"true\" >$1:<\/span>")
-        // unreadablize silent symbol
-        .replace(/([「 ]+[\?\!…]+[ 」]+)/g, "<span aria-hidden=\"true\" >$1<\/span>")
-        // unreadablize these symbol
-        .replace(/([*\$#@]+)/g, "<span aria-hidden=\"true\" >$1<\/span>")
-        // delete hr
-        .replace(/<hr>/g, "")
-        // partition
-        .replace(/<p>([\?\!…\*–―-\s]+|–o–)<\/p>/g, "\<hr class=\"solid\">")
-        ;
-    doc = ordinal_number(doc);
-    doc = ordinal_number(doc);
+}
+function quote_symbol(doc) {
+    return doc
+        // Quote symbol
+        .replace(/“/g, " “")
+        .replace(/”/g, "” ")
+        .replace(/  /g, " ")
+        .replace(/``/g, "\"")
+        // .replace(/``|“|”/g, "\"")
+        .replace(/\"\./g, ".\"")
+        .replace(/([!|?])\"/g, "$1 \"")
+        // in paragraph quote init
+        .replace(/([!|?|,|\.]) \"([A-Z]|…|─)/g, "$1“$2")
+        .replace(/ \"([A-Z]|[a-z]|[0-9])/g, " “$1")
+        .replace(/([A-Z]|[a-z]|[0-9])\" /g, "$1” ")
+        .replace(/\>\"/g, "\>“")
+        .replace(/\"\<\//g, "”\<\/")
+        .replace(/([\.|,|\?|\!| \?| \!|…|─|–|〜])\"/g, "$1”")
+        .replace(/.\" ([A-Z])/g, ".” $1")
+        .replace(/. \"([A-Z])/g, ". “$1")
+        .replace(/([ |\>])\'/g, "$1‘")
+        .replace(/\'([ |\.|,|\<])/g, "’$1")
+
+        // except Apostrophe
+        .replace(/([A-Z]|[a-z])’([A-Z]|[a-z])/g, "$1APosTroPhe$2")
+        .replace(/([A-Z]|[a-z])‘([A-Z]|[a-z])/g, "$1APosTroPhe$2")
+        // .replace(/s’ /g, "sAPosTroPhes ")
+        // .replace(/ ‘|‘/g, "『 ")
+        // .replace(/’|’ /g, " 』")
+        .replace(/APosTroPhe/g, "’")
+
+}
+function japanese_quote_symbol(doc) {
+    const japanese_open_quote = doc.match(/「/g);
+    const japanese_close_quote = doc.match(/」/g);
+    // const english_open_quote = doc.match(/“/g);
+    // const english_close_quote = doc.match(/”/g);
+    if (japanese_open_quote == null && japanese_close_quote == null)
+        doc = doc
+            .replace(/“/g, "「 ")
+            .replace(/”/g, " 」")
+    doc = doc
+        .replace(/\[/g, "『 ")
+        .replace(/\]/g, " 』")
+
+        // .replace(/\[/g, "「 ")
+        // .replace(/\]/g, " 」")
+        // .replace(/“/g, "『 ")
+        // .replace(/”/g, " 』")
+
+        // .replace(/\)/g, " ）")
+        // .replace(/\(/g, "（ ")
+        // space managing
+        .replace(/([「【（『])/g, "$1 ")
+        .replace(/([」】）』])/g, " $1")
+        .replace(/ ([「【（『])/g, "$1")
+        .replace(/([」】）』]) /g, "$1")
+        .replace(/  」…/g, " 「 …")
+        .replace(/([\.|])([」|】|』|）])([\.| |])/g, "<span aria-hidden=\"true\" >$1<\/span>$2<span aria-hidden=\"true\" >$3<\/span>")
+        .replace(/\.([」|】|』|）])/g, "\. $1")
+        .replace(/([\.| |])([「|【|『|（])/g, "<span aria-hidden=\"true\" >$1<\/span>$2")
+        .replace(/>  ([「|【|『])/g, "> $1 ")
     return doc;
 }
 function ordinal_number(doc) {
@@ -355,12 +396,16 @@ function process(parent_name, target_name, content_name) {
         hide_all_except(target.children, content);
     }
 }
-if (window.location.hostname == 'ranobes.net')
-    process("dle-content", "block story shortstory", "arrticle");
-if (window.location.hostname == 'infinitenoveltranslations.net')
-    infinitenoveltranslations();
-if (window.location.hostname == 'allnovelfull.com')
-    allnovelfull();
-// incomplete
-if (window.location.hostname == 'others.net') process("novel-content", "content", "arrticle");
+function main() {
+    if (window.location.hostname == 'ranobes.net')
+        process("dle-content", "block story shortstory", "arrticle");
+    if (window.location.hostname == 'infinitenoveltranslations.net')
+        infinitenoveltranslations();
+    if (window.location.hostname == 'allnovelfull.com')
+        allnovelfull();
+    // incomplete
+    if (window.location.hostname == 'others.net') process("novel-content", "content", "arrticle");
+
+}
+main();
 // version 96
