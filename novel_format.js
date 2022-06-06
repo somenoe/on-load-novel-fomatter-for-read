@@ -40,9 +40,6 @@ function replacing(doc) {
         .replace(/——|—─/g, "—")
         .replace(/~|~~/g, "〜")
         .replace(/〜〜/g, "〜")
-        // arrangement of …
-        .replace(/([\wé]) …( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/g, "$1…$2")
-        .replace(/( |\?|\!|\.|,|…|\"|\'|\)|\(|\>)… ([\wé])/g, "$1…$2")
 
         // easy to read with just short (-)
         .replace(/([\wé])–([\wé])/g, "$1-$2")
@@ -62,12 +59,6 @@ function replacing(doc) {
         // for easy to read number
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
         .replace(/『 [0-9] 』/g, "⋆ ")
-        // transtlation note
-        .replace(/T\/N:|Ο/g, "")
-        // fantasy currency
-        .replace(/([0-9]) R/g, "$1 Riel")
-        // just delete it
-        .replace(/\?\?\?|\>─\</g, "")
         ;
     doc = partition(doc);
     doc = naming(doc);
@@ -76,8 +67,20 @@ function replacing(doc) {
     doc = exclamation(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
+    doc = ellipsis(doc)
     doc = ordinal_number(doc);
     return doc;
+}
+function ellipsis(doc) {
+    return doc
+        // arrangement of ellipsis(…)
+        .replace(/([\wé]) …( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/g, "$1…$2")
+        .replace(/( |\?|\!|\.|,|…|\"|\'|\)|\(|\>)… ([\wé])/g, "$1…$2")
+        .replace(/(\w) (…|… )([^\w\s])/g, "$1… $3")
+        .replace(/([^\w\s])(…| …) (\w)/g, "$1 …$3")
+        .replace(/([A-Z]) … ([a-z])/g, "$1… $2")
+        .replace(/([a-z]) … ([A-Z])/g, "$1 …$2")
+        .replace(/([a-z]) … ([a-z])/g, "$1… $2")
 }
 function partition(doc) {
     return doc
@@ -243,10 +246,12 @@ function japanese_quote_symbol(doc) {
     const japanese_close_quote = doc.match(/」/g);
     // const english_open_quote = doc.match(/“/g);
     // const english_close_quote = doc.match(/”/g);
-    if (japanese_open_quote == null && japanese_close_quote == null)
+    if (japanese_open_quote == null && japanese_close_quote == null) {
+        console.log("[log]: change to japanese quote style")
         doc = doc
             .replace(/“/g, "「 ")
             .replace(/”/g, " 」")
+    }
     doc = doc
         .replace(/\[/g, "『 ")
         .replace(/\]/g, " 』")
