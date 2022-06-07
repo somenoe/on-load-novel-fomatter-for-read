@@ -58,7 +58,7 @@ function replacing(doc) {
     doc = partition(doc);
     doc = naming(doc);
     doc = exclamation(doc);
-    // doc = quote_symbol(doc);
+    doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
     doc = ellipsis(doc);
     doc = ordinal_number(doc);
@@ -461,8 +461,8 @@ function main() {
         infinitenoveltranslations();
     if (window.location.hostname == "allnovelfull.com") allnovelfull();
     // incomplete
-    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb') {
-
+    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '') {
+        font_styling();
         document.body.innerHTML = replacing(document.body.innerHTML);
     }
     if (window.location.hostname == 'i.meguminovel.com') {
