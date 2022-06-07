@@ -58,7 +58,7 @@ function replacing(doc) {
     doc = partition(doc);
     doc = naming(doc);
     doc = exclamation(doc);
-    doc = quote_symbol(doc);
+    // doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
     doc = ellipsis(doc);
     doc = ordinal_number(doc);
@@ -235,7 +235,7 @@ function exclamation(doc) {
             .replace(/Aa([^\w\s])/g, "Ah$1")
             .replace(/Mmmhmm|Mmhmm| mmmhmm| mmhmm/g, "Mmm-hmm")
             .replace(/Hmpf|Hmph|Hmhm/g, "Hmm")
-            .replace(/ hm([ |\.|,|\!|\?|…])|Hm([ |\.|,|\!|\?|…])/g, " Hmm$1$2")
+            .replace(/(Hm|[^\w]hm)([^\w])/g, "Hmm$2")
             .replace(/Kreuk|Keuk|Kuek/g, "Kwuk")
             .replace(/[K|k]euck/g, "Kheck")
             .replace(/Krr|krr/g, "Karr")
