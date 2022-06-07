@@ -454,16 +454,41 @@ function process(parent_name, target_name, content_name) {
         hide_all_except(target.children, content);
     }
 }
+function outerHTML_of_(target) {
+    var array = [];
+    for (i = 0; i < target.length; i++) {
+        array.push(target[i].outerHTML);
+    }
+    return array;
+}
 function main() {
     if (window.location.hostname == "ranobes.net")
         process("dle-content", "block story shortstory", "arrticle");
     if (window.location.hostname == "infinitenoveltranslations.net")
         infinitenoveltranslations();
-    if (window.location.hostname == "allnovelfull.com") allnovelfull();
-    // incomplete
+    if (window.location.hostname == "allnovelfull.com")
+        allnovelfull();
     if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '') {
         font_styling();
+        const img = document.body.getElementsByTagName("img");
+        const img_o = outerHTML_of_(img);
+        const h1 = document.body.getElementsByTagName("h1");
+        const h1_o = outerHTML_of_(h1);
+
+        const ul = document.body.getElementsByTagName("ul");
+        const ul_o = outerHTML_of_(ul);
+
         document.body.innerHTML = replacing(document.body.innerHTML);
+
+        for (let index = 0; index < img.length; index++) {
+            document.body.innerHTML = document.body.innerHTML.replace(img[index].outerHTML, img_o[index]);
+        }
+        for (let index = 0; index < ul.length; index++) {
+            document.body.innerHTML = document.body.innerHTML.replace(ul[index].outerHTML, ul_o[index]);
+        }
+        for (let index = 0; index < h1.length; index++) {
+            document.body.innerHTML = document.body.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
+        }
     }
     if (window.location.hostname == 'i.meguminovel.com') {
         font_styling();
