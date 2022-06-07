@@ -186,7 +186,7 @@ function unreadablize(doc) {
             .replace(/([A-Z][\wé]*):/g,
                 '<span aria-hidden="true" >$1:</span>')
             // unreadablize silent symbol
-            .replace(/([「 ]*\*+[\?\!…\,\. 」]*)/g,
+            .replace(/([「 ]+[\*\?\!…\,\.]+[ 」]+)/g,
                 '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
             .replace(/([†*\$#@]+)/g,
@@ -262,18 +262,11 @@ function quote_symbol(doc) {
             .replace(/``/g, '"')
             // .replace(/``|“|”/g, "\"")
             .replace(/\"\. /g, '." ')
-            .replace(/([!|?])\"/g, '$1 "')
             // in paragraph quote init
-            .replace(/([!|?|,|\.]) \"([A-Z]|…|─)/g, "$1“$2")
-            .replace(/ \"([A-Z]|[a-z]|[0-9])/g, " “$1")
-            .replace(/([A-Z]|[a-z]|[0-9])\" /g, "$1” ")
-            .replace(/\>\"/g, ">“")
-            .replace(/\"\<\//g, "”</")
-            .replace(/([\.|,|\?|\!| \?| \!|…|─|–|〜])\"/g, "$1”")
-            .replace(/.\" ([A-Z])/g, ".” $1")
-            .replace(/. \"([A-Z])/g, ". “$1")
-            .replace(/([ |\>])\'/g, "$1‘")
-            .replace(/\'([ |\.|,|\<])/g, "’$1")
+            .replace(/([\s>])\"([^\s>])/g, "$1“$2")
+            .replace(/([^\s<])\"([\s<])/g, "$1”$2")
+            .replace(/([\s>])\'([^\s>])/g, "$1‘$2")
+            .replace(/([^\s<])\'([\s<])/g, "$1’$2")
 
             // except Apostrophe
             .replace(/([A-Z]|[a-z])’([A-Z]|[a-z])/g, "$1APosTroPhe$2")
