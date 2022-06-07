@@ -468,10 +468,15 @@ function main() {
         infinitenoveltranslations();
     if (window.location.hostname == "allnovelfull.com")
         allnovelfull();
-    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '') {
+    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb') {
+        // TODO nested html tag: let body= frame.contentWindow.document.body
+
+    }
+    if (window.location.hostname == '') {
         font_styling();
         const img = document.body.getElementsByTagName("img");
         const img_o = outerHTML_of_(img);
+
         const h1 = document.body.getElementsByTagName("h1");
         const h1_o = outerHTML_of_(h1);
 
