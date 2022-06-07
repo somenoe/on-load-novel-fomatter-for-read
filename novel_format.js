@@ -357,8 +357,8 @@ function hide(doc) {
 function show(doc) {
     doc.style.display = "block";
 }
-function font_styling() {
-    let newStyle = document.createElement("style");
+function font_styling(doc) {
+    let newStyle = doc.createElement("style");
     newStyle.innerHTML =
         'body { font-family: "Arial" !important;\
         font-size: 25px !important; \
@@ -366,7 +366,7 @@ function font_styling() {
         margin-bottom: 100px !important; \
         margin-right: calc(33% - 100px) !important; \
         margin-left: calc(33% - 100px) !important; }';
-    document.head.appendChild(newStyle);
+    doc.head.appendChild(newStyle);
 }
 function allnovelfull() {
     const content = document.getElementById("chapter-content");
@@ -397,7 +397,7 @@ function add_child(parent, child) {
     parent.appendChild(child);
 }
 function infinitenoveltranslations() {
-    font_styling();
+    font_styling(document);
     const parent = document.getElementsByTagName("body")[0];
     const content = document.getElementsByClassName("entry-content")[0];
     const image = content.getElementsByTagName("img")[0];
@@ -470,10 +470,34 @@ function main() {
         allnovelfull();
     if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb') {
         // TODO nested html tag: let body= frame.contentWindow.document.body
+        const frame = document.getElementById('content_frame');
+        const content = frame.contentWindow.document.body;
+
+        font_styling(document);
+        const img = content.getElementsByTagName("img");
+        const img_o = outerHTML_of_(img);
+
+        const h1 = content.getElementsByTagName("h1");
+        const h1_o = outerHTML_of_(h1);
+
+        const ul = content.getElementsByTagName("ul");
+        const ul_o = outerHTML_of_(ul);
+
+        content.innerHTML = replacing(content.innerHTML);
+
+        for (let index = 0; index < img.length; index++) {
+            content.innerHTML = content.innerHTML.replace(img[index].outerHTML, img_o[index]);
+        }
+        for (let index = 0; index < ul.length; index++) {
+            content.innerHTML = content.innerHTML.replace(ul[index].outerHTML, ul_o[index]);
+        }
+        for (let index = 0; index < h1.length; index++) {
+            content.innerHTML = content.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
+        }
 
     }
     if (window.location.hostname == '') {
-        font_styling();
+        font_styling(document);
         const img = document.body.getElementsByTagName("img");
         const img_o = outerHTML_of_(img);
 
@@ -496,7 +520,7 @@ function main() {
         }
     }
     if (window.location.hostname == 'i.meguminovel.com') {
-        font_styling();
+        font_styling(document);
         const parent = document.getElementsByTagName("body")[0];
         const content = document.getElementsByClassName("thecontent")[0];
         hide_all(parent.children);
