@@ -259,7 +259,7 @@ function quote_symbol(doc) {
             .replace(/  /g, " ")
             .replace(/``/g, '"')
             // .replace(/``|“|”/g, "\"")
-            .replace(/\"\./g, '."')
+            .replace(/\"\. /g, '." ')
             .replace(/([!|?])\"/g, '$1 "')
             // in paragraph quote init
             .replace(/([!|?|,|\.]) \"([A-Z]|…|─)/g, "$1“$2")
