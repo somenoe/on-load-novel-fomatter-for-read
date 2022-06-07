@@ -188,7 +188,7 @@ function unreadablize(doc) {
             // unreadablize silent symbol
             .replace(/([「 ]*\*+[\?\!…\,\. 」]*)/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
-            .replace(/([*\$#@]+)/g, '<span aria-hidden="true" >$1</span>')
+            .replace(/([†*\$#@]+)/g, '<span aria-hidden="true" >$1</span>')
     );
 }
 function stutter(doc) {
@@ -365,12 +365,12 @@ function show(doc) {
 function font_styling() {
     let newStyle = document.createElement("style");
     newStyle.innerHTML =
-        'body { font-family: "Arial";\
-        font-size: 25px; \
-        margin-top: 100px; \
-        margin-bottom: 100px; \
-        margin-right: calc(33% - 100px); \
-        margin-left: calc(33% - 100px); }';
+        'body { font-family: "Arial" !important;\
+        font-size: 25px !important; \
+        margin-top: 100px !important; \
+        margin-bottom: 100px !important; \
+        margin-right: calc(33% - 100px) !important; \
+        margin-left: calc(33% - 100px) !important; }';
     document.head.appendChild(newStyle);
 }
 function allnovelfull() {
