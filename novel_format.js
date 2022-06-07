@@ -186,7 +186,7 @@ function unreadablize(doc) {
             // unreadablize name front quote // !OVERWORK: it work EVERYWHERE, not just strat of paragraph
             .replace(/([A-Z][\wé]*):/g, '<span aria-hidden="true" >$1:</span>')
             // unreadablize silent symbol
-            .replace(/([「 ]+[\?\!…]+[ 」]+)/g, '<span aria-hidden="true" >$1</span>')
+            .replace(/([「 ]*\*+[\?\!…\,\. 」]*)/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
             .replace(/([*\$#@]+)/g, '<span aria-hidden="true" >$1</span>')
     );
@@ -466,6 +466,10 @@ function main() {
         infinitenoveltranslations();
     if (window.location.hostname == "allnovelfull.com") allnovelfull();
     // incomplete
+    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb') {
+
+        document.body.innerHTML = replacing(document.body.innerHTML);
+    }
     if (window.location.hostname == 'i.meguminovel.com') {
         font_styling();
         const parent = document.getElementsByTagName("body")[0];
