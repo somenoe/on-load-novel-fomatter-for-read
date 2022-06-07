@@ -196,7 +196,7 @@ function stutter(doc) {
     return (
         doc
             // stutter
-            .replace(/([^\w])([\w])[…─-–]\s([\w])/g, "$1$2ah– $3")
+            .replace(/([^\w])([\w])[…─\-–]\s([\w])/g, "$1$2ah– $3")
             .replace(
                 /( |\?|\!|\.|,|…)(Wh|wh|Th|th)[\─\-\–](Wh|wh|Th|th)/g,
                 "$1$2ah– $3"
