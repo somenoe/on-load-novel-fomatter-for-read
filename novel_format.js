@@ -178,20 +178,18 @@ function unreadablize(doc) {
     return (
         doc
             // unreadablize chapter name
-            .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g,
-                '<span aria-hidden="true" >$1$2</span><')
+            .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g, '<span aria-hidden="true" >$1$2</span><')
             // unreadablize inside bracket()
-            .replace(/(\(.+\))/g,
-                '< span aria - hidden="true" > $1</span > ')
+            .replace(/(\(.+\))/g, '< span aria - hidden="true" > $1</span > ')
             // unreadablize name front quote // !OVERWORK: it work EVERYWHERE, not just strat of paragraph
-            .replace(/([A-Z][\wé]*):/g,
-                '<span aria-hidden="true" >$1:</span>')
+            .replace(/([A-Z][\wé]*):/g, '<span aria-hidden="true" >$1:</span>')
             // unreadablize silent symbol
-            .replace(/([「 ]+[\*\?\!…\,\.]+[ 」]+)/g,
-                '<span aria-hidden="true" >$1</span>')
+            .replace(/([「 ]+[\*\?\!…\,\.]+[ 」]+)/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
-            .replace(/([†*\$#@]+)/g,
-                '<span aria-hidden="true" >$1</span>')
+            .replace(/([†*\$#@]+)/g, '<span aria-hidden="true" >$1</span>')
+            // unreadablize dot near quote symbol
+            .replace(/\.([」】）』「【（『])/g, ".<span aria-hidden=\"true\">$1</span>")
+            .replace(/([」】）』「【（『])\./g, "<span aria-hidden=\"true\">$1</span>.")
     );
 }
 function stutter(doc) {
@@ -314,8 +312,6 @@ function japanese_quote_symbol(doc) {
         .replace(/ ([「【（『])/g, "$1")
         .replace(/([」】）』]) /g, "$1")
         .replace(/  」…/g, " 「 …")
-        .replace(/\.([」】）』「【（『])/g, ". $1")
-        .replace(/([」】）』「【（『])\./g, "$1 .")
         .replace(/([\w]) ([」】）』])([^\w])/g, "$1. $2$3")
     return doc;
 }
