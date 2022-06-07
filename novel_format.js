@@ -357,15 +357,23 @@ function hide(doc) {
 function show(doc) {
     doc.style.display = "block";
 }
-function font_styling(doc) {
+function styling(doc) {
     let newStyle = doc.createElement("style");
     newStyle.innerHTML =
-        'body { font-family: "Arial" !important;\
-        font-size: 25px !important; \
-        margin-top: 100px !important; \
-        margin-bottom: 100px !important; \
-        margin-right: calc(33% - 100px) !important; \
-        margin-left: calc(33% - 100px) !important; }';
+        'body { \
+            font-family: "Arial" !important;\
+            font-size: 25px !important; \
+            margin-top: 100px !important; \
+            margin-bottom: 100px !important; \
+            margin-right: calc(33% - 100px) !important; \
+            margin-left: calc(33% - 100px) !important; \
+            text-align: left !important;\
+        }\
+        p {\
+            margin-top: 1em; !important;\
+            text-indent: 0pt; !important;\
+        }'
+        ;
     doc.head.appendChild(newStyle);
 }
 function allnovelfull() {
@@ -397,7 +405,7 @@ function add_child(parent, child) {
     parent.appendChild(child);
 }
 function infinitenoveltranslations() {
-    font_styling(document);
+    styling(document);
     const parent = document.getElementsByTagName("body")[0];
     const content = document.getElementsByClassName("entry-content")[0];
     const image = content.getElementsByTagName("img")[0];
@@ -471,9 +479,11 @@ function main() {
     if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb') {
         // TODO nested html tag: let body= frame.contentWindow.document.body
         const frame = document.getElementById('content_frame');
+        const doc = frame.contentWindow.document;
         const content = frame.contentWindow.document.body;
 
-        font_styling(document);
+        styling(doc);
+
         const img = content.getElementsByTagName("img");
         const img_o = outerHTML_of_(img);
 
@@ -497,7 +507,7 @@ function main() {
 
     }
     if (window.location.hostname == '') {
-        font_styling(document);
+        styling(document);
         const img = document.body.getElementsByTagName("img");
         const img_o = outerHTML_of_(img);
 
@@ -520,7 +530,7 @@ function main() {
         }
     }
     if (window.location.hostname == 'i.meguminovel.com') {
-        font_styling(document);
+        styling(document);
         const parent = document.getElementsByTagName("body")[0];
         const content = document.getElementsByClassName("thecontent")[0];
         hide_all(parent.children);
