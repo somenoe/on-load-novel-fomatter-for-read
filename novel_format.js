@@ -176,19 +176,21 @@ function naming(doc) {
 function unreadablize(doc) {
     return (
         doc
-            // unreadablize editor and translator thought
-            .replace(
-                /(\(EN: .+\)|\(TN: .+\))/g,
-                '<span aria-hidden="true" >$1</span>'
-            )
+            // unreadablize chapter name
+            .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g,
+                '<span aria-hidden="true" >$1$2</span><')
             // unreadablize inside bracket()
-            .replace(/(\(.+\))/g, '<span aria-hidden="true" >$1</span>')
+            .replace(/(\(.+\))/g,
+                '< span aria - hidden="true" > $1</span > ')
             // unreadablize name front quote // !OVERWORK: it work EVERYWHERE, not just strat of paragraph
-            .replace(/([A-Z][\wé]*):/g, '<span aria-hidden="true" >$1:</span>')
+            .replace(/([A-Z][\wé]*):/g,
+                '<span aria-hidden="true" >$1:</span>')
             // unreadablize silent symbol
-            .replace(/([「 ]*\*+[\?\!…\,\. 」]*)/g, '<span aria-hidden="true" >$1</span>')
+            .replace(/([「 ]*\*+[\?\!…\,\. 」]*)/g,
+                '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
-            .replace(/([†*\$#@]+)/g, '<span aria-hidden="true" >$1</span>')
+            .replace(/([†*\$#@]+)/g,
+                '<span aria-hidden="true" >$1</span>')
     );
 }
 function stutter(doc) {
