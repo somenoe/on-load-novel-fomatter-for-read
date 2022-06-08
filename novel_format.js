@@ -501,7 +501,7 @@ function epub_reader() {
         content.innerHTML = content.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
     }
     // error image to line partition
-    let ext = document.getElementsByClassName("ext_ch");
+    let ext = doc.getElementsByClassName("ext_ch");
     for (let i = 0; i < ext.length; i++) {
         ext[i].innerHTML = '<hr>'
     }
