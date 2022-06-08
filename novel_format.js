@@ -471,7 +471,8 @@ function epub_reader() {
         }
     });
     // skip only image page //? load image error
-    if (doc.body.className == 'nomargin center' || doc.body.getElementsByClassName('galley-rw')) return;
+    if (doc.body.className == 'nomargin center' || doc.body.getElementsByClassName('image_full').length > 0) return;
+
     const content = frame.contentWindow.document.body;
 
     styling(doc);
@@ -490,6 +491,7 @@ function epub_reader() {
     for (let index = 0; index < img.length; index++) {
         content.innerHTML = content.innerHTML.replace(img[index].outerHTML, img_o[index]);
     }
+
     for (let index = 0; index < ul.length; index++) {
         content.innerHTML = content.innerHTML.replace(ul[index].outerHTML, ul_o[index]);
     }
@@ -504,31 +506,8 @@ function main() {
         infinitenoveltranslations();
     if (window.location.hostname == "allnovelfull.com")
         allnovelfull();
-    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb')
+    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '')
         epub_reader();
-    if (window.location.hostname == '') {
-        styling(document);
-        const img = document.body.getElementsByTagName("img");
-        const img_o = outerHTML_of_(img);
-
-        const h1 = document.body.getElementsByTagName("h1");
-        const h1_o = outerHTML_of_(h1);
-
-        const ul = document.body.getElementsByTagName("ul");
-        const ul_o = outerHTML_of_(ul);
-
-        document.body.innerHTML = replacing(document.body.innerHTML);
-
-        for (let index = 0; index < img.length; index++) {
-            document.body.innerHTML = document.body.innerHTML.replace(img[index].outerHTML, img_o[index]);
-        }
-        for (let index = 0; index < ul.length; index++) {
-            document.body.innerHTML = document.body.innerHTML.replace(ul[index].outerHTML, ul_o[index]);
-        }
-        for (let index = 0; index < h1.length; index++) {
-            document.body.innerHTML = document.body.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
-        }
-    }
     if (window.location.hostname == 'i.meguminovel.com') {
         styling(document);
         const parent = document.getElementsByTagName("body")[0];
