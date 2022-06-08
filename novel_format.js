@@ -500,6 +500,11 @@ function epub_reader() {
     for (let index = 0; index < h1.length; index++) {
         content.innerHTML = content.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
     }
+    // error image to line partition
+    let ext = document.getElementsByClassName("ext_ch");
+    for (let i = 0; i < ext.length; i++) {
+        ext[i].innerHTML = '<hr>'
+    }
 }
 function main() {
     if (window.location.hostname == "ranobes.net")
