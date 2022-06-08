@@ -466,6 +466,49 @@ function outerHTML_of_(target) {
     }
     return array;
 }
+function epub_reader() {
+    const frame = document.getElementById('content_frame');
+    const doc = frame.contentWindow.document;
+    // key detect
+    doc.addEventListener("keydown", function (e) {
+        if (e.key === "1") console.log("1");
+        if (e.key === "2") console.log("2");
+        if (e.key === "ArrowLeft") {
+            console.log("<-");
+            epub_reader();
+        }
+        if (e.key === "ArrowRight") {
+            console.log("->");
+            epub_reader();
+        }
+    });
+    // skip only image page //? load image error
+    if (doc.body.className == 'nomargin center') return;
+    const content = frame.contentWindow.document.body;
+
+    styling(doc);
+
+    const img = content.getElementsByTagName("img");
+    const img_o = outerHTML_of_(img);
+
+    const h1 = content.getElementsByTagName("h1");
+    const h1_o = outerHTML_of_(h1);
+
+    const ul = content.getElementsByTagName("ul");
+    const ul_o = outerHTML_of_(ul);
+
+    content.innerHTML = replacing(content.innerHTML);
+
+    for (let index = 0; index < img.length; index++) {
+        content.innerHTML = content.innerHTML.replace(img[index].outerHTML, img_o[index]);
+    }
+    for (let index = 0; index < ul.length; index++) {
+        content.innerHTML = content.innerHTML.replace(ul[index].outerHTML, ul_o[index]);
+    }
+    for (let index = 0; index < h1.length; index++) {
+        content.innerHTML = content.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
+    }
+}
 function main() {
     if (window.location.hostname == "ranobes.net")
         process("dle-content", "block story shortstory", "arrticle");
@@ -473,36 +516,8 @@ function main() {
         infinitenoveltranslations();
     if (window.location.hostname == "allnovelfull.com")
         allnovelfull();
-    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb') {
-        // TODO nested html tag: let body= frame.contentWindow.document.body
-        const frame = document.getElementById('content_frame');
-        const doc = frame.contentWindow.document;
-        const content = frame.contentWindow.document.body;
-
-        styling(doc);
-
-        const img = content.getElementsByTagName("img");
-        const img_o = outerHTML_of_(img);
-
-        const h1 = content.getElementsByTagName("h1");
-        const h1_o = outerHTML_of_(h1);
-
-        const ul = content.getElementsByTagName("ul");
-        const ul_o = outerHTML_of_(ul);
-
-        content.innerHTML = replacing(content.innerHTML);
-
-        for (let index = 0; index < img.length; index++) {
-            content.innerHTML = content.innerHTML.replace(img[index].outerHTML, img_o[index]);
-        }
-        for (let index = 0; index < ul.length; index++) {
-            content.innerHTML = content.innerHTML.replace(ul[index].outerHTML, ul_o[index]);
-        }
-        for (let index = 0; index < h1.length; index++) {
-            content.innerHTML = content.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
-        }
-
-    }
+    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb')
+        epub_reader();
     if (window.location.hostname == '') {
         styling(document);
         const img = document.body.getElementsByTagName("img");
