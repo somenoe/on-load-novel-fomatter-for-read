@@ -471,7 +471,7 @@ function epub_reader() {
         }
     });
     // skip only image page //? load image error
-    if (doc.body.className == 'nomargin center') return;
+    if (doc.body.className == 'nomargin center' || doc.body.getElementsByClassName('galley-rw')) return;
     const content = frame.contentWindow.document.body;
 
     styling(doc);
