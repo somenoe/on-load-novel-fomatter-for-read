@@ -149,6 +149,7 @@ function naming(doc) {
             .replace(/Snoc/g, "Noc")
             .replace(/Sylv/g, "Silv")
             .replace(/Taci/g, "Tashi")
+            .replace(/Rino([^A-Za-z])/g, "Rinola$1")
             .replace(/Yekaterina/g, "Katerina")
             // Japan
             .replace(/[G|g]oshujin-sama/g, "Master")
@@ -160,6 +161,7 @@ function naming(doc) {
             .replace(/Soujiro/g, "Shojeero")
             .replace(/Souma|Soma/g, "Shoma")
             .replace(/Yoash/g, "Yohan")
+            .replace(/Shinichi/g, "Shin")
     );
 }
 function unreadablize(doc) {
@@ -220,7 +222,7 @@ function exclamation(doc) {
             // [^\w\s] = not in \w, not in \s
             .replace(/Ee([^\w\s])/g, "Eh$1")
             .replace(/Aa([^\w\s])/g, "Ah$1")
-            .replace(/Mmmhmm|Mmhmm| mmmhmm| mmhmm/g, "Mmm-hmm")
+            .replace(/(Mm-hmm|Mmmhmm|Mmhmm| mmmhmm| mmhmm|Mhm)([ |?|!|\.|,|…])/g, "Uh-huh$2")
             .replace(/Hmpf|Hmph|Hmhm/g, "Hmm")
             .replace(/(Hm|[^\w]hm)([^\w])/g, "Hmm$2")
             .replace(/Kreuk|Keuk|Kuek/g, "Kwuk")
