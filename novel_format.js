@@ -99,19 +99,7 @@ function partition(doc) {
             .replace(/\"\*\*\*\"/g, '<hr class="solid">')
             // delete double partition
             .replace(
-                /\<hr class=\"solid\">\<hr class=\"solid\">/g,
-                '<hr class="solid">'
-            )
-            .replace(
-                /\<hr class=\"solid\">\<hr class=\"solid\">/g,
-                '<hr class="solid">'
-            )
-            .replace(
-                /\<hr class=\"solid\">\<hr class=\"solid\">/g,
-                '<hr class="solid">'
-            )
-            .replace(
-                /\<hr class=\"solid\">\<hr class=\"solid\">/g,
+                /(<hr class=\"solid\">)([\n\s]*<hr class=\"solid\">)+/g,
                 '<hr class="solid">'
             )
             // partition
