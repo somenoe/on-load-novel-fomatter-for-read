@@ -466,20 +466,21 @@ function outerHTML_of_(target) {
     }
     return array;
 }
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
 function epub_reader() {
     const frame = document.getElementById('content_frame');
     const doc = frame.contentWindow.document;
     // key detect
     doc.addEventListener("keydown", function (e) {
-        if (e.key === "1") console.log("1");
-        if (e.key === "2") console.log("2");
         if (e.key === "ArrowLeft") {
             console.log("<-");
-            epub_reader();
+            delay(1000).then(() => epub_reader());
         }
         if (e.key === "ArrowRight") {
             console.log("->");
-            epub_reader();
+            delay(1000).then(() => epub_reader());
         }
     });
     // skip only image page //? load image error
