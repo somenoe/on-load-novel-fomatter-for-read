@@ -7,8 +7,8 @@ function replacing(doc) {
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
         .replace(/<br>/g, "</p><p>")
-        // Nothing But SPace
-        .replace(/&nbsp;|<p>&nbsp;<\/p>/g, " ")
+
+        .replace(/[—–―-]/g, "–")
 
         .replace(/("|[A-Z]|[a-z])──([A-Z]|[a-z])/g, "$1– $2")
 
@@ -174,7 +174,7 @@ function unreadablize(doc) {
             // unreadablize name front quote // ! did not test yet
             .replace(/(>\s*)([A-Z][\wé]*):/g, '$1<span aria-hidden="true" >$2:</span>')
             // unreadablize silent symbol
-            .replace(/([「 ]+[\*\?\!…\,\.]+[ 」]+)/g, '<span aria-hidden="true" >$1</span>')
+            .replace(/([「][^\w]+[」])/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
             .replace(/([†*\$#@]+)/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize dot near quote symbol
@@ -220,10 +220,10 @@ function exclamation(doc) {
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
             .replace(/Ara/g, "Ahh")
-            .replace(/Etto|Ano/g, "Uhh")
+            .replace(/(Etto|Ano)([^\w])/g, "Uhh$2")
             // [^\w\s] = not in \w, not in \s
-            .replace(/Ee([^\w\s])/g, "Eh$1")
-            .replace(/Aa([^\w\s])/g, "Ah$1")
+            .replace(/Ee([^\w])/g, "Eh$1")
+            .replace(/Aa([^\w])/g, "Ah$1")
             .replace(/(Mm-hmm|Mmmhmm|Mmhmm| mmmhmm| mmhmm|Mhm)([ |?|!|\.|,|…])/g, "Uh-huh$2")
             .replace(/Hmpf|Hmph|Hmhm/g, "Hmm")
             .replace(/(Hm|[^\w]hm)([^\w])/g, "Hmm$2")
