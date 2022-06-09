@@ -189,6 +189,8 @@ function stutter(doc) {
             // stutter
             .replace(/([^\w])((?![aiueoAIUEO])[A-Za-z])[…─\-–]\s([\w])/g, "$1$2ah– $3")
             .replace(/ (?![aiueoAIUEO])([A-Za-z]h?)[…─\-–]+ /g, " $1ah– ")
+            .replace(/((?![A-z]).)((?![aiueoAIUEO])[A-z])[…─\-–]/g, "$1$2ah– ")
+            .replace(/((?![A-z]).)((?![aiueoAIUEO])[A-z])[…─\-–]/g, "$1$2ah– ")
             .replace(
                 /( |\?|\!|\.|,|…)(Wh|wh|Th|th)[\─\-\–](Wh|wh|Th|th)/g,
                 "$1$2ah– $3"
