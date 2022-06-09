@@ -171,8 +171,8 @@ function unreadablize(doc) {
             .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g, '<span aria-hidden="true" >$1$2</span><')
             // unreadablize inside bracket()
             .replace(/(\(.+\))/g, '<span aria-hidden="true" >$1</span>')
-            // unreadablize name front quote // !OVERWORK: it work EVERYWHERE, not just strat of paragraph
-            .replace(/([A-Z][\wé]*):/g, '<span aria-hidden="true" >$1:</span>')
+            // unreadablize name front quote // ! did not test yet
+            .replace(/(>\s*)([A-Z][\wé]*):/g, '$1<span aria-hidden="true" >$2:</span>')
             // unreadablize silent symbol
             .replace(/([「 ]+[\*\?\!…\,\.]+[ 」]+)/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
