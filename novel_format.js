@@ -38,11 +38,11 @@ function replacing(doc) {
         .replace(/~|~~/g, "〜")
         .replace(/〜〜/g, "〜")
 
-        // easy to read with just short (-)
-        .replace(/([\wé])–([\wé])/g, "$1-$2")
-        .replace(/([\wé])–([\wé])/g, "$1-$2")
-        .replace(/([\wé])–([\wé])/g, "$1-$2")
-        .replace(/–-/g, "-")
+        // easy to read with just short (–)
+        .replace(/([\wé])–([\wé])/g, "$1–$2")
+        .replace(/([\wé])–([\wé])/g, "$1–$2")
+        .replace(/([\wé])–([\wé])/g, "$1–$2")
+        .replace(/––/g, "–")
 
         // please read what it stand for
         .replace(/PDA/g, "LoveLove")
