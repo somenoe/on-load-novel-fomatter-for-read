@@ -176,7 +176,7 @@ function unreadablize(doc) {
             // unreadablize silent symbol
             .replace(/([「][^\w]+[」])/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize these symbol
-            .replace(/(\s[^\w][^\w][^\w]+\s)/g, '<span aria-hidden="true" >$1</span>')
+            // .replace(/(\s[^\w][^\w][^\w]+\s)/g, '<span aria-hidden="true" >$1</span>')
             .replace(/([†*\$#]+)/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize dot near quote symbol
             .replace(/\.([」】）』「【（『])/g, ".<span aria-hidden=\"true\">$1</span>")
