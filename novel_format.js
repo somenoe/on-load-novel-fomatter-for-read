@@ -64,7 +64,21 @@ function replacing(doc) {
     doc = ordinal_number(doc);
     doc = stutter(doc);
     doc = unreadablize(doc);
+    doc = post_arrangement(doc)
     return doc;
+}
+function post_arrangement(doc) {
+    return doc
+        // remove the space between quote symbol
+        .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+        .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+        .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+        .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+        .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+        .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+        .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+        .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+        ;
 }
 function ellipsis(doc) {
     return (
@@ -267,15 +281,6 @@ function quote_symbol(doc) {
             // .replace(/ ‘|‘/g, "『 ")
             // .replace(/’|’ /g, " 』")
             .replace(/APosTroPhe/g, "’")
-            // remove the space between
-            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
-            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
-            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
-            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
-            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
-            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
-            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
-            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
     );
 }
 function japanese_quote_symbol(doc) {
