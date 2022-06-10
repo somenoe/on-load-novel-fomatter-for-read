@@ -267,6 +267,15 @@ function quote_symbol(doc) {
             // .replace(/ ‘|‘/g, "『 ")
             // .replace(/’|’ /g, " 』")
             .replace(/APosTroPhe/g, "’")
+            // remove the space between
+            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+            .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
+            .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
     );
 }
 function japanese_quote_symbol(doc) {
