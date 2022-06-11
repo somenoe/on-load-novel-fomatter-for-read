@@ -56,6 +56,7 @@ function pre_replace(doc) {
 }
 function post_arrangement(doc) {
     return doc
+        // new line to paragraph
         .replace(/<br>/g, "</p><p>")
         // remove the space between quote symbol
         .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
@@ -66,6 +67,9 @@ function post_arrangement(doc) {
         .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
         .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
         .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
+        // delete pseudo table
+        .replace(/[┌│]/g, "")
+
         ;
 }
 function ellipsis(doc) {
