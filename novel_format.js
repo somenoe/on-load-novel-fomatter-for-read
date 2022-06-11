@@ -1,10 +1,23 @@
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
 // * for test on paste: document.body.innerHTML=document.body.innerHTML.replace(//g, "")
 function replacing(doc) {
-    doc = doc
+    doc = pre_replace(doc)
+    doc = partition(doc);
+    doc = naming(doc);
+    doc = exclamation(doc);
+    doc = quote_symbol(doc);
+    doc = japanese_quote_symbol(doc);
+    doc = ellipsis(doc);
+    doc = ordinal_number(doc);
+    doc = stutter(doc);
+    doc = unreadablize(doc);
+    doc = post_arrangement(doc)
+    return doc;
+}
+function pre_replace(doc) {
+    return doc
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
-        .replace(/<br>/g, "</p><p>")
 
         // delete dupulicate
         .replace(/[\s]+/g, " ")
@@ -28,28 +41,16 @@ function replacing(doc) {
         .replace(/([\wé])–([\wé])/g, "$1–$2")
         .replace(/([\wé])–([\wé])/g, "$1–$2")
 
-        // please read what it stand for
-        .replace(/PDA/g, "LoveLove")
-
         // for easy to read number
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
 
         .replace(/『 [0-9] 』/g, "⋆ ");
 
-    doc = partition(doc);
-    doc = naming(doc);
-    doc = exclamation(doc);
-    doc = quote_symbol(doc);
-    doc = japanese_quote_symbol(doc);
-    doc = ellipsis(doc);
-    doc = ordinal_number(doc);
-    doc = stutter(doc);
-    doc = unreadablize(doc);
-    doc = post_arrangement(doc)
-    return doc;
+    ;
 }
 function post_arrangement(doc) {
     return doc
+        .replace(/<br>/g, "</p><p>")
         // remove the space between quote symbol
         .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
         .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
@@ -94,6 +95,9 @@ function partition(doc) {
 function naming(doc) {
     return (
         doc
+            // please read what it stand for
+            .replace(/PDA/g, "LoveLove")
+
             // Korean
             .replace(/ Ja | Ja,/g, " Jah ")
             .replace(/-gi/g, "-gai")
