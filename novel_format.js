@@ -1,8 +1,8 @@
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
 /*
-    * for test on paste:
-        document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
-        document.body.innerHTML.match(//g);
+* for test on paste:
+document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
+document.body.innerHTML.match(//g);
 */
 function replacing(doc) {
     doc = pre_replace(doc)
@@ -25,7 +25,9 @@ function pre_replace(doc) {
 
         // delete dupulicate
         .replace(/[\s]+/g, " ")
-        .replace(/[\-—–―─]+/g, "–")
+        // dash
+        .replace(/[─]+/g, "─")
+        .replace(/[\-—–―]+/g, "–")
         .replace(/!+/g, "!")
         .replace(/~+/g, "〜")
         .replace(/〜+/g, "〜")
@@ -126,17 +128,17 @@ function wording(doc) {
             .replace(/ ([A-Z])\+ ([Rank|rank|Tier|tier])/g, " $1-Plus $2")
             .replace(/ (Lv|lv)(| |\.)([0-9])/g, " Level $3")
             .replace(/Aracelli/g, "Aracellia")
-            .replace(/b─tch|B─tch/g, "Bitch")
-            .replace(/bast─rd|Bast─rd/g, "Bastard")
+            .replace(/b–tch|B–tch/g, "Bitch")
+            .replace(/bast–rd|Bast–rd/g, "Bastard")
             .replace(/Creare/g, "Clare")
             .replace(/Csille/g, "Callie")
-            .replace(/f─ck|F─ck|f-ck|F-ck/g, "Fuck")
+            .replace(/f–ck|F–ck|f–ck|F–ck/g, "Fuck")
             .replace(/Imeraria/g, "Maria")
             .replace(/Kreuz/g, "Kruz")
             .replace(/Ma'am|ma'am|Ma’am|ma’am/g, "Madam")
             .replace(/Mia([ |?|!|\.|,|…])/g, "Miah$1")
             .replace(/Rey/g, "Ray")
-            .replace(/Roel/g, "Ro-el")
+            .replace(/Roel/g, "Ro–el")
             .replace(/Runegear/g, "Rune-gear")
             .replace(/Sh–t|sh–t/g, "Shit")
             .replace(/Snoc/g, "Noc")
