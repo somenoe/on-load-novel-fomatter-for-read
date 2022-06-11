@@ -172,7 +172,7 @@ function unreadablize(doc) {
             // unreadablize chapter name
             .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g, `${unread('$1$2')}<`)
             // unreadablize inside bracket()
-            .replace(/(\(.+\))/g, `${unread('$1')}`)
+            .replace(/\([^()]+\)/g, `${unread('$1')}`)
             // unreadablize name front quote
             .replace(/(>\s*)([A-Z][\wé]*):/g, `$1${unread('$2')}`)
             // unreadablize silent symbol
