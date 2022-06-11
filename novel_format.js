@@ -150,7 +150,7 @@ function wording(doc) {
             .replace(/Taci/g, "Tashi")
             .replace(/Rino([^A-Za-z])/g, "Rinola$1")
             .replace(/Yekaterina/g, "Katerina")
-            // Japan
+            // JP Name
             .replace(/[G|g]oshujin-sama/g, "Master")
             .replace(/Ganbatte|Ganbattene/g, "Do your best")
             .replace(/Hifumi/g, "Hiro")
@@ -161,6 +161,7 @@ function wording(doc) {
             .replace(/Souma|Soma/g, "Shoma")
             .replace(/Yoash/g, "Yohan")
             .replace(/Shinichi/g, "Shin")
+            .replace(/Seiji/g, "Sayji")
     );
 }
 function unread(text) {
