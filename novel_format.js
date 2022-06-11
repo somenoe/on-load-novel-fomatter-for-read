@@ -1,7 +1,5 @@
-// version 96
-console.log("version 96");
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
-// TODO: group repalce line to separate function
+// * for test on paste: document.body.innerHTML=document.body.innerHTML.replace(//g, "")
 function replacing(doc) {
     doc = doc
         // remove abrr tag
@@ -517,4 +515,3 @@ function main() {
     }
 }
 main();
-// version 96
