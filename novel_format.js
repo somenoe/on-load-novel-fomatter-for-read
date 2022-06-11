@@ -66,6 +66,7 @@ function post_arrangement(doc) {
         .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
         .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
         // delete pseudo table
+        .replace(/([^─])(\s*<\/p><p>│\s*\w+:\s+)/g, "$1, $2")
         .replace(/(─\s*<\/p>)<p>│|<p>│(\s*[【•※])/g, "$1<p>$2")
         .replace(/┌|(<\/p><p>)*│/g, " ")
         ;
@@ -305,7 +306,7 @@ function japanese_quote_symbol(doc) {
         .replace(/ ([「【（『])/g, "$1")
         .replace(/([」】）』]) /g, "$1")
         .replace(/  」…/g, " 「 …")
-        .replace(/([\w]) ([」】）』])([^\w])/g, "$1. $2$3")
+    // .replace(/([\w]) ([」】）』])([^\w])/g, "$1. $2$3")
     return doc;
 }
 function ordinal_number(doc) {
