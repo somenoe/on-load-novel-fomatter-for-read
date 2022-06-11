@@ -131,6 +131,8 @@ function wording(doc) {
             .replace(/ ([A-Z])\+ ([Rank|rank|Tier|tier])/g, " $1-Plus $2")
             .replace(/ (Lv|lv)(| |\.)([0-9])/g, " Level $3")
             .replace(/Aracelli/g, "Aracellia")
+            .replace(/Gewalt/g, "Gerwalt")
+            .replace(/Gewalt/g, "Gerwalt")
             .replace(/b–tch|B–tch/g, "Bitch")
             .replace(/bast–rd|Bast–rd/g, "Bastard")
             .replace(/Creare/g, "Clare")
