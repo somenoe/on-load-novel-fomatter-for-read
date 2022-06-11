@@ -10,7 +10,7 @@ function replacing(doc) {
 
         // delete dupulicate
         .replace(/[\s]+/g, " ")
-        .replace(/[—–―-]+/g, "–")
+        .replace(/[\-—–―─]+/g, "–")
         .replace(/!+/g, "!")
         .replace(/~+/g, "〜")
         .replace(/〜+/g, "〜")
@@ -85,7 +85,7 @@ function partition(doc) {
             .replace(/<hr>/g, "")
             // partition
             .replace(
-                /<p>([\?\!\*\s…–―-━◇◆⍚#]+|–o–|&amp;|&nbsp;)<\/p>/g,
+                /<p>([\?\!\*\s…\-—–―─━◇◆⍚#└│]+|–o–|&amp;|&nbsp;|)<\/p>/g,
                 '<hr class="solid">')
             // delete double partition
             .replace(
