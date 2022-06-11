@@ -8,53 +8,36 @@ function replacing(doc) {
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
         .replace(/<br>/g, "</p><p>")
 
-        .replace(/[—–―-]/g, "–")
+        // delete dupulicate
+        .replace(/[\s]+/g, " ")
+        .replace(/[—–―-]+/g, "–")
+        .replace(/!+/g, "!")
+        .replace(/~+/g, "〜")
+        .replace(/〜+/g, "〜")
 
-        .replace(/("|[A-Z]|[a-z])──([A-Z]|[a-z])/g, "$1– $2")
-
-        .replace(/ \.|・/g, ".")
+        .replace(/ \.|·/g, ".")
         .replace(/\.\(|\. \(/g, "(")
-        .replace(/-|—-|—–|──|---------------/g, "–")
-        .replace(/-|—-|—–|──/g, "–")
-        .replace(/-|—-|—–|──/g, "–")
-        .replace(/-|—-|—–|──/g, "–")
-        .replace(/-|—-|—–|──/g, "–")
-        .replace(/-|—-|—–|──/g, "–")
-        .replace(/!!/g, "!")
-        .replace(/!\./g, "!")
-        .replace(/·/g, ".")
         .replace(/\",/g, '" ,')
-        .replace(/([A-Z]|[a-z])—([A-Z]|[a-z])/g, "$1— $2")
         .replace(/]\.\'/g, "]. '")
+
+        .replace(/!\./g, "!")
         .replace(/\?!/g, "!?")
         .replace(/\?\./g, "?")
-        .replace(/\?\./g, "?")
         .replace(/\.]/g, "]")
-        // .replace(/\*/g, "–")
-        .replace(/——|—─/g, "—")
-        .replace(/——|—─/g, "—")
-        .replace(/——|—─/g, "—")
-        .replace(/——|—─/g, "—")
-        .replace(/~|~~/g, "〜")
-        .replace(/〜〜/g, "〜")
 
         // easy to read with just short (–)
         .replace(/([\wé])–([\wé])/g, "$1–$2")
         .replace(/([\wé])–([\wé])/g, "$1–$2")
         .replace(/([\wé])–([\wé])/g, "$1–$2")
-        .replace(/––/g, "–")
 
         // please read what it stand for
         .replace(/PDA/g, "LoveLove")
 
-        // delete dupulicate space
-        .replace(/   /g, " ")
-        .replace(/  /g, " ")
-        .replace(/  /g, " ")
-        .replace(/  /g, " ")
         // for easy to read number
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
+
         .replace(/『 [0-9] 』/g, "⋆ ");
+
     doc = partition(doc);
     doc = naming(doc);
     doc = exclamation(doc);
