@@ -49,10 +49,8 @@ function pre_replace(doc) {
 
         // for easy to read number
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
-
-        .replace(/『 [0-9] 』/g, "⋆ ");
-
-    ;
+        .replace(/『 [0-9] 』/g, "⋆ ")
+        ;
 }
 function post_arrangement(doc) {
     return doc
@@ -68,8 +66,8 @@ function post_arrangement(doc) {
         .replace(/([「【（『])\s+([「【（『])/g, "$1$2")
         .replace(/([」】）』])\s+([」】）』])/g, "$1$2")
         // delete pseudo table
-        .replace(/[┌│]/g, "")
-
+        .replace(/(─\s*<\/p>)<p>│|<p>│(\s*[【•※])/g, "$1<p>$2")
+        .replace(/┌|(<\/p><p>)*│/g, " ")
         ;
 }
 function ellipsis(doc) {
