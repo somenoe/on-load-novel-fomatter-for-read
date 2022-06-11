@@ -178,11 +178,14 @@ function naming(doc) {
             .replace(/Shinichi/g, "Shin")
     );
 }
+function unread(text) {
+    return `<span aria-hidden="true" >${text}</span>`;
+}
 function unreadablize(doc) {
     return (
         doc
             // unreadablize chapter name
-            .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g, '<span aria-hidden="true" >$1$2</span><')
+            .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g, `${unread('$1$2')}<`)
             // unreadablize inside bracket()
             .replace(/(\(.+\))/g, '<span aria-hidden="true" >$1</span>')
             // unreadablize name front quote // ! did not test yet
