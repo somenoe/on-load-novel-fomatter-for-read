@@ -1,5 +1,9 @@
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
-// * for test on paste: document.body.innerHTML=document.body.innerHTML.replace(//g, "")
+/*
+    * for test on paste:
+        document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
+        document.body.innerHTML.match(//g);
+*/
 function replacing(doc) {
     doc = pre_replace(doc)
     doc = partition(doc);
