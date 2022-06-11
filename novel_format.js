@@ -3,7 +3,7 @@
 function replacing(doc) {
     doc = pre_replace(doc)
     doc = partition(doc);
-    doc = naming(doc);
+    doc = wording(doc);
     doc = exclamation(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
@@ -92,7 +92,7 @@ function partition(doc) {
                 '<hr class="solid">')
     );
 }
-function naming(doc) {
+function wording(doc) {
     return (
         doc
             // please read what it stand for
