@@ -100,24 +100,14 @@ function partition(doc) {
         doc
             // delete hr
             .replace(/<hr>/g, "")
-            // TODO use match caste with partition (like "unreadablize")
+            // partition
             .replace(
-                /\<p\>[…|–|* * *|\- \- \-|\-\-\-|━|—| —|&amp;]\<\/p\>/g,
-                '<hr class="solid">'
-            )
-            .replace(
-                /－ － －|───|–––|<p>─<\/p>|<p> —<\/p>|─ ─ ─|– – –|◆◇◆◇◆|◇|⍚|<p>\.<\/p>|<p>&nbsp;\.<\/p>|#######/g,
-                '<hr class="solid">'
-            )
-            .replace(/\* \* \*|\- \- \-\<\/p>/g, '<hr class="solid">')
-            .replace(/\"\*\*\*\"/g, '<hr class="solid">')
+                /<p>([\?\!\*\s…–―-━◇◆⍚#]+|–o–|&amp;|&nbsp;)<\/p>/g,
+                '<hr class="solid">')
             // delete double partition
             .replace(
-                /(<hr class=\"solid\">)([\n\s]*<hr class=\"solid\">)+/g,
-                '<hr class="solid">'
-            )
-            // partition
-            .replace(/<p>([\?\!…\*–―-\s]+|–o–)<\/p>/g, '<hr class="solid">')
+                /(hr class=\"solid\">)([\n\s]*<hr class=\"solid\">)+/g,
+                '<hr class="solid">')
     );
 }
 function naming(doc) {
