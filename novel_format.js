@@ -187,17 +187,17 @@ function unreadablize(doc) {
             // unreadablize chapter name
             .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g, `${unread('$1$2')}<`)
             // unreadablize inside bracket()
-            .replace(/(\(.+\))/g, '<span aria-hidden="true" >$1</span>')
-            // unreadablize name front quote // ! did not test yet
-            .replace(/(>\s*)([A-Z][\wé]*):/g, '$1<span aria-hidden="true" >$2:</span>')
+            .replace(/(\(.+\))/g, `${unread('$1')}`)
+            // unreadablize name front quote
+            .replace(/(>\s*)([A-Z][\wé]*):/g, `$1${unread('$2')}`)
             // unreadablize silent symbol
-            .replace(/([「][^\w]+[」])/g, '<span aria-hidden="true" >$1</span>')
+            .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
-            // .replace(/(\s[^\w][^\w][^\w]+\s)/g, '<span aria-hidden="true" >$1</span>')
-            .replace(/([†*\$#]+)/g, '<span aria-hidden="true" >$1</span>')
+            // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
+            .replace(/([†*\$#]+)/g, `${unread('$1')}`)
             // unreadablize dot near quote symbol
-            .replace(/\.([」】）』「【（『])/g, ".<span aria-hidden=\"true\">$1</span>")
-            .replace(/([」】）』「【（『])\./g, "<span aria-hidden=\"true\">$1</span>.")
+            .replace(/\.([」】）』「【（『])/g, `.${unread('$1')}`)
+            .replace(/([」】）』「【（『])\./g, `${unread('$1')}.`)
     );
 }
 function stutter(doc) {
