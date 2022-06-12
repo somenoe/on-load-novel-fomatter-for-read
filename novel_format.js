@@ -208,7 +208,7 @@ function exclamation(doc) {
     return (
         doc
             // exclamation sound
-            .replace(/\s(nn|N)([^\w])/g, " Neun$2")
+            .replace(/([^\w])(nn|N)([^\w])/g, " Neun$2")
             .replace(/Aa([〜|,|!|?])/g, "Ah$1")
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
@@ -219,7 +219,7 @@ function exclamation(doc) {
             .replace(/Ee([^\w])/g, "Eh$1")
             .replace(/Aa([^\w])/g, "Ah$1")
             .replace(/(Mm-hmm|Mmmhmm|Mmhmm| mmmhmm| mmhmm|Mhm)([ |?|!|\.|,|…])/g, "Uh-huh$2")
-            .replace(/Hmpf|Hmph|Hmhm|Mhh/g, "Hmm")
+            .replace(/Hmpf|Hmph|Hmhm|Mhh|Hn/g, "Hmm")
             .replace(/(Hm|[^\w]hm)([^\w])/g, "Hmm$2")
             .replace(/Kreuk|Keuk|Kuek/g, "Kwuk")
             .replace(/[K|k]euck/g, "Kheck")
