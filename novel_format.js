@@ -156,7 +156,7 @@ function wording(doc) {
             .replace(/Ganbatte|Ganbattene/g, "Do your best")
             .replace(/Hifumi/g, "Hiro")
             .replace(/Mylene/g, "Malena")
-            .replace(/([Nn]|[Oo]n)ii–*(san|sama|chan)/g, "Big–Bro")
+            .replace(/(([Nn]|[Oo]n)ii|[Aa]n)–*(san|sama|chan)/g, "Big–Bro")
             .replace(/[Ii]mouto/g, "Little-Sis")
             .replace(/[Kk]aa–*(san|sama|chan)/g, "Mom")
             .replace(/[Oo](c|jii)–*(san|sama|chan)/g, "Gramps")
@@ -299,6 +299,7 @@ function japanese_quote_symbol(doc) {
         .replace(/([」】）』])/g, " $1")
         .replace(/ ([「【（『])/g, "$1")
         .replace(/([」】）』]) /g, "$1")
+        .replace(/( [」】）』])([\'’]s)/g, "$2$1")
         .replace(/  」…/g, " 「 …")
     // .replace(/([\w]) ([」】）』])([^\w])/g, "$1. $2$3")
     return doc;
