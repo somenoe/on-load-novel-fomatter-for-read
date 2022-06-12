@@ -26,7 +26,7 @@ function pre_replace(doc) {
         .replace(/[\s]+/g, " ")
         // dash
         .replace(/[─]+/g, "─")
-        .replace(/[\-—–―]+/g, "–")
+        .replace(/[\-—–―]+,*/g, "–")
         .replace(/!+/g, "!")
         .replace(/[~～〜]+/g, "〜")
         .replace(/：/g, ": ")
