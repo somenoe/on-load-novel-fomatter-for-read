@@ -30,6 +30,7 @@ function pre_replace(doc) {
         .replace(/[\-—–―]+/g, "–")
         .replace(/!+/g, "!")
         .replace(/[~～〜]+/g, "〜")
+        .replace(/：/g, ": ")
 
         .replace(/ \.|·/g, ".")
         .replace(/\.\(|\. \(/g, "(")
