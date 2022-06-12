@@ -122,6 +122,7 @@ function wording(doc) {
             .replace(/Sanagi/g, "Sa-na-gi")
             .replace(/Se-/g, "See-")
             .replace(/Seo| seo|-seo/g, "So")
+            .replace(/[Ss]eok/g, "Sok")
             .replace(/seodam|Seodam/g, "Seo-dam")
             .replace(/Sunyoung/g, "Sun-young")
             .replace(/Tae Ho/g, "Jin-ho")
