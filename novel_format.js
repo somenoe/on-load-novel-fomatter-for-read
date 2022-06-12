@@ -105,6 +105,8 @@ function wording(doc) {
         doc
             // please read what it stand for
             .replace(/PDA/g, "LoveLove")
+            // no. to number
+            .replace(/([^\w])[Nn]o\. ([0-9])/g, "$1Number $2")
 
             // Korean
             .replace(/ Ja | Ja,/g, " Jah ")
