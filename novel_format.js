@@ -181,8 +181,8 @@ function unreadablize(doc) {
             .replace(/(Chapter|chapter)([\s0-9]*[:\w\s]*)</g, `${unread('$1$2')}<`)
             // unreadablize inside bracket()
             .replace(/(\([^()]+\))/g, `${unread('$1')}`)
-            // unreadablize name front quote
-            .replace(/(>\s*)([A-Z][\wé]*):/g, `$1${unread('$2')}`)
+            // // unreadablize name front quote
+            // .replace(/(>\s*)([A-Z][\wé]*):/g, `$1${unread('$2')}`)
             // unreadablize silent symbol
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
