@@ -7,10 +7,10 @@ document.body.innerHTML.match(//g);
 function replacing(doc) {
     doc = pre_replace(doc)
     doc = partition(doc);
-    doc = wording(doc);
-    doc = exclamation(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
+    doc = wording(doc);
+    doc = exclamation(doc);
     doc = ellipsis(doc);
     doc = ordinal_number(doc);
     doc = stutter(doc);
