@@ -68,6 +68,7 @@ function post_arrangement(doc) {
         .replace(/([^─])(\s*<\/p><p>│\s*\w+:\s+)/g, "$1, $2")
         .replace(/(─\s*<\/p>)<p>│|<p>│(\s*[【•※])/g, "$1<p>$2")
         .replace(/┌|(<\/p><p>)*│/g, " ")
+        .replace(/([A-z])–([A-z])/g, "$1-$2")
         ;
 }
 function ellipsis(doc) {
@@ -197,13 +198,13 @@ function stutter(doc) {
     return (
         doc
             // stutter
-            .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[…─\-–〜](\s*[A-z])/g, "$1$2ah– $3")
-            .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[…─\-–〜](\s*[A-z])/g, "$1$2ah– $3")
-            .replace(/((?![\w’]).)([aiueoAUEO])[…─\-–〜](\s*[A-z])/g, "$1$2h– $3")
-            .replace(/((?![\w’]).)([aiueoAUEO])[…─\-–〜](\s*[A-z])/g, "$1$2h– $3")
-            .replace(/((?![\w’]).)(I)[…─\-–〜](\s*[A-z])/g, "$1$2– $3")
-            .replace(/((?![\w’]).)(I)[…─\-–〜](\s*[A-z])/g, "$1$2– $3")
-            .replace(/(\s)(I)[…─\-–〜](\s*[A-z])/g, "$1$2– $3")
+            .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[…─\-–〜](\s*[A-z])/g, "$1$2ah-$3")
+            .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[…─\-–〜](\s*[A-z])/g, "$1$2ah-$3")
+            .replace(/((?![\w’]).)([aiueoAUEO])[…─\-–〜](\s*[A-z])/g, "$1$2h-$3")
+            .replace(/((?![\w’]).)([aiueoAUEO])[…─\-–〜](\s*[A-z])/g, "$1$2h-$3")
+            .replace(/((?![\w’]).)(I)[…─\-–〜](\s*[A-z])/g, "$1$2-$3")
+            .replace(/((?![\w’]).)(I)[…─\-–〜](\s*[A-z])/g, "$1$2-$3")
+            .replace(/(\s)(I)[…─\-–〜](\s*[A-z])/g, "$1$2-$3")
     );
 }
 function exclamation(doc) {
