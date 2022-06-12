@@ -128,7 +128,7 @@ function wording(doc) {
             // Western
             .replace(/ ([A-Z])\- ([Rank|rank|Tier|tier])/g, " $1-Minus $2")
             .replace(/ ([A-Z])\+ ([Rank|rank|Tier|tier])/g, " $1-Plus $2")
-            .replace(/ (Lv|lv)(| |\.)([0-9])/g, " Level $3")
+            .replace(/([^\w])([Ll][Vv][Ll]*)([\s\.]*)([0-9])/g, "$1Level $4")
             .replace(/Aracelli/g, "Aracellia")
             .replace(/Gewalt/g, "Greywalt")
             .replace(/b[*–]tch|B[*–]tch/g, "Bitch")
@@ -182,7 +182,8 @@ function unreadablize(doc) {
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
-            .replace(/([†*\$#\\]+)/g, `${unread('$1')}`)
+            .replace(/([†*\$#]+)/g, `${unread('$1')}`)
+            .replace(/([A-z])\/([A-z])/g, `$1${unread('\/')}$2`)
             // unreadablize dot near quote symbol
             .replace(/\.([」】）』「【（『])/g, `.${unread('$1')}`)
             .replace(/([」】）』「【（『])\./g, `${unread('$1')}.`)
