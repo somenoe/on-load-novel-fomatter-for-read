@@ -22,7 +22,6 @@ function pre_replace(doc) {
     return doc
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
-
         // delete dupulicate
         .replace(/[\s]+/g, " ")
         // dash
@@ -41,15 +40,15 @@ function pre_replace(doc) {
         .replace(/\?!/g, "!?")
         .replace(/\?\./g, "?")
         .replace(/\.]/g, "]")
-
         // easy to read with just short (–)
         .replace(/([\wé])–([\wé])/g, "$1–$2")
         .replace(/([\wé])–([\wé])/g, "$1–$2")
         .replace(/([\wé])–([\wé])/g, "$1–$2")
-
         // for easy to read number
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
         .replace(/『 [0-9] 』/g, "⋆ ")
+        // dot without space
+        .replace(/([A-z])\.([A-z])/g, "$1. $2")
         ;
 }
 function post_arrangement(doc) {
