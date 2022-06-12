@@ -222,7 +222,7 @@ function exclamation(doc) {
             .replace(/[K|k]euck/g, "Kheck")
             .replace(/Krr|krr/g, "Karr")
             .replace(/Keugh|keugh/g, "Kugh")
-            .replace(/(Mm|Mmhm|mmhm)([ |?|!|\.|,|…])/g, "Mmm$2")
+            .replace(/(Mm|Mmhm|mmhm|Mhh)([^\w])/g, "Mmm$2")
             .replace(/mmm/g, "mm")
             .replace(/Nn/g, "Neun")
             .replace(
