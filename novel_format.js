@@ -182,7 +182,7 @@ function unreadablize(doc) {
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
-            .replace(/([†*\$#]+)/g, `${unread('$1')}`)
+            .replace(/([†*\$#\\]+)/g, `${unread('$1')}`)
             // unreadablize dot near quote symbol
             .replace(/\.([」】）』「【（『])/g, `.${unread('$1')}`)
             .replace(/([」】）』「【（『])\./g, `${unread('$1')}.`)
@@ -211,6 +211,7 @@ function exclamation(doc) {
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
             .replace(/Ara/g, "Ahh")
+            .replace(/[Pp]ikon/g, "Ahah")
             .replace(/(Etto|Ano)([^\w])/g, "Uhh$2")
             // [^\w\s] = not in \w, not in \s
             .replace(/Ee([^\w])/g, "Eh$1")
