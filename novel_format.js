@@ -154,7 +154,7 @@ function wording(doc) {
             .replace(/Ganbatte|Ganbattene/g, "Do your best")
             .replace(/Hifumi/g, "Hiro")
             .replace(/Mylene/g, "Malena")
-            .replace(/Nii–chan/g, "Big-Bro")
+            .replace(/Nii–chan|Onii–chan/g, "Big-Bro")
             .replace(/Kaa–san/g, "Mom")
             .replace(/otome game|Otome game/g, "Romance game")
             .replace(/Shahata/g, "Shaha")
