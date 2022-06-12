@@ -199,6 +199,7 @@ function stutter(doc) {
             .replace(/((?![\w’]).)([aiueoAUEO])[…─\-–](\s*[A-z])/g, "$1$2h– $3")
             .replace(/((?![\w’]).)(I)[…─\-–](\s*[A-z])/g, "$1$2– $3")
             .replace(/((?![\w’]).)(I)[…─\-–](\s*[A-z])/g, "$1$2– $3")
+            .replace(/(\s)(I)[…─\-–](\s*[A-z])/g, "$1$2– $3")
     );
 }
 function exclamation(doc) {
