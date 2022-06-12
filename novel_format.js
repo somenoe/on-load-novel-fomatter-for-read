@@ -193,30 +193,12 @@ function stutter(doc) {
     return (
         doc
             // stutter
-            // .replace(/([^\w])((?![aiueoAIUEO])[A-Za-z])[…─\-–]\s([\w])/g, "$1$2ah– $3")
-            // .replace(/ (?![aiueoAIUEO])([A-Za-z]h?)[…─\-–]+ /g, " $1ah– ")
             .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[…─\-–](\s*[A-z])/g, "$1$2ah– $3")
             .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[…─\-–](\s*[A-z])/g, "$1$2ah– $3")
             .replace(/((?![\w’]).)([aiueoAUEO])[…─\-–](\s*[A-z])/g, "$1$2h– $3")
             .replace(/((?![\w’]).)([aiueoAUEO])[…─\-–](\s*[A-z])/g, "$1$2h– $3")
-            .replace(
-                /( |\?|\!|\.|,|…)(Wh|wh|Th|th)[\─\-\–](Wh|wh|Th|th)/g,
-                "$1$2ah– $3"
-            )
-        // .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh), /g, " $1ah– ")
-        // .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
-        // .replace(/( |\?|\!|\.|,|…)([A-Z]|[a-z]|Wh|wh)─ /g, " $2ah– ")
-        // .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
-        // .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
-        // .replace(/( |\?|\!|\.|,|…)([a|e|o|u|A|E|O|U])ah– /g, " $2h– ")
-        // .replace(
-        //     /Wh-wh| wh-wh|Wh, wh| wh, wh|Wh- wh| wh- wh|Wh– wh| wh– wh|Wh– Wh/g,
-        //     " Wha– Wh"
-        // )
-        // .replace(
-        //     /Th-th| th-th|Th, th| th, th|Th- th| th- th|Th– th| th– th|Th– Th/g,
-        //     " Ta– Th"
-        // )
+            .replace(/((?![\w’]).)(I)[…─\-–](\s*[A-z])/g, "$1$2– $3")
+            .replace(/((?![\w’]).)(I)[…─\-–](\s*[A-z])/g, "$1$2– $3")
     );
 }
 function exclamation(doc) {
