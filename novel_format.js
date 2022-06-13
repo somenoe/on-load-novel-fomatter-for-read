@@ -358,8 +358,8 @@ function styling(doc) {
             text-align: left !important;
         }
         p {
-            margin-top: 1em; !important;
-            text-indent: 0pt; !important;
+            margin-top: 1em !important;
+            text-indent: 0pt !important;
         }`;
     doc.head.appendChild(newStyle);
 }
