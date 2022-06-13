@@ -308,26 +308,26 @@ function japanese_quote_symbol(doc) {
 }
 function ordinal_number(doc) {
     return doc
-        .replace(/([2-9])([0-9])(st|nd|rd|th| st| nd| rd| th)/, "$10 $2$3")
-        .replace(/(1st|1 st)([^\w])/, "First$2")
-        .replace(/(2nd|2 nd)([^\w])/, "Second$2")
-        .replace(/(3rd|3 rd)([^\w])/, "Third$2")
-        .replace(/(4th|4 th)([^\w])/, "Fourth$2")
-        .replace(/(5th|5 th)([^\w])/, "Fifth$2")
-        .replace(/(6th|6 th)([^\w])/, "Sixth$2")
-        .replace(/(7th|7 th)([^\w])/, "Seventh$2")
-        .replace(/(8th|8 th)([^\w])/, "Eighth$2")
-        .replace(/(9th|9 th)([^\w])/, "Ninth$2")
-        .replace(/(10th|10 th)([^\w])/, "Tenth$2")
-        .replace(/(11th|11 th)([^\w])/, "Eleventh$2")
-        .replace(/(12th|12 th)([^\w])/, "Twelfth$2")
-        .replace(/(13th|12 th)([^\w])/, "Thirteenth$2")
-        .replace(/(14th|14 th)([^\w])/, "Fourteenth$2")
-        .replace(/(15th|15 th)([^\w])/, "Fifteenth$2")
-        .replace(/(16th|16 th)([^\w])/, "Sixteenth$2")
-        .replace(/(17th|17 th)([^\w])/, "Seventeenth$2")
-        .replace(/(18th|18 th)([^\w])/, "Eighteenth$2")
-        .replace(/(19th|19 th)([^\w])/, "Nineteenth$2");
+        .replace(/([2-9])([0-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
+        .replace(/(1\s*st)([^\w])/g, "First$2")
+        .replace(/(2\s*nd)([^\w])/g, "Second$2")
+        .replace(/(3\s*rd)([^\w])/g, "Third$2")
+        .replace(/(4\s*th)([^\w])/g, "Fourth$2")
+        .replace(/(5\s*th)([^\w])/g, "Fifth$2")
+        .replace(/(6\s*th)([^\w])/g, "Sixth$2")
+        .replace(/(7\s*th)([^\w])/g, "Seventh$2")
+        .replace(/(8\s*th)([^\w])/g, "Eighth$2")
+        .replace(/(9\s*th)([^\w])/g, "Ninth$2")
+        .replace(/(10\s*th)([^\w])/g, "Tenth$2")
+        .replace(/(11\s*th)([^\w])/g, "Eleventh$2")
+        .replace(/(12\s*th)([^\w])/g, "Twelfth$2")
+        .replace(/(12\s*th)([^\w])/g, "Thirteenth$2")
+        .replace(/(14\s*th)([^\w])/g, "Fourteenth$2")
+        .replace(/(15\s*th)([^\w])/g, "Fifteenth$2")
+        .replace(/(16\s*th)([^\w])/g, "Sixteenth$2")
+        .replace(/(17\s*th)([^\w])/g, "Seventeenth$2")
+        .replace(/(18\s*th)([^\w])/g, "Eighteenth$2")
+        .replace(/(19\s*th)([^\w])/g, "Nineteenth$2");
 }
 function hide_all_except(children, except) {
     for (let i = 0; i < children.length; i++) {
