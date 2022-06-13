@@ -308,6 +308,16 @@ function japanese_quote_symbol(doc) {
 }
 function ordinal_number(doc) {
     return doc
+        .replace(/([2-9])([0-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
+        .replace(/(11\s*th)([^\w])/g, "Eleventh$2")
+        .replace(/(12\s*th)([^\w])/g, "Twelfth$2")
+        .replace(/(13\s*th)([^\w])/g, "Thirteenth$2")
+        .replace(/(14\s*th)([^\w])/g, "Fourteenth$2")
+        .replace(/(15\s*th)([^\w])/g, "Fifteenth$2")
+        .replace(/(16\s*th)([^\w])/g, "Sixteenth$2")
+        .replace(/(17\s*th)([^\w])/g, "Seventeenth$2")
+        .replace(/(18\s*th)([^\w])/g, "Eighteenth$2")
+        .replace(/(19\s*th)([^\w])/g, "Nineteenth$2")
         .replace(/(1\s*st)([^\w])/g, "First$2")
         .replace(/(2\s*nd)([^\w])/g, "Second$2")
         .replace(/(3\s*rd)([^\w])/g, "Third$2")
@@ -318,16 +328,6 @@ function ordinal_number(doc) {
         .replace(/(8\s*th)([^\w])/g, "Eighth$2")
         .replace(/(9\s*th)([^\w])/g, "Ninth$2")
         .replace(/(10\s*th)([^\w])/g, "Tenth$2")
-        .replace(/(11\s*th)([^\w])/g, "Eleventh$2")
-        .replace(/(12\s*th)([^\w])/g, "Twelfth$2")
-        .replace(/(13\s*th)([^\w])/g, "Thirteenth$2")
-        .replace(/(14\s*th)([^\w])/g, "Fourteenth$2")
-        .replace(/(15\s*th)([^\w])/g, "Fifteenth$2")
-        .replace(/(16\s*th)([^\w])/g, "Sixteenth$2")
-        .replace(/(17\s*th)([^\w])/g, "Seventeenth$2")
-        .replace(/(18\s*th)([^\w])/g, "Eighteenth$2")
-        .replace(/(19\s*th)([^\w])/g, "Nineteenth$2")
-        .replace(/([2-9])([0-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
         ;
 }
 function hide_all_except(children, except) {
