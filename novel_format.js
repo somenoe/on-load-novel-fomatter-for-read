@@ -48,7 +48,7 @@ function pre_replace(doc) {
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
         .replace(/『 [0-9] 』/g, "⋆ ")
         // symbol without space
-        .replace(/([A-z])([,.!?])([A-z])/g, "$1$2 $3")
+        .replace(/([A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
         ;
 }
 function post_arrangement(doc) {
