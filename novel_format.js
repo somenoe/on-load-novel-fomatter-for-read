@@ -5,14 +5,14 @@ document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
 document.body.innerHTML.match(//g);
 */
 function replacing(doc) {
-    doc = pre_replace(doc)
+    doc = pre_replace(doc);
+    doc = ordinal_number(doc);
     doc = partition(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
     doc = wording(doc);
     doc = exclamation(doc);
     doc = ellipsis(doc);
-    doc = ordinal_number(doc);
     doc = stutter(doc);
     doc = unreadablize(doc);
     doc = post_arrangement(doc)
