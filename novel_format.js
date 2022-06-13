@@ -23,7 +23,7 @@ function pre_replace(doc) {
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
         // delete dupulicate
-        .replace(/[\s]+/g, " ")
+        .replace(/[\s]+|(&nbsp;)+/g, " ")
         // dash
         .replace(/[─]+/g, "─")
         .replace(/[\-—–―]+,*/g, "–")
