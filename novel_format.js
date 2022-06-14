@@ -211,7 +211,8 @@ function stutter(doc) {
             .replace(/(\s)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
     );
 }
-function exclamation(doc) {
+function exclamation
+    (doc) {
     return (
         doc
             // exclamation sound
@@ -232,8 +233,7 @@ function exclamation(doc) {
             .replace(/[K|k]euck/g, "Kheck")
             .replace(/Krr|krr/g, "Karr")
             .replace(/Keugh|keugh/g, "Kugh")
-            .replace(/(Mm|Mmhm|mmhm)([^\w])/g, "Mmm$2")
-            .replace(/mmm/g, "mm")
+            .replace(/(Mm+|Mmhm|mmhm)([^\w])/g, "Mmm$2")
             .replace(/Nn/g, "Neun")
             .replace(
                 /(Pff|Pffff|Pfftf|Pffft|Pwff|Pfff|Pft|pft)([ |\?|\!|\.|,|…])/g,
