@@ -189,6 +189,8 @@ function unreadablize
             // unreadablize these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
             .replace(/([†*\$#]+)/g, `${unread('$1')}`)
+            // only number
+            .replace(/((<p>[0-9\s]<\/p>))/g, `${unread('$1')}`)
             .replace(/([A-z])\/([A-z])/g, `$1${unread('\/')}$2`)
             // unreadablize dot near quote symbol
             .replace(/\.([」】）』「【（『])/g, `.${unread('$1')}`)
