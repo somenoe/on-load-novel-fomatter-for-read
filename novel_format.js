@@ -512,7 +512,8 @@ function epub_reader() {
         ext[i].innerHTML = '<hr>'
     }
 }
-function main() {
+function main
+    () {
     if (window.location.hostname == "ranobes.net")
         process("dle-content", "block story shortstory", "arrticle");
     if (window.location.hostname == "infinitenoveltranslations.net")
@@ -527,6 +528,12 @@ function main() {
         const content = document.getElementsByClassName("thecontent")[0];
         hide_all(parent.children);
         add_child(parent, content);
+    }
+    if (window.location.hostname == '') {
+        if (document.getElementById('novelArticle1')) {
+            styling(document);
+            document.body.innerHTML = replacing(document.body.innerHTML);
+        }
     }
 }
 main();
