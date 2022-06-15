@@ -179,7 +179,7 @@ function unreadablize
     return (
         doc
             // unreadablize chapter name
-            .replace(/(Chapter|chapter)([\s0-9]*[^<>]*)</g, `${unread('$1$2')}<`)
+            .replace(/([Ee]pisode|[Cc]hapter)(\s*[0-9]+[^<>]*)</g, `${unread('$1$2')}<`)
             // unreadablize inside bracket()
             .replace(/(\([^()]+\))/g, `${unread('$1')}`)
             // // unreadablize name front quote
