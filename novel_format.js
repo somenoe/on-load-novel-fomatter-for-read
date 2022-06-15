@@ -71,10 +71,11 @@ function post_arrangement(doc) {
         .replace(/([A-z])–([A-z])/g, "$1-$2")
         ;
 }
-function ellipsis(doc) {
+function ellipsis
+    (doc) {
     return (
         doc
-            .replace(/(\.…)+|(…\.)+|(\.\.\.)+|(\. \. \.)+|…+/g, "…")
+            .replace(/(\.…)+|(…\.)+|(\.\.\.)+|(\. \. \.)+|…+\.*/g, "…")
             // arrangement of ellipsis(…)
             .replace(/([\wé]) …( |\?|\!|\.|,|…|\"|\'|\)|\(|\<)/g, "$1…$2")
             .replace(/( |\?|\!|\.|,|…|\"|\'|\)|\(|\>)… ([\wé])/g, "$1…$2")
