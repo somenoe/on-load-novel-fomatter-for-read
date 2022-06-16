@@ -87,14 +87,15 @@ function ellipsis
             .replace(/([a-z]) … ([a-z])/g, "$1… $2")
     );
 }
-function partition(doc) {
+function partition
+    (doc) {
     return (
         doc
             // delete hr
             .replace(/<hr>/g, "")
             // partition
             .replace(
-                /<p>([\?\!\*\s\-\.…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/p>/g,
+                /<p>([\?\!\*\s\-\_.…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/p>/g,
                 '<hr class="solid">')
             // delete double partition
             .replace(
