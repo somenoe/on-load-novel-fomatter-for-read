@@ -199,17 +199,18 @@ function unreadablize
             .replace(/([」】）』「【（『])\./g, `${unread('$1')}.`)
     );
 }
-function stutter(doc) {
+function stutter
+    (doc) {
     console.log("[log]: stutter");
     return (
         doc
             // stutter
-            .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[,…─\-–〜](\s*)([A-z])/g, "$1$2ah-$4")
-            .replace(/((?![\w’]).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[,…─\-–〜](\s*)([A-z])/g, "$1$2ah-$4")
-            .replace(/((?![\w’]).)([aiueoAUEO])[,…─\-–〜](\s*)([A-z])/g, "$1$2h-$4")
-            .replace(/((?![\w’]).)([aiueoAUEO])[,…─\-–〜](\s*)([A-z])/g, "$1$2h-$4")
-            .replace(/((?![\w’]).)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
-            .replace(/((?![\w’]).)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
+            .replace(/((?![\w’']).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[,…─\-–〜](\s*)([A-z])/g, "$1$2ah-$4")
+            .replace(/((?![\w’']).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[,…─\-–〜](\s*)([A-z])/g, "$1$2ah-$4")
+            .replace(/((?![\w’']).)([aiueoAUEO])[,…─\-–〜](\s*)([A-z])/g, "$1$2h-$4")
+            .replace(/((?![\w’']).)([aiueoAUEO])[,…─\-–〜](\s*)([A-z])/g, "$1$2h-$4")
+            .replace(/((?![\w’']).)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
+            .replace(/((?![\w’']).)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
             .replace(/(\s)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
     );
 }
