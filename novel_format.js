@@ -311,9 +311,10 @@ function japanese_quote_symbol(doc) {
     // .replace(/([\w]) ([」】）』])([^\w])/g, "$1. $2$3")
     return doc;
 }
-function ordinal_number(doc) {
+function ordinal_number
+    (doc) {
     return doc
-        .replace(/([2-9])([0-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
+        .replace(/([2-9])([1-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
         .replace(/(11\s*th)([^\w])/g, "Eleventh$2")
         .replace(/(12\s*th)([^\w])/g, "Twelfth$2")
         .replace(/(13\s*th)([^\w])/g, "Thirteenth$2")
