@@ -103,7 +103,8 @@ function partition
                 '<hr class="solid">')
     );
 }
-function wording(doc) {
+function wording
+    (doc) {
     return (
         doc
             // please read what it stand for
@@ -122,6 +123,7 @@ function wording(doc) {
             .replace(/Jitae/g, "Jin-ho")
             .replace(/Kaeul/g, "Kya-eunl")
             .replace(/Sanagi/g, "Sa-na-gi")
+            .replace(/[Gg]ong-nyuh/g, "Duke’s daughter")
             .replace(/Se-/g, "See-")
             .replace(/Seo| seo|-seo/g, "So")
             .replace(/[Ss]eok/g, "Sok")
