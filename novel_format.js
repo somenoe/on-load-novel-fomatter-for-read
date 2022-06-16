@@ -10,11 +10,11 @@ function replacing(doc) {
     doc = partition(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
-    doc = wording(doc);
     doc = exclamation(doc);
     doc = ellipsis(doc);
     doc = stutter(doc);
     doc = unreadablize(doc);
+    doc = wording(doc);
     doc = post_arrangement(doc)
     return doc;
 }
@@ -123,7 +123,7 @@ function wording
             .replace(/Jitae/g, "Jin-ho")
             .replace(/Kaeul/g, "Kya-eunl")
             .replace(/Sanagi/g, "Sa-na-gi")
-            .replace(/[Gg]ong-nyuh/g, "Duke’s daughter")
+            .replace(/([Gg]ong\-nyuh)/g, "Duke's Daughter") //! I cannot replace this (╯︵╰,)
             .replace(/Se-/g, "See-")
             .replace(/Seo| seo|-seo/g, "So")
             .replace(/[Ss]eok/g, "Sok")
