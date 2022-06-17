@@ -109,6 +109,7 @@ function wording
         doc
             // please read what it stand for
             .replace(/PDA/g, "LoveLove")
+            .replace(/FL/g, "Heroine")
             // no. to number
             .replace(/([^\w])[Nn]o\. ([0-9])/g, "$1Number $2")
 
@@ -419,7 +420,7 @@ function infinitenoveltranslations() {
             if (e.key === "ArrowLeft" && a_tags.length >= 3) location = prev_chapter;
         });
     }
-    // unreadablize title
+    // clean title text
     document.getElementsByClassName("entry-title")[0].innerHTML = "";
     // replacing
     content.innerHTML = replacing(content.innerHTML);
@@ -517,12 +518,38 @@ function epub_reader() {
         ext[i].innerHTML = '<hr>'
     }
 }
+function towelcitytown
+    () {
+    const body = document.body;
+    const content = document.getElementsByClassName("entry-content")[0].children[0].cloneNode(true);
+    const title = document.getElementsByTagName("title")[0].innerHTML;
+    const prev_chapter = document.getElementsByClassName("nav-previous")[0].children[0].href;
+    const next_chapter = document.getElementsByClassName("nav-next")[0].children[0].href;
+    // set margin and font
+    styling(document);
+    // cleaning other text
+    body.innerHTML = ''
+    // navigator with arrow key
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") location = next_chapter;
+        if (e.key === "ArrowLeft") location = prev_chapter;
+    });
+    // add unread title
+    content.innerHTML = `<span aria-hidden="true" > ${title} </span><hr> ${content.innerHTML}`;
+    // replacing
+    content.innerHTML = replacing(content.innerHTML);
+    // show only content
+    hide_all(body.children);
+    add_child(body, content);
+}
 function main
     () {
     if (window.location.hostname == "ranobes.net")
         process("dle-content", "block story shortstory", "arrticle");
     if (window.location.hostname == "infinitenoveltranslations.net")
         infinitenoveltranslations();
+    if (window.location.hostname == 'towelcitytown.wordpress.com')
+        towelcitytown();
     if (window.location.hostname == "allnovelfull.com")
         allnovelfull();
     if (window.location.hostname == 'i.meguminovel.com') {
