@@ -541,6 +541,7 @@ function epub_reader
         ext[i].innerHTML = '<hr>'
     }
 }
+var back_up;
 function towelcitytown
     () {
     const body = document.body;
@@ -548,6 +549,8 @@ function towelcitytown
     const title = document.getElementsByTagName("title")[0].innerHTML;
     const prev_chapter = document.getElementsByClassName("nav-previous")[0].children[0].href;
     const next_chapter = document.getElementsByClassName("nav-next")[0].children[0].href;
+    // clone body
+    back_up = body.cloneNode(true);
     // set margin and font
     styling(document);
     // cleaning other text
@@ -564,6 +567,10 @@ function towelcitytown
     // show only content
     hide_all(body.children);
     add_child(body, content);
+}
+function reset
+    () {
+    document.body = back_up;
 }
 function main
     () {
@@ -592,3 +599,5 @@ function main
     }
 }
 main();
+console.log('try reset')
+reset()
