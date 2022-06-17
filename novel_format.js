@@ -221,7 +221,7 @@ function stutter
         // .replace(/(\s)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
     );
 }
-function exclamationS
+function exclamation
     (doc) {
     return (
         doc
