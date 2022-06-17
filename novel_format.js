@@ -4,7 +4,8 @@
 document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
 document.body.innerHTML.match(//g);
 */
-function replacing(doc) {
+function replacing
+    (doc) {
     doc = pre_replace(doc);
     doc = ordinal_number(doc);
     doc = partition(doc);
@@ -18,7 +19,8 @@ function replacing(doc) {
     doc = post_arrangement(doc)
     return doc;
 }
-function pre_replace(doc) {
+function pre_replace
+    (doc) {
     return doc
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
@@ -51,7 +53,8 @@ function pre_replace(doc) {
         .replace(/([A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
         ;
 }
-function post_arrangement(doc) {
+function post_arrangement
+    (doc) {
     return doc
         // new line to paragraph
         .replace(/<br>/g, "</p><p>")
@@ -72,6 +75,7 @@ function post_arrangement(doc) {
         ;
 }
 function ellipsis
+
     (doc) {
     return (
         doc
@@ -88,6 +92,7 @@ function ellipsis
     );
 }
 function partition
+
     (doc) {
     return (
         doc
@@ -104,6 +109,7 @@ function partition
     );
 }
 function wording
+
     (doc) {
     return (
         doc
@@ -176,10 +182,12 @@ function wording
             .replace(/Seiji/g, "Sayji")
     );
 }
-function unread(text) {
+function unread
+    (text) {
     return `<span aria-hidden="true" >${text}</span>`;
 }
 function unreadablize
+
     (doc) {
     return (
         doc
@@ -203,6 +211,7 @@ function unreadablize
     );
 }
 function stutter
+
     (doc) {
     console.log("[log]: stutter");
     return (
@@ -218,6 +227,7 @@ function stutter
     );
 }
 function exclamation
+
     (doc) {
     return (
         doc
@@ -250,7 +260,8 @@ function exclamation
             .replace(/Un([?|!|\.|,|…])/g, "Eun$1")
     );
 }
-function quote_symbol(doc) {
+function quote_symbol
+    (doc) {
     return (
         doc
             // Quote symbol
@@ -275,7 +286,8 @@ function quote_symbol(doc) {
             .replace(/APosTroPhe/g, "’")
     );
 }
-function japanese_quote_symbol(doc) {
+function japanese_quote_symbol
+    (doc) {
     console.log("[log]: change to japanese quote style");
     const japanese_open_quote = doc.match(/「/g);
     const japanese_close_quote = doc.match(/」/g);
@@ -316,6 +328,7 @@ function japanese_quote_symbol(doc) {
     return doc;
 }
 function ordinal_number
+
     (doc) {
     return doc
         .replace(/([2-9])([1-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
@@ -340,23 +353,28 @@ function ordinal_number
         .replace(/(10\s*th)([^\w])/g, "Tenth$2")
         ;
 }
-function hide_all_except(children, except) {
+function hide_all_except
+    (children, except) {
     for (let i = 0; i < children.length; i++) {
         if (children[i] != except) hide(children[i]);
     }
 }
-function hide_all(children) {
+function hide_all
+    (children) {
     for (let i = 0; i < children.length; i++) {
         hide(children[i]);
     }
 }
-function hide(doc) {
+function hide
+    (doc) {
     doc.style.display = "none";
 }
-function show(doc) {
+function show
+    (doc) {
     doc.style.display = "block";
 }
-function styling(doc) {
+function styling
+    (doc) {
     let newStyle = doc.createElement("style");
     newStyle.innerHTML =
         `body {
@@ -374,7 +392,8 @@ function styling(doc) {
         }`;
     doc.head.appendChild(newStyle);
 }
-function allnovelfull() {
+function allnovelfull
+    () {
     const content = document.getElementById("chapter-content");
 
     // replacing
@@ -399,10 +418,12 @@ function allnovelfull() {
     document.getElementsByClassName("chapter-nav")[0].remove();
     document.getElementsByClassName("footer")[0].remove();
 }
-function add_child(parent, child) {
+function add_child
+    (parent, child) {
     parent.appendChild(child);
 }
-function infinitenoveltranslations() {
+function infinitenoveltranslations
+    () {
     styling(document);
     const parent = document.getElementsByTagName("body")[0];
     const content = document.getElementsByClassName("entry-content")[0];
@@ -446,7 +467,8 @@ function infinitenoveltranslations() {
         hide(content.children[content.children.length - 2]);
     }
 }
-function process(parent_name, target_name, content_name) {
+function process
+    (parent_name, target_name, content_name) {
     const parent = document.getElementById(parent_name);
     const target = document.getElementsByClassName(target_name)[0];
     const content = document.getElementById(content_name);
@@ -460,17 +482,20 @@ function process(parent_name, target_name, content_name) {
         hide_all_except(target.children, content);
     }
 }
-function outerHTML_of_(target) {
+function outerHTML_of_
+    (target) {
     var array = [];
     for (i = 0; i < target.length; i++) {
         array.push(target[i].outerHTML);
     }
     return array;
 }
-function delay(time) {
+function delay
+    (time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
-function epub_reader() {
+function epub_reader
+    () {
     const frame = document.getElementById('content_frame');
     const doc = frame.contentWindow.document;
     // key detect
