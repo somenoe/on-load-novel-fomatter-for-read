@@ -246,8 +246,8 @@ function exclamation
             .replace(/(Mm+|Mmhm|mmhm)([^\w])/g, "Mmm$2")
             .replace(/Nn/g, "Neun")
             .replace(
-                /(Pff|Pffff|Pfftf|Pffft|Pwff|Pfff|Pft|pft)([ |\?|\!|\.|,|…])/g,
-                "Pfft$2"
+                /([^\w])([Pp]w*f+t+f*|[Pp]ff+t*f*)([^\w])/g,
+                "$1Pfft$3"
             )
             .replace(/Seug/g, "Shug")
             .replace(/Tsk| tsk| tch|Tch/g, "Shi")
