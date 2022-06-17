@@ -98,7 +98,7 @@ function partition
             .replace(/<hr>/g, '<hr class="solid">')
             // partition
             .replace(
-                /<p>([\?\!\*\s\-\._…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/p>/g,
+                /<(p|span)>([\?\!\*\s\-\._…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/(p|span)>/g,
                 '<hr class="solid">')
             // delete double partition
             .replace(
