@@ -550,7 +550,7 @@ function towelcitytown
     const prev_chapter = document.getElementsByClassName("nav-previous")[0].children[0].href;
     const next_chapter = document.getElementsByClassName("nav-next")[0].children[0].href;
     // clone body
-    back_up = body.cloneNode(true);
+    back_up = body.innerHTML;
     // set margin and font
     styling(document);
     // cleaning other text
@@ -568,9 +568,15 @@ function towelcitytown
     hide_all(body.children);
     add_child(body, content);
 }
-function reset
+function add_reset_script
     () {
-    document.body = back_up;
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.innerHTML = `
+    function reset() {
+        document.body.innerHTML = \`${back_up}\`;
+    }`;
+    document.head.appendChild(script);
 }
 function main
     () {
@@ -597,5 +603,6 @@ function main
         }
         epub_reader();
     }
+    add_reset_script();
 }
 main();
