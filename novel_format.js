@@ -371,6 +371,7 @@ function styling
     let newStyle = doc.createElement("style");
     newStyle.innerHTML =
         `body {
+            background-color: #1F2022;
             color: wheat;
             font-family: "Arial" !important;
             font-size: 25px !important;
@@ -385,13 +386,8 @@ function styling
             margin-top: 1em !important;
             margin: 0 0 1em !important;
             text-indent: 0pt !important;
-        }
-        div {
-            background-color: #1F2022;
-        }
-        html {
-            background-color: #1F2022;
-        }`;
+        }`
+        ;
     doc.head.appendChild(newStyle);
 }
 function allnovelfull
