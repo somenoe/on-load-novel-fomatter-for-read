@@ -75,7 +75,6 @@ function post_arrangement
         ;
 }
 function ellipsis
-
     (doc) {
     return (
         doc
@@ -92,7 +91,6 @@ function ellipsis
     );
 }
 function partition
-
     (doc) {
     return (
         doc
@@ -109,7 +107,6 @@ function partition
     );
 }
 function wording
-
     (doc) {
     return (
         doc
@@ -187,7 +184,6 @@ function unread
     return `<span aria-hidden="true" >${text}</span>`;
 }
 function unreadablize
-
     (doc) {
     return (
         doc
@@ -211,7 +207,6 @@ function unreadablize
     );
 }
 function stutter
-
     (doc) {
     console.log("[log]: stutter");
     return (
@@ -226,8 +221,7 @@ function stutter
         // .replace(/(\s)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
     );
 }
-function exclamation
-
+function exclamationS
     (doc) {
     return (
         doc
@@ -328,7 +322,6 @@ function japanese_quote_symbol
     return doc;
 }
 function ordinal_number
-
     (doc) {
     return doc
         .replace(/([2-9])([1-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
