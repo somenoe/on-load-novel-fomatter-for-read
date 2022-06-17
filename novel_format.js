@@ -85,9 +85,9 @@ function ellipsis
             .replace(/(\w) (…|… )([^\w\s])/g, "$1… $3")
             .replace(/([^\w\s])(…| …) (\w)/g, "$1 …$3")
             .replace(/([\?\!])(…| …)([^\w])/g, "…$1 $3")
-            .replace(/([A-Z]) … ([a-z])/g, "$1… $2")
-            .replace(/([a-z]) … ([A-Z])/g, "$1 …$2")
-            .replace(/([a-z]) … ([a-z])/g, "$1… $2")
+            .replace(/([A-Z])\s*…\s*([a-z])/g, "$1… $2")
+            .replace(/([a-z])\s*…\s*([A-Z])/g, "$1… $2")
+            .replace(/([a-z])\s*…\s*([a-z])/g, "$1… $2")
     );
 }
 function partition
