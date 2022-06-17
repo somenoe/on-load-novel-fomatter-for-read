@@ -373,14 +373,16 @@ function styling
         `body {
             font-family: "Arial" !important;
             font-size: 25px !important;
-            margin-top: 100px !important;
+            line-height: 1.3 !important;
             margin-bottom: 100px !important;
-            margin-right: calc(33% - 100px) !important;
             margin-left: calc(33% - 100px) !important;
+            margin-right: calc(33% - 100px) !important;
+            margin-top: 100px !important;
             text-align: left !important;
         }
         p {
             margin-top: 1em !important;
+            margin: 0 0 1em !important;
             text-indent: 0pt !important;
         }`;
     doc.head.appendChild(newStyle);
