@@ -94,8 +94,8 @@ function partition
     (doc) {
     return (
         doc
-            // delete hr
-            .replace(/<hr>/g, "")
+            // solid hr
+            .replace(/<hr>/g, '<hr class="solid">')
             // partition
             .replace(
                 /<p>([\?\!\*\s\-\._…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/p>/g,
@@ -555,7 +555,7 @@ function towelcitytown
         if (e.key === "ArrowLeft") location = prev_chapter;
     });
     // add unread title
-    content.innerHTML = `<span aria-hidden="true" > ${title} </span><hr> ${content.innerHTML}`;
+    content.innerHTML = `<span aria-hidden="true" > ${title} </span> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // show only content
