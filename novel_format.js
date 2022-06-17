@@ -112,7 +112,8 @@ function wording
         doc
             // please read what it stand for
             .replace(/PDA/g, "LoveLove")
-            .replace(/FL/g, "Heroine")
+            .replace(/FL/g, "Female Lead")
+            .replace(/ML/g, "Male Lead")
             // no. to number
             .replace(/([^\w])[Nn]o\. ([0-9])/g, "$1Number $2")
 
