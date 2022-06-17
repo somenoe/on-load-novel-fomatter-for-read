@@ -599,5 +599,3 @@ function main
     }
 }
 main();
-console.log('try reset')
-reset()
