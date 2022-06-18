@@ -50,7 +50,8 @@ function pre_replace
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
         .replace(/『 [0-9] 』/g, "⋆ ")
         // symbol without space
-        .replace(/([A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
+        .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
+        .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
         ;
 }
 function post_arrangement
@@ -251,7 +252,7 @@ function exclamation
                 "$1Pfft$3"
             )
             .replace(/Seug/g, "Shug")
-            .replace(/Tsk| tsk| tch|Tch/g, "Shi")
+            .replace(/([^\w])([Tt]sk|[Tt]ch|[Cc]k)([^\w])/g, "$1Shi$3")
             .replace(/Un([?|!|\.|,|…])/g, "Eun$1")
     );
 }
@@ -386,6 +387,8 @@ function styling
         p {
             margin-top: 1em !important;
             margin: 0 0 1em !important;
+            padding-bottom: 0rem !important;
+            text-align: left !important;
             text-indent: 0pt !important;
         }`
         ;
@@ -603,6 +606,7 @@ function main
             return;
         }
         epub_reader();
+        return;
     }
     add_reset_script();
 }
