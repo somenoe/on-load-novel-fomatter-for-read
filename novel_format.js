@@ -28,7 +28,7 @@ function pre_replace
         .replace(/[\s]+|(&nbsp;)+/g, " ")
         // dash
         .replace(/[─]+/g, "─")
-        .replace(/[\-—–―]+,*/g, "–")
+        .replace(/\.[\-—–―]+,*/g, "–")
         .replace(/!+/g, "!")
         .replace(/[~～〜]+/g, "〜")
         .replace(/：/g, ": ")
