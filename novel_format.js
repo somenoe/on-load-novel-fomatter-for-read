@@ -504,11 +504,11 @@ function epub_reader
     doc.addEventListener("keydown", function (e) {
         if (e.key === "ArrowLeft") {
             console.log("<-");
-            delay(1000).then(() => epub_reader());
+            delay(500).then(() => epub_reader());
         }
         if (e.key === "ArrowRight") {
             console.log("->");
-            delay(1000).then(() => epub_reader());
+            delay(500).then(() => epub_reader());
         }
     });
     // skip only image page //? load image error
