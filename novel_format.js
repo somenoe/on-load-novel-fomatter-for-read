@@ -193,8 +193,8 @@ function unreadablize
             .replace(/([Ee]pisode|[Cc]hapter)(\s*[0-9]+[^<>]*)</g, `${unread('$1$2')}<`)
             // unreadablize inside bracket()
             .replace(/(\([^()]+\))/g, `${unread('$1')}`)
-            // // unreadablize name front quote
-            // .replace(/(>\s*)([A-Z][\wé]*):/g, `$1${unread('$2')}`)
+            // unreadablize name front quote
+            .replace(/(>\s*)([A-Z][\wé]*:)/g, `$1${unread('$2')}`)
             // unreadablize silent symbol
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
