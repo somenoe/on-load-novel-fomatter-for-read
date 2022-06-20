@@ -268,8 +268,8 @@ function quote_symbol
             // .replace(/``|“|”/g, "\"")
             .replace(/\"\. /g, '." ')
             // in paragraph quote init
-            .replace(/([\s>])\"([^\s>])/g, "$1“$2")
-            .replace(/([^\s<])\"([\s<])/g, "$1”$2")
+            .replace(/([\s>])\"([^\s<])/g, "$1“$2")
+            .replace(/([^\s>]|[!?.]\s*)\"([\s<])/g, "$1”$2")
             .replace(/([\s>])\'([^\s>])/g, "$1‘$2")
             .replace(/([^\s<])\'([\s<])/g, "$1’$2")
 
