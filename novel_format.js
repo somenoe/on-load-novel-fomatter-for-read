@@ -52,6 +52,7 @@ function pre_replace
         // symbol without space
         .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
         .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
+        .replace(/If you are reading this anywhere [^<>]+ com\./g, '')
         ;
 }
 function post_arrangement
