@@ -233,7 +233,7 @@ function exclamation
             .replace(/Aa([〜|,|!|?])/g, "Ah$1")
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
-            .replace(/Ara/g, "Ahh")
+            .replace(/Ara([^\w])/g, "Ahh$1")
             .replace(/[Pp]ikon/g, "Ahah")
             .replace(/(Etto|Ano)([^\w])/g, "Uhh$2")
             // [^\w\s] = not in \w, not in \s
