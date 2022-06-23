@@ -234,6 +234,7 @@ function exclamation
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
             .replace(/Ara([^\w])/g, "Ahh$1")
+            .replace(/Ngh([^\w])/g, "Nguh$1")
             .replace(/[Pp]ikon/g, "Ahah")
             .replace(/(Etto|Ano)([^\w])/g, "Uhh$2")
             // [^\w\s] = not in \w, not in \s
@@ -601,6 +602,7 @@ function main
         add_child(parent, content);
     }
     if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '') {
+        console.log('epub?')
         if (document.getElementById('novelArticle1')) {
             styling(document);
             document.body.innerHTML = replacing(document.body.innerHTML);
