@@ -200,7 +200,7 @@ function unreadablize
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
-            .replace(/([†♱*\$#]+)/g, `${unread('$1')}`)
+            .replace(/([_†♱*\$#]+)/g, `${unread('$1')}`)
             // only number
             .replace(/(<p>)([0-9\s])(<\/p>)/g, `$1${unread('$2')}$3`)
             .replace(/([A-z])\/([A-z])/g, `$1${unread('\/')}$2`)
@@ -287,13 +287,20 @@ function quote_symbol
 function japanese_quote_symbol
     (doc) {
     console.log("[log]: change to japanese quote style");
-    const japanese_open_quote = doc.match(/「/g);
-    const japanese_close_quote = doc.match(/」/g);
+    // const japanese_open_quote = doc.match(/「/g);
+    // const japanese_close_quote = doc.match(/」/g);
+    const double_open_quote = doc.match(/“/g);
+    const double_close_quote = doc.match(/”/g);
+    const single_open_quote = doc.match(/‘/g);
+    const single_close_quote = doc.match(/’/g);
 
     // mainly use english quote symbol ("")
-    if (japanese_open_quote == null && japanese_close_quote == null) {
-        console.log("[log]: ENG style");
+    if ((double_close_quote + double_open_quote) > (single_open_quote + single_close_quote)) {
+        console.log("[log]: double quote style");
         doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
+    } else {
+        console.log("[log]: single quote style");
+        doc = doc.replace(/‘/g, "「 ").replace(/’/g, " 」");
     }
     // const english_open_quote = doc.match(/“/g);
     // const english_close_quote = doc.match(/”/g);
