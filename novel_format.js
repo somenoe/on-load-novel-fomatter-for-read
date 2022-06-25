@@ -289,10 +289,28 @@ function japanese_quote_symbol
     console.log("[log]: change to japanese quote style");
     // const japanese_open_quote = doc.match(/「/g);
     // const japanese_close_quote = doc.match(/」/g);
-    const double_open_quote = doc.match(/“/g);
-    const double_close_quote = doc.match(/”/g);
-    const single_open_quote = doc.match(/‘/g);
-    const single_close_quote = doc.match(/’/g);
+    var double_close_quote, double_open_quote, single_open_quote, single_close_quote;
+
+    try {
+        double_open_quote = doc.match(/“/g).length;
+    } catch {
+        double_open_quote = 0
+    }
+    try {
+        double_close_quote = doc.match(/”/g).length;
+    } catch {
+        double_close_quote = 0
+    }
+    try {
+        single_open_quote = doc.match(/‘/g).length;
+    } catch {
+        single_open_quote = 0
+    }
+    try {
+        single_close_quote = doc.match(/’/g).length;
+    } catch {
+        single_close_quote = 0
+    }
 
     // mainly use english quote symbol ("")
     if ((double_close_quote + double_open_quote) > (single_open_quote + single_close_quote)) {
@@ -554,7 +572,35 @@ function epub_reader
         ext[i].innerHTML = '<hr>'
     }
 }
-var back_up;
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+function pandanovel
+    () {
+    const body = document.body;
+    const content = document.getElementById("novelArticle1").cloneNode(true);
+    const title = document.getElementsByTagName("title")[0].innerHTML;
+    const prev_chapter = document.getElementsByClassName("btn btn-prev")[0].href;
+    const next_chapter = document.getElementsByClassName("btn btn-next")[0].href;
+    // set margin and font
+    styling(document);
+    // cleaning other text
+    body.innerHTML = ''
+    // navigator with arrow key
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") location = next_chapter;
+        if (e.key === "ArrowLeft") location = prev_chapter;
+    });
+    // add unread title
+    content.innerHTML = `<span aria-hidden="true" > ${title} </span> <hr> ${content.innerHTML}`;
+    // replacing
+    content.innerHTML = replacing(content.innerHTML);
+    // show only content
+    hide_all(body.children);
+    add_child(body, content);
+}
 function towelcitytown
     () {
     const body = document.body;
@@ -562,8 +608,6 @@ function towelcitytown
     const title = document.getElementsByTagName("title")[0].innerHTML;
     const prev_chapter = document.getElementsByClassName("nav-previous")[0].children[0].href;
     const next_chapter = document.getElementsByClassName("nav-next")[0].children[0].href;
-    // clone body
-    back_up = body.innerHTML;
     // set margin and font
     styling(document);
     // cleaning other text
@@ -587,12 +631,13 @@ function add_reset_script
     script.type = 'text/javascript';
     script.innerHTML = `
     function reset() {
-        document.body.innerHTML = \`${back_up}\`;
+        document.body.innerHTML = \`${document.body.innerHTML}\`;
     }`;
     document.head.appendChild(script);
 }
 function main
     () {
+    add_reset_script();
     if (window.location.hostname == "ranobes.net")
         process("dle-content", "block story shortstory", "arrticle");
     if (window.location.hostname == "infinitenoveltranslations.net")
@@ -608,6 +653,8 @@ function main
         hide_all(parent.children);
         add_child(parent, content);
     }
+    if (window.location.hostname == 'www.panda-novel.com')
+        pandanovel();
     if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '') {
         console.log('epub?')
         if (document.getElementById('novelArticle1')) {
@@ -618,6 +665,5 @@ function main
         epub_reader();
         return;
     }
-    add_reset_script();
 }
 main();
