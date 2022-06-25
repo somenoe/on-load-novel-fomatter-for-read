@@ -577,19 +577,27 @@ function removeAllChildNodes(parent) {
         parent.removeChild(parent.firstChild);
     }
 }
-function pandanovel
+function clear_html
     () {
-    const content = document.getElementById("novelArticle1").cloneNode(true);
-    const title = document.getElementsByTagName("title")[0].innerHTML;
-    const prev_chapter = document.getElementsByClassName("btn btn-prev")[0].href;
-    const next_chapter = document.getElementsByClassName("btn btn-next")[0].href;
-    // cleaning other text
     const html = document.getElementsByTagName('html')[0];
     const head = document.createElement('head');
     const body = document.createElement('body');
     removeAllChildNodes(html);
     html.appendChild(head);
     html.appendChild(body);
+}
+function pandanovel
+    () {
+    const content = document.getElementById("novelArticle1").cloneNode(true);
+    const title = document.getElementsByTagName("title")[0].cloneNode(true);
+    const prev_chapter = document.getElementsByClassName("btn btn-prev")[0].href;
+    const next_chapter = document.getElementsByClassName("btn btn-next")[0].href;
+    const html = document.getElementsByTagName('html')[0];
+    // cleaning other text
+    clear_html();
+    const body = document.body;
+    // add title
+    html.appendChild(title);
     // set margin and font
     styling(document);
     // navigator with arrow key
@@ -598,7 +606,7 @@ function pandanovel
         if (e.key === "ArrowLeft") location = prev_chapter;
     });
     // add unread title
-    content.innerHTML = `<span aria-hidden="true" > ${title} </span> <hr> ${content.innerHTML}`;
+    content.innerHTML = `<span aria-hidden="true" > ${title.innerHTML} </span> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // show only content
