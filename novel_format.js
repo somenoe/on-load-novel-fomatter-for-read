@@ -579,15 +579,19 @@ function removeAllChildNodes(parent) {
 }
 function pandanovel
     () {
-    const body = document.body;
     const content = document.getElementById("novelArticle1").cloneNode(true);
     const title = document.getElementsByTagName("title")[0].innerHTML;
     const prev_chapter = document.getElementsByClassName("btn btn-prev")[0].href;
     const next_chapter = document.getElementsByClassName("btn btn-next")[0].href;
+    // cleaning other text
+    const html = document.getElementsByTagName('html')[0];
+    const head = document.createElement('head');
+    const body = document.createElement('body');
+    removeAllChildNodes(html);
+    html.appendChild(head);
+    html.appendChild(body);
     // set margin and font
     styling(document);
-    // cleaning other text
-    body.innerHTML = ''
     // navigator with arrow key
     document.addEventListener("keydown", function (e) {
         if (e.key === "ArrowRight") location = next_chapter;
