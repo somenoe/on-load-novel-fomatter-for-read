@@ -700,40 +700,39 @@ function full_html_from_epub
         content.innerHTML = replacing(content.innerHTML);
     }
 }
+function meguminovel
+    () {
+    styling(document);
+    const parent = document.getElementsByTagName("body")[0];
+    const content = document.getElementsByClassName("thecontent")[0];
+    hide_all(parent.children);
+    add_child(parent, content);
+}
 function main
     () {
     add_reset_script();
-    if (window.location.hostname == "ranobes.net")
-        process("dle-content", "block story shortstory", "arrticle");
-    if (window.location.hostname == "infinitenoveltranslations.net")
-        infinitenoveltranslations();
-    if (window.location.hostname == 'towelcitytown.wordpress.com')
-        towelcitytown();
-    if (window.location.hostname == "allnovelfull.com")
-        allnovelfull();
-    if (window.location.hostname == 'i.meguminovel.com') {
-        styling(document);
-        const parent = document.getElementsByTagName("body")[0];
-        const content = document.getElementsByClassName("thecontent")[0];
-        hide_all(parent.children);
-        add_child(parent, content);
-    }
-    if (window.location.hostname == 'freewebnovel.com')
-        freewebnovel();
-    if (window.location.hostname == 'www.panda-novel.com')
-        pandanovel();
-    if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '') {
-        console.log('epub?')
-        if (document.getElementById('novelArticle1')) {
-            styling(document);
-            document.body.innerHTML = replacing(document.body.innerHTML);
-            return;
-        }
-        try {
-            epub_reader();
-        } catch (error) {
-            full_html_from_epub();
-        }
+    switch (window.location.hostname) {
+        case 'ranobes.net':
+            process("dle-content", "block story shortstory", "arrticle");
+            break;
+        case 'infinitenoveltranslations.net':
+            infinitenoveltranslations();
+            break;
+        case 'towelcitytown.wordpress.com':
+            towelcitytown();
+            break;
+        case 'allnovelfull.com':
+            allnovelfull();
+            break;
+        case 'i.meguminovel.com':
+            meguminovel();
+            break;
+        case 'freewebnovel.com':
+            freewebnovel();
+            break;
+        case 'www.panda-novel.com':
+            pandanovel();
+            break;
     }
 }
 main();
