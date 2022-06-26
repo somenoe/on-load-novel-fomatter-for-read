@@ -183,6 +183,7 @@ function wording
             .replace(/Seiji/g, "Sayji")
             .replace(/Arakawa/g, "Araka-wa")
             .replace(/Kouki/g, "Koki")
+            .replace(/Kou([^\w])/g, "Kho$1")
     );
 }
 function unread
@@ -214,7 +215,6 @@ function unreadablize
 }
 function stutter
     (doc) {
-    console.log("[log]: stutter");
     return (
         doc
             // stutter
@@ -311,6 +311,7 @@ function count_quote_symbol
     } catch {
         single_close_quote = 0
     }
+    console.log("double:", double_close_quote, double_open_quote, "single:", single_open_quote, single_close_quote);
 }
 function japanese_quote_symbol
     (doc) {
@@ -319,10 +320,8 @@ function japanese_quote_symbol
 
     // mainly use english quote symbol ("")
     if ((double_close_quote + double_open_quote) > (single_open_quote + single_close_quote)) {
-        console.log("[log]: double quote style");
         doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
     } else {
-        console.log("[log]: single quote style");
         doc = doc.replace(/‘/g, "「 ").replace(/’/g, " 」");
     }
     // const english_open_quote = doc.match(/“/g);
