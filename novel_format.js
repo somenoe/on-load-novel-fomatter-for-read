@@ -284,36 +284,38 @@ function quote_symbol
             // .replace(/s’ /g, "sAPosTroPhes ")
             // .replace(/ ‘|‘/g, "『 ")
             // .replace(/’|’ /g, " 』")
-            .replace(/APosTroPhe/g, "’")
+            // .replace(/APosTroPhe/g, "’")
+            .replace(/APosTroPhe/g, "\'")
     );
 }
-function japanese_quote_symbol
-    (doc) {
-    console.log("[log]: change to japanese quote style");
-    // const japanese_open_quote = doc.match(/「/g);
-    // const japanese_close_quote = doc.match(/」/g);
-    var double_close_quote, double_open_quote, single_open_quote, single_close_quote;
-
+var double_close_quote, double_open_quote, single_open_quote, single_close_quote;
+function count_quote_symbol
+    () {
     try {
-        double_open_quote = doc.match(/“/g).length;
+        double_open_quote = document.body.innerHTML.match(/“/g).length;
     } catch {
         double_open_quote = 0
     }
     try {
-        double_close_quote = doc.match(/”/g).length;
+        double_close_quote = document.body.innerHTML.match(/”/g).length;
     } catch {
         double_close_quote = 0
     }
     try {
-        single_open_quote = doc.match(/‘/g).length;
+        single_open_quote = document.body.innerHTML.match(/‘/g).length;
     } catch {
         single_open_quote = 0
     }
     try {
-        single_close_quote = doc.match(/’/g).length;
+        single_close_quote = document.body.innerHTML.match(/’/g).length;
     } catch {
         single_close_quote = 0
     }
+}
+function japanese_quote_symbol
+    (doc) {
+    // const japanese_open_quote = doc.match(/「/g);
+    // const japanese_close_quote = doc.match(/」/g);
 
     // mainly use english quote symbol ("")
     if ((double_close_quote + double_open_quote) > (single_open_quote + single_close_quote)) {
@@ -708,9 +710,11 @@ function meguminovel
     hide_all(parent.children);
     add_child(parent, content);
 }
+
 function main
     () {
     add_reset_script();
+    count_quote_symbol();
     switch (window.location.hostname) {
         case 'ranobes.net':
             process("dle-content", "block story shortstory", "arrticle");
@@ -732,6 +736,18 @@ function main
             break;
         case 'www.panda-novel.com':
             pandanovel();
+            break;
+        default:
+            if (document.getElementById('novelArticle1')) {
+                styling(document);
+                document.body.innerHTML = replacing(document.body.innerHTML);
+                return;
+            }
+            try {
+                epub_reader();
+            } catch (error) {
+                full_html_from_epub();
+            }
             break;
     }
 }
