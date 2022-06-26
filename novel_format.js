@@ -203,7 +203,7 @@ function unreadablize
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
-            .replace(/([_†♱*\$#]+)/g, `${unread('$1')}`)
+            .replace(/([†♱*\$#]+)/g, `${unread('$1')}`)
             // only number
             .replace(/(<p>)([0-9\s])(<\/p>)/g, `$1${unread('$2')}$3`)
             .replace(/([A-z])\/([A-z])/g, `$1${unread('\/')}$2`)
@@ -412,7 +412,7 @@ function styling
             margin-left: calc(33% - 100px) !important;
             margin-right: calc(33% - 100px) !important;
             margin-top: 100px !important;
-            text-align: left !important;
+            text-align: left;
         }
         p {
             margin-top: 1em !important;
@@ -655,6 +655,16 @@ function add_reset_script
     }`;
     document.head.appendChild(script);
 }
+function full_html_from_epub
+    () {
+    styling(document);
+    let contents = document.getElementsByClassName('calibre');
+    for (let index = 0; index < contents.length; index++) {
+        const content = contents[index];
+        console.log(content);
+        content.innerHTML = replacing(content.innerHTML);
+    }
+}
 function main
     () {
     add_reset_script();
@@ -682,8 +692,11 @@ function main
             document.body.innerHTML = replacing(document.body.innerHTML);
             return;
         }
-        epub_reader();
-        return;
+        try {
+            epub_reader();
+        } catch (error) {
+            full_html_from_epub();
+        }
     }
 }
 main();
