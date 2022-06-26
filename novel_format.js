@@ -726,17 +726,16 @@ function main
         case 'www.panda-novel.com':
             pandanovel();
             break;
-        default:
+        case 'jhhclmfgfllimlhabjkgkeebkbiadflb':
+            epub_reader();
+            break;
+        case '':
             if (document.getElementById('novelArticle1')) {
                 styling(document);
                 document.body.innerHTML = replacing(document.body.innerHTML);
                 return;
             }
-            try {
-                epub_reader();
-            } catch (error) {
-                full_html_from_epub();
-            }
+            full_html_from_epub();
             break;
     }
 }
