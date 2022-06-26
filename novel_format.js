@@ -307,7 +307,7 @@ function count_quote_symbol
         single_open_quote = 0
     }
     try {
-        single_close_quote = document.body.innerHTML.match(/’/g).length;
+        single_close_quote = document.body.innerHTML.match(/’[^A-z]/g).length;
     } catch {
         single_close_quote = 0
     }
@@ -315,24 +315,16 @@ function count_quote_symbol
 }
 function japanese_quote_symbol
     (doc) {
-    // const japanese_open_quote = doc.match(/「/g);
-    // const japanese_close_quote = doc.match(/」/g);
 
+    // doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
+
+    // // ! need to change all [Apostrophe] to (') first, otherwise it count as [single_close_quote]
     // mainly use english quote symbol ("")
     if ((double_close_quote + double_open_quote) > (single_open_quote + single_close_quote)) {
         doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
     } else {
         doc = doc.replace(/‘/g, "「 ").replace(/’/g, " 」");
     }
-    // const english_open_quote = doc.match(/“/g);
-    // const english_close_quote = doc.match(/”/g);
-    // // mainly use japanese quote symbol ("")
-    // if (japanese_open_quote != null && japanese_close_quote != null)
-    //     if (english_open_quote != null && english_close_quote != null)
-    //         if (japanese_open_quote.length + japanese_close_quote.length > english_open_quote.length + english_close_quote.length) {
-    //             console.log("[log]: JP style");
-    //             doc = doc.replace(/“/g, "『 ").replace(/”/g, " 』");
-    //         }
     doc = doc
         .replace(/\[/g, "『 ")
         .replace(/\]/g, " 』")
@@ -691,13 +683,11 @@ function full_html_from_epub
     let contents = document.getElementsByClassName('calibre');
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
-        console.log(content);
         content.innerHTML = replacing(content.innerHTML);
     }
     contents = document.getElementsByClassName('western');
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
-        console.log(content);
         content.innerHTML = replacing(content.innerHTML);
     }
 }
