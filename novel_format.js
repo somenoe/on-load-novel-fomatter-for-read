@@ -181,6 +181,8 @@ function wording
             .replace(/Yoash/g, "Yohan")
             .replace(/Shinichi/g, "Shin")
             .replace(/Seiji/g, "Sayji")
+            .replace(/Arakawa/g, "Araka-wa")
+            .replace(/Kouki/g, "Koki")
     );
 }
 function unread
@@ -542,7 +544,12 @@ function epub_reader
     // skip only image page //? load image error
     if (doc.body.className == 'nomargin center' || doc.body.getElementsByClassName('image_full').length > 0) return;
 
-    const content = frame.contentWindow.document.body;
+    var content
+    try {
+        content = frame.contentWindow.document.getElementsByClassName('main')[0];
+    } catch (error) {
+        content = frame.contentWindow.document.body;
+    }
 
     styling(doc);
 
