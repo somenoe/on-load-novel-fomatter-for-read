@@ -116,6 +116,7 @@ function wording
             .replace(/PDA/g, "LoveLove")
             .replace(/FL/g, "Female Lead")
             .replace(/ML/g, "Male Lead")
+            .replace(/ASAP/g, "as soon as possible")
             // no. to number
             .replace(/([^\w])[Nn]o\. ([0-9])/g, "$1Number $2")
 
