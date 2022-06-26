@@ -621,6 +621,35 @@ function pandanovel
     hide_all(body.children);
     add_child(body, content);
 }
+function freewebnovel
+    () {
+    const content = document.getElementsByClassName("txt ")[0].cloneNode(true);
+    const title = document.getElementsByTagName("title")[0].cloneNode(true);
+    const prev_chapter = document.getElementById("prev_url").href;
+    const next_chapter = document.getElementById("next_url").href;
+    const html = document.getElementsByTagName('html')[0];
+    // cleaning other text
+    clear_html();
+    const body = document.body;
+    // remove element style
+    content.removeAttribute('style');
+    // add title
+    html.appendChild(title);
+    // set margin and font
+    styling(document);
+    // navigator with arrow key
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") location = next_chapter;
+        if (e.key === "ArrowLeft") location = prev_chapter;
+    });
+    // add unread title
+    content.innerHTML = `<span aria-hidden="true" > ${title.innerHTML} </span> <hr> ${content.innerHTML}`;
+    // replacing
+    content.innerHTML = replacing(content.innerHTML);
+    // show only content
+    hide_all(body.children);
+    add_child(body, content);
+}
 function towelcitytown
     () {
     const body = document.body;
@@ -664,6 +693,12 @@ function full_html_from_epub
         console.log(content);
         content.innerHTML = replacing(content.innerHTML);
     }
+    contents = document.getElementsByClassName('western');
+    for (let index = 0; index < contents.length; index++) {
+        const content = contents[index];
+        console.log(content);
+        content.innerHTML = replacing(content.innerHTML);
+    }
 }
 function main
     () {
@@ -683,6 +718,8 @@ function main
         hide_all(parent.children);
         add_child(parent, content);
     }
+    if (window.location.hostname == 'freewebnovel.com')
+        freewebnovel();
     if (window.location.hostname == 'www.panda-novel.com')
         pandanovel();
     if (window.location.hostname == 'jhhclmfgfllimlhabjkgkeebkbiadflb' || window.location.hostname == '') {
