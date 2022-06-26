@@ -8,7 +8,7 @@ function replacing
     (doc) {
     doc = pre_replace(doc);
     doc = ordinal_number(doc);
-    doc = partition(doc);
+    // doc = partition(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
     doc = exclamation(doc);
