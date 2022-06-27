@@ -164,6 +164,7 @@ function wording
             .replace(/Sylv/g, "Silv")
             .replace(/Taci/g, "Tashi")
             .replace(/Rino([^A-Za-z])/g, "Rinola$1")
+            .replace(/Noa([^A-Za-z])/g, "Noah$1")
             .replace(/Yekaterina/g, "Katerina")
             // JP Name
             .replace(/[G|g]oshujin-sama/g, "Master")
