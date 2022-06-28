@@ -682,6 +682,11 @@ function full_html_from_epub
     () {
     styling(document);
     var contents;
+    contents = document.getElementsByTagName('img');
+    for (let index = 0; index < contents.length; index++) {
+        const content = contents[index];
+        content.parentElement.className = 'img';
+    }
     contents = document.getElementsByTagName('nav');
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
