@@ -681,12 +681,23 @@ function add_reset_script
 function full_html_from_epub
     () {
     styling(document);
-    let contents = document.getElementsByClassName('calibre');
+    var contents;
+    contents = document.getElementsByTagName('nav');
+    for (let index = 0; index < contents.length; index++) {
+        const content = contents[index];
+        content.parentElement.className = 'toc';
+    }
+    contents = document.getElementsByClassName('calibre');
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
         content.innerHTML = replacing(content.innerHTML);
     }
     contents = document.getElementsByClassName('western');
+    for (let index = 0; index < contents.length; index++) {
+        const content = contents[index];
+        content.innerHTML = replacing(content.innerHTML);
+    }
+    contents = document.getElementsByClassName('calibre1');
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
         content.innerHTML = replacing(content.innerHTML);
