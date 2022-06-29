@@ -678,31 +678,27 @@ function add_reset_script
     }`;
     document.head.appendChild(script);
 }
+function diff
+    (A, B) {
+    return A.filter(x => !B.includes(x));
+}
 function full_html_from_epub
     () {
     styling(document);
-    var contents;
-    contents = [
+    let excepts = [
         ...document.getElementsByTagName('img'),
         ...document.getElementsByTagName('nav')
-    ];
-    for (let index = 0; index < contents.length; index++) {
-        const content = contents[index];
-        content.parentElement.className = 'NRE';
-    }
+    ].map(e => e.parentElement);
 
-    contents = document.getElementsByClassName('class_s3s');
-    for (let index = 0; index < contents.length; index++) {
-        const content = contents[index];
-        content.innerHTML = unread(content.innerHTML);
-    }
-
-    contents = [
+    let contents = [
         ...document.getElementsByClassName('calibre'),
         ...document.getElementsByClassName('calibre1'),
         ...document.getElementsByClassName('class_s1k'),
+        ...document.getElementsByClassName('class_s3s'),
         ...document.getElementsByClassName('western'),
     ];
+    contents = diff(contents, excepts);
+
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
         content.innerHTML = replacing(content.innerHTML);
