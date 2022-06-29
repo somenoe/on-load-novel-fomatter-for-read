@@ -11,9 +11,9 @@ function replacing
     // doc = partition(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
-    doc = exclamation(doc);
     doc = ellipsis(doc);
     doc = stutter(doc);
+    doc = exclamation(doc);
     doc = unreadablize(doc);
     doc = wording(doc);
     doc = post_arrangement(doc)
@@ -691,6 +691,11 @@ function full_html_from_epub
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
         content.parentElement.className = 'toc';
+    }
+    contents = document.getElementsByClassName('class_s3s');
+    for (let index = 0; index < contents.length; index++) {
+        const content = contents[index];
+        content.innerHTML = unread(content.innerHTML);
     }
     contents = document.getElementsByClassName('calibre');
     for (let index = 0; index < contents.length; index++) {
