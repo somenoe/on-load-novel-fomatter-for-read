@@ -682,21 +682,26 @@ function full_html_from_epub
     () {
     styling(document);
     var contents;
-    contents = [...document.getElementsByTagName('img'), ...document.getElementsByTagName('nav')];
-
+    contents = [
+        ...document.getElementsByTagName('img'),
+        ...document.getElementsByTagName('nav')
+    ];
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
         content.parentElement.className = 'NRE';
     }
+
     contents = document.getElementsByClassName('class_s3s');
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
         content.innerHTML = unread(content.innerHTML);
     }
+
     contents = [
         ...document.getElementsByClassName('calibre'),
+        ...document.getElementsByClassName('calibre1'),
+        ...document.getElementsByClassName('class_s1k'),
         ...document.getElementsByClassName('western'),
-        ...document.getElementsByClassName('calibre1')
     ];
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
