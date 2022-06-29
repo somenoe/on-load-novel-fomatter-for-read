@@ -50,8 +50,8 @@ function pre_replace
         .replace(/([0-9])([A-Z|a-z])/g, "$1 $2")
         .replace(/『 [0-9] 』/g, "⋆ ")
         // symbol without space
-        .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
-        .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
+        .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)([^>]+<)/g, "$1$2 $3$4")
+        // .replace(/([’'A-z][A-z]+)([,.!?])([A-z][A-z]*)/g, "$1$2 $3")
         .replace(/If you are reading this anywhere [^<>]+ com\./g, '')
         ;
 }
@@ -205,10 +205,10 @@ function unreadablize
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // unreadablize these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
-            .replace(/([†♱*\$#]+)/g, `${unread('$1')}`)
+            .replace(/([†♱*\$#]+)([^>]+<)/g, `${unread('$1')}$2`)
             // only number
             .replace(/(<p>)([0-9\s])(<\/p>)/g, `$1${unread('$2')}$3`)
-            .replace(/([A-z])\/([A-z])/g, `$1${unread('\/')}$2`)
+            .replace(/([A-z])\/([A-z])([^>]+<)/g, `$1${unread('\/')}$2$3`)
             // unreadablize dot near quote symbol
             .replace(/\.([」】）』「【（『])/g, `.${unread('$1')}`)
             .replace(/([」】）』「【（『])\./g, `${unread('$1')}.`)
@@ -275,7 +275,7 @@ function quote_symbol
             .replace(/\"\. /g, '." ')
             // in paragraph quote init
             .replace(/([\s>])\"([^\s<])/g, "$1“$2")
-            .replace(/([^\s>]|[!?.]\s*)\"([\s<])/g, "$1”$2")
+            .replace(/([^\s>]|[!?.]\s*)\"([\s<])([^>]+<)/g, "$1”$2$3")
             .replace(/([\s>])\'([^\s>])/g, "$1‘$2")
             .replace(/([^\s<])\'([\s<])/g, "$1’$2")
 
