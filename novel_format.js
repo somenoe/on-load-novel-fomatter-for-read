@@ -694,7 +694,6 @@ function full_html_from_epub
         content.innerHTML = unread(content.innerHTML);
     }
     contents = [
-        ...document.getElementsByClassName('class_s1k'),
         ...document.getElementsByClassName('calibre'),
         ...document.getElementsByClassName('western'),
         ...document.getElementsByClassName('calibre1')
@@ -703,6 +702,7 @@ function full_html_from_epub
         const content = contents[index];
         content.innerHTML = replacing(content.innerHTML);
     }
+    document.body.innerHTML = document.body.innerHTML.replace(/([✽†♱*\$]+)/g, `${unread('$1')}`);
 }
 
 function meguminovel
