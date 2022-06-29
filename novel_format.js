@@ -412,7 +412,7 @@ function styling
             margin-top: 1em !important;
             margin: 0 0 1em !important;
             padding-bottom: 0rem !important;
-            text-align: left !important;
+            text-align: left;
             text-indent: 0pt !important;
         }`
         ;
