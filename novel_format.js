@@ -420,29 +420,24 @@ function styling
 }
 function allnovelfull
     () {
-    const content = document.getElementById("chapter-content");
-
+    const content = document.getElementById("chapter-content").cloneNode(true);
+    const title = document.getElementsByTagName("title")[0].cloneNode(true);
+    const html = document.getElementsByTagName('html')[0];
+    // cleaning other text
+    clear_html();
+    const body = document.body;
+    // remove element style
+    content.removeAttribute('style');
+    // add title
+    html.appendChild(title);
+    // set margin and font
+    styling(document);
     // replacing
     content.innerHTML = replacing(content.innerHTML);
+    // show only content
+    hide_all(body.children);
+    add_child(body, content);
 
-    // for allnovelfull
-    document.getElementsByClassName("truyen-title")[0].remove();
-    document.getElementsByClassName("chapter-title")[0].remove();
-    document.getElementsByClassName("navbar-breadcrumb")[0].remove();
-    document
-        .getElementsByClassName(
-            "btn btn-responsive btn-success toggle-nav-open "
-        )[0]
-        .remove();
-    document.getElementsByClassName("btn btn-warning")[0].remove();
-    document
-        .getElementsByClassName(
-            "bg-info text-center visible-md visible-lg box-notice"
-        )[0]
-        .remove();
-    document.getElementsByClassName("chapter-nav")[0].remove();
-    document.getElementsByClassName("chapter-nav")[0].remove();
-    document.getElementsByClassName("footer")[0].remove();
 }
 function add_child
     (parent, child) {
