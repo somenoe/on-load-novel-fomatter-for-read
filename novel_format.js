@@ -276,17 +276,11 @@ function quote_symbol
             // in paragraph quote init
             .replace(/([\s>])\"([^\s<])/g, "$1“$2")
             .replace(/([^\s>]|[!?.]\s*)\"(\s*[^>]*<)/g, "$1”$2")
+            .replace(/([^\s>]|[!?.]\s*)\"(\s*[^>]*<)/g, "$1”$2")
             .replace(/([\s>])\'([^\s>])/g, "$1‘$2")
             .replace(/([^\s<])\'([\s<])/g, "$1’$2")
-
-            // except Apostrophe
-            .replace(/([A-Z]|[a-z])’([A-Z]|[a-z])/g, "$1APosTroPhe$2")
-            .replace(/([A-Z]|[a-z])‘([A-Z]|[a-z])/g, "$1APosTroPhe$2")
-            // .replace(/s’ /g, "sAPosTroPhes ")
-            // .replace(/ ‘|‘/g, "『 ")
-            // .replace(/’|’ /g, " 』")
-            // .replace(/APosTroPhe/g, "’")
-            .replace(/APosTroPhe/g, "\'")
+            // Apostrophe
+            .replace(/([A-z])[‘']([A-z])/g, "$1’$2")
     );
 }
 var double_close_quote, double_open_quote, single_open_quote, single_close_quote;
