@@ -669,7 +669,7 @@ function add_reset_script
     script.type = 'text/javascript';
     script.innerHTML = `
     function reset() {
-        document.body.innerHTML = \`${document.body.innerHTML}\`;
+       document.getElementsByTagName('html')[0].innerHTML = \`${document.getElementsByTagName('html')[0].innerHTML}\`;
     }`;
     document.head.appendChild(script);
 }
