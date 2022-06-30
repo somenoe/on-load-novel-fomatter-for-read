@@ -10,7 +10,7 @@ function replacing
     doc = ordinal_number(doc);
     // doc = partition(doc);
     doc = quote_symbol(doc);
-    doc = japanese_quote_symbol(doc);
+    // doc = japanese_quote_symbol(doc);
     doc = ellipsis(doc);
     doc = stutter(doc);
     doc = exclamation(doc);
