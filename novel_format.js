@@ -592,6 +592,8 @@ function pandanovel
     const prev_chapter = document.getElementsByClassName("btn btn-prev")[0].href;
     const next_chapter = document.getElementsByClassName("btn btn-next")[0].href;
     const html = document.getElementsByTagName('html')[0];
+    // remove 'del' tag
+    new Set(content.getElementsByTagName('del')).forEach(e => e.remove())
     // cleaning other text
     clear_html();
     const body = document.body;
