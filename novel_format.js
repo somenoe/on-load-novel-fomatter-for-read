@@ -10,7 +10,7 @@ function replacing
     doc = ordinal_number(doc);
     // doc = partition(doc);
     doc = quote_symbol(doc);
-    // doc = japanese_quote_symbol(doc);
+    doc = japanese_quote_symbol(doc);
     doc = ellipsis(doc);
     doc = stutter(doc);
     doc = exclamation(doc);
@@ -318,26 +318,18 @@ function japanese_quote_symbol
     let sum_double_quote = double_open_quote + double_close_quote;
     let sum_single_quote = single_open_quote + single_close_quote;
     if ((sum_double_quote) > (sum_single_quote) || sum_double_quote + sum_single_quote == 0) {
-        doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
+        doc = doc.replace(/“/g, "「").replace(/”/g, "」");
     } else {
-        doc = doc.replace(/‘/g, "「 ").replace(/’/g, " 」");
+        doc = doc.replace(/‘/g, "「").replace(/’/g, "」");
     }
     doc = doc
-        .replace(/\[/g, "『 ")
-        .replace(/\]/g, " 』")
-
-        // .replace(/\[/g, "「 ")
-        // .replace(/\]/g, " 」")
-        // .replace(/“/g, "『 ")
-        // .replace(/”/g, " 』")
-
-        // .replace(/\)/g, " ）")
-        // .replace(/\(/g, "（ ")
+        .replace(/\[/g, "『")
+        .replace(/\]/g, "』")
         // space managing
-        .replace(/([「【（『])/g, "$1 ")
-        .replace(/([」】）』])/g, " $1")
-        .replace(/ ([「【（『])/g, "$1")
-        .replace(/([」】）』]) /g, "$1")
+        .replace(/([「【（『])/g, " $1 ")
+        .replace(/([」】）』])/g, " $1 ")
+        // .replace(/ ([「【（『])/g, "$1")
+        // .replace(/([」】）』]) /g, "$1")
         .replace(/( [」】）』])([\'’]s)/g, "$2$1")
         .replace(/  」…/g, " 「 …")
     // .replace(/([\w]) ([」】）』])([^\w])/g, "$1. $2$3")
