@@ -396,7 +396,7 @@ function styling
             text-align: left;
         }
         p {
-            color: wheat;
+            color: papayawhip;
             margin-top: 1em !important;
             margin: 0 0 1em !important;
             padding-bottom: 0rem !important;
