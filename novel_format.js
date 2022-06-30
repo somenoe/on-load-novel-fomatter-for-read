@@ -183,6 +183,7 @@ function wording
             .replace(/Shinichi/g, "Shin")
             .replace(/Seiji/g, "Sayji")
             .replace(/Arakawa/g, "Araka-wa")
+            .replace(/Ooal/g, "Oal")
             .replace(/Kouki/g, "Koki")
             .replace(/Kou([^\w])/g, "Kho$1")
     );
