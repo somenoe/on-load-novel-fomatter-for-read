@@ -673,6 +673,16 @@ function add_reset_script
     }`;
     document.head.appendChild(script);
 }
+function add_format_script
+    () {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.innerHTML = `
+    function format() {
+       document.getElementsByTagName('html')[0].innerHTML = \`${document.getElementsByTagName('html')[0].innerHTML}\`;
+    }`;
+    document.head.appendChild(script);
+}
 function diff
     (A, B) {
     return A.filter(x => !B.includes(x));
@@ -748,5 +758,6 @@ function main
             full_html_from_epub();
             break;
     }
+    add_format_script();
 }
 main();
