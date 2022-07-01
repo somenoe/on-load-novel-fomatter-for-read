@@ -196,21 +196,22 @@ function unreadablize
     (doc) {
     return (
         doc
-            // unreadablize chapter name
+            // chapter name
             .replace(/([Ee]pisode|[Cc]hapter)(\s*[0-9]+[^<>]*)</g, `${unread('$1$2')}<`)
-            // unreadablize inside bracket()
+            // inside bracket()
             .replace(/(\([^()]+\))/g, `${unread('$1')}`)
-            // unreadablize name front quote
+            // name front quote
             .replace(/(>\s*)([A-Z][\wé]*:)/g, `$1${unread('$2')}`)
-            // unreadablize silent symbol
+            // silent symbol
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
-            // unreadablize these symbol
+            // these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
             .replace(/([†♱*\$#]+)([^>]*<)/g, `${unread('$1')}$2`)
             // only number
             .replace(/(<p>)([0-9\s])(<\/p>)/g, `$1${unread('$2')}$3`)
-            .replace(/([A-z])\/([A-z])([^>]*<)/g, `$1${unread('\/')}$2$3`)
-        // // unreadablize dot near quote symbol
+            // slash to false slash
+            .replace(/([A-z])\/([A-z])([^>]*<)/g, `$1 &frasl; $2$3`)
+        // // dot near quote symbol
         // .replace(/\.([」】）』「【（『])/g, `.${unread('$1')}`)
         // .replace(/([」】）』「【（『])\./g, `${unread('$1')}.`)
     );
