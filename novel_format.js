@@ -8,7 +8,7 @@ function replacing
     (doc) {
     doc = pre_replace(doc);
     doc = ordinal_number(doc);
-    // doc = partition(doc);
+    doc = partition(doc);
     doc = quote_symbol(doc);
     doc = japanese_quote_symbol(doc);
     doc = ellipsis(doc);
@@ -98,10 +98,10 @@ function partition
         doc
             // solid hr
             .replace(/<hr>/g, '<hr class="solid">')
-            // partition
-            .replace(
-                /<(p|span)>([\?\!\*\s\-\._…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/(p|span)>/g,
-                '<hr class="solid">')
+            // // partition
+            // .replace(
+            //     /<(p|span)>([\?\!\*\s\-\._…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/(p|span)>/g,
+            //     '<hr class="solid">')
             // delete double partition
             .replace(
                 /(hr class=\"solid\">)([\n\s]*<hr class=\"solid\">)+/g,
@@ -410,7 +410,7 @@ function styling
 function allnovelfull
     () {
     const content = document.getElementById("chapter-content").cloneNode(true);
-    const title = document.getElementsByTagName("title")[0].cloneNode(true);
+    const title = document.getElementsByTagName("h3")[0].cloneNode(true);
     const html = document.getElementsByTagName('html')[0];
     // cleaning other text
     clear_html();
@@ -421,6 +421,10 @@ function allnovelfull
     html.appendChild(title);
     // set margin and font
     styling(document);
+    // remove original title
+    content.getElementsByTagName("h3")[0].remove();
+    // add unread title
+    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // show only content
@@ -594,7 +598,7 @@ function pandanovel
         if (e.key === "ArrowLeft") location = prev_chapter;
     });
     // add unread title
-    content.innerHTML = `<span aria-hidden="true" > ${title.innerHTML} </span> <hr> ${content.innerHTML}`;
+    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // show only content
@@ -623,7 +627,7 @@ function freewebnovel
         if (e.key === "ArrowLeft") location = prev_chapter;
     });
     // add unread title
-    content.innerHTML = `<span aria-hidden="true" > ${title.innerHTML} </span> <hr> ${content.innerHTML}`;
+    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // show only content
@@ -647,7 +651,7 @@ function towelcitytown
         if (e.key === "ArrowLeft") location = prev_chapter;
     });
     // add unread title
-    content.innerHTML = `<span aria-hidden="true" > ${title} </span> <hr> ${content.innerHTML}`;
+    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // show only content
