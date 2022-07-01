@@ -404,6 +404,9 @@ function styling
             padding-bottom: 0rem !important;
             text-align: left;
             text-indent: 0pt !important;
+        }
+        h1 {
+            color: papayawhip;
         }`
         ;
     doc.head.appendChild(newStyle);
