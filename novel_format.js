@@ -4,8 +4,7 @@
 document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
 document.body.innerHTML.match(//g);
 */
-function replacing
-    (doc) {
+function replacing(doc) {
     doc = pre_replace(doc);
     doc = ordinal_number(doc);
     doc = partition(doc);
@@ -19,8 +18,8 @@ function replacing
     doc = post_arrangement(doc)
     return doc;
 }
-function pre_replace
-    (doc) {
+
+function pre_replace(doc) {
     return doc
         // remove abrr tag
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
@@ -55,8 +54,8 @@ function pre_replace
         .replace(/If you are reading this anywhere [^<>]+ com\./g, '')
         ;
 }
-function post_arrangement
-    (doc) {
+
+function post_arrangement(doc) {
     return doc
         // new line to paragraph
         .replace(/<br>/g, "</p><p>")
@@ -76,8 +75,8 @@ function post_arrangement
         .replace(/([A-z])–([A-z])/g, "$1-$2")
         ;
 }
-function ellipsis
-    (doc) {
+
+function ellipsis(doc) {
     return (
         doc
             .replace(/…\s*[…\.]+|(\.(\s*\.+)+)/g, "…")
@@ -92,8 +91,8 @@ function ellipsis
             .replace(/([a-z])\s*…\s*([a-z])/g, "$1… $2")
     );
 }
-function partition
-    (doc) {
+
+function partition(doc) {
     return (
         doc
             // solid hr
@@ -108,8 +107,8 @@ function partition
                 '<hr class="solid">')
     );
 }
-function wording
-    (doc) {
+
+function wording(doc) {
     return (
         doc
             // please read what it stand for
@@ -188,12 +187,12 @@ function wording
             .replace(/Kou([^\w])/g, "Kho$1")
     );
 }
-function unread
-    (text) {
+
+function unread(text) {
     return `<span aria-hidden="true" >${text}</span>`;
 }
-function unreadablize
-    (doc) {
+
+function unreadablize(doc) {
     return (
         doc
             // chapter name
@@ -216,8 +215,8 @@ function unreadablize
         // .replace(/([」】）』「【（『])\./g, `${unread('$1')}.`)
     );
 }
-function stutter
-    (doc) {
+
+function stutter(doc) {
     return (
         doc
             // stutter
@@ -230,8 +229,8 @@ function stutter
         // .replace(/(\s)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
     );
 }
-function exclamation
-    (doc) {
+
+function exclamation(doc) {
     return (
         doc
             // exclamation sound
@@ -264,8 +263,8 @@ function exclamation
             .replace(/Un([?|!|\.|,|…])/g, "Eun$1")
     );
 }
-function quote_symbol
-    (doc) {
+
+function quote_symbol(doc) {
     return (
         doc
             // Quote symbol
@@ -286,8 +285,7 @@ function quote_symbol
     );
 }
 var double_close_quote, double_open_quote, single_open_quote, single_close_quote;
-function count_quote_symbol
-    () {
+function count_quote_symbol() {
     try {
         double_open_quote = document.body.innerHTML.match(/“/g).length;
     } catch {
@@ -310,8 +308,8 @@ function count_quote_symbol
     }
     console.log("double:", double_close_quote, double_open_quote, "single:", single_open_quote, single_close_quote);
 }
-function japanese_quote_symbol
-    (doc) {
+
+function japanese_quote_symbol(doc) {
 
     // doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
 
@@ -337,8 +335,8 @@ function japanese_quote_symbol
     // .replace(/([\w]) ([」】）』])([^\w])/g, "$1. $2$3")
     return doc;
 }
-function ordinal_number
-    (doc) {
+
+function ordinal_number(doc) {
     return doc
         .replace(/([2-9])([1-9])\s*(st|nd|rd|th)/g, "$10 $2$3")
         .replace(/(11\s*th)([^\w])/g, "Eleventh$2")
@@ -362,28 +360,28 @@ function ordinal_number
         .replace(/(10\s*th)([^\w])/g, "Tenth$2")
         ;
 }
-function hide_all_except
-    (children, except) {
+
+function hide_all_except(children, except) {
     for (let i = 0; i < children.length; i++) {
         if (children[i] != except) hide(children[i]);
     }
 }
-function hide_all
-    (children) {
+
+function hide_all(children) {
     for (let i = 0; i < children.length; i++) {
         hide(children[i]);
     }
 }
-function hide
-    (doc) {
+
+function hide(doc) {
     doc.style.display = "none";
 }
-function show
-    (doc) {
+
+function show(doc) {
     doc.style.display = "block";
 }
-function styling
-    (doc) {
+
+function styling(doc) {
     let newStyle = doc.createElement("style");
     newStyle.innerHTML =
         `body {
@@ -411,8 +409,8 @@ function styling
         ;
     doc.head.appendChild(newStyle);
 }
-function allnovelfull
-    () {
+
+function allnovelfull() {
     const content = document.getElementById("chapter-content").cloneNode(true);
     const title = document.getElementsByTagName("h3")[0].cloneNode(true);
     // cleaning other text
@@ -433,12 +431,12 @@ function allnovelfull
     add_child(body, content);
 
 }
-function add_child
-    (parent, child) {
+
+function add_child(parent, child) {
     parent.appendChild(child);
 }
-function infinitenoveltranslations
-    () {
+
+function infinitenoveltranslations() {
     styling(document);
     const parent = document.getElementsByTagName("body")[0];
     const content = document.getElementsByClassName("entry-content")[0];
@@ -482,8 +480,8 @@ function infinitenoveltranslations
         hide(content.children[content.children.length - 2]);
     }
 }
-function process
-    (parent_name, target_name, content_name) {
+
+function process(parent_name, target_name, content_name) {
     const parent = document.getElementById(parent_name);
     const target = document.getElementsByClassName(target_name)[0];
     const content = document.getElementById(content_name);
@@ -497,20 +495,20 @@ function process
         hide_all_except(target.children, content);
     }
 }
-function outerHTML_of_
-    (target) {
+
+function outerHTML_of_(target) {
     var array = [];
     for (i = 0; i < target.length; i++) {
         array.push(target[i].outerHTML);
     }
     return array;
 }
-function delay
-    (time) {
+
+function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
-function epub_reader
-    () {
+
+function epub_reader() {
     const frame = document.getElementById('content_frame');
     const doc = frame.contentWindow.document;
     // key detect
@@ -563,13 +561,14 @@ function epub_reader
         ext[i].innerHTML = '<hr>'
     }
 }
+
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
-function clear_html
-    () {
+
+function clear_html() {
     const html = document.getElementsByTagName('html')[0];
     const head = document.createElement('head');
     const body = document.createElement('body');
@@ -577,8 +576,8 @@ function clear_html
     html.appendChild(head);
     html.appendChild(body);
 }
-function pandanovel
-    () {
+
+function pandanovel() {
     const content = document.getElementById("novelArticle1").cloneNode(true);
     const title = document.getElementsByTagName("title")[0].cloneNode(true);
     const prev_chapter = document.getElementsByClassName("btn btn-prev")[0].href;
@@ -606,8 +605,8 @@ function pandanovel
     hide_all(body.children);
     add_child(body, content);
 }
-function freewebnovel
-    () {
+
+function freewebnovel() {
     const content = document.getElementsByClassName("txt ")[0].cloneNode(true);
     const title = document.getElementsByTagName("title")[0].cloneNode(true);
     const prev_chapter = document.getElementById("prev_url").href;
@@ -635,8 +634,8 @@ function freewebnovel
     hide_all(body.children);
     add_child(body, content);
 }
-function towelcitytown
-    () {
+
+function towelcitytown() {
     const body = document.body;
     const content = document.getElementsByClassName("entry-content")[0].children[0].cloneNode(true);
     const title = document.getElementsByTagName("title")[0].innerHTML;
@@ -659,8 +658,8 @@ function towelcitytown
     hide_all(body.children);
     add_child(body, content);
 }
-function add_reset_script
-    () {
+
+function add_reset_script() {
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.innerHTML = `
@@ -669,8 +668,8 @@ function add_reset_script
     }`;
     document.head.appendChild(script);
 }
-function add_format_script
-    () {
+
+function add_format_script() {
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.innerHTML = `
@@ -679,12 +678,12 @@ function add_format_script
     }`;
     document.head.appendChild(script);
 }
-function diff
-    (A, B) {
+
+function diff(A, B) {
     return A.filter(x => !B.includes(x));
 }
-function full_html_from_epub
-    () {
+
+function full_html_from_epub() {
     styling(document);
     let excepts = [
         ...document.getElementsByTagName('img'),
@@ -707,8 +706,7 @@ function full_html_from_epub
     document.body.innerHTML = document.body.innerHTML.replace(/([✽†♱*\$]+)/g, `${unread('$1')}`);
 }
 
-function meguminovel
-    () {
+function meguminovel() {
     styling(document);
     const parent = document.getElementsByTagName("body")[0];
     const content = document.getElementsByClassName("thecontent")[0];
@@ -716,8 +714,7 @@ function meguminovel
     add_child(parent, content);
 }
 
-function main
-    () {
+function main() {
     add_reset_script();
     count_quote_symbol();
     switch (window.location.hostname) {
@@ -756,4 +753,5 @@ function main
     }
     add_format_script();
 }
+
 main();
