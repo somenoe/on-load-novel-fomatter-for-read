@@ -1,4 +1,5 @@
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
+// TODO: make test case for debug like other tech comp
 /*
 * for test on paste:
 document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
@@ -219,14 +220,9 @@ function unreadablize(doc) {
 function stutter(doc) {
     return (
         doc
-            // stutter
-            .replace(/((?![\w’']).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[,…─\-–〜](\s*)([A-z])/g, "$1$2ah-$4")
-            .replace(/((?![\w’']).)((?![aiueoAIUEO])[A-z]|[WwTt]h)[,…─\-–〜](\s*)([A-z])/g, "$1$2ah-$4")
-            .replace(/((?![\w’']).)([aiueoAUEO])[,…─\-–〜](\s*)([A-z])/g, "$1$2h-$4")
-            .replace(/((?![\w’']).)([aiueoAUEO])[,…─\-–〜](\s*)([A-z])/g, "$1$2h-$4")
-        // .replace(/((?![\w’']).)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
-        // .replace(/((?![\w’']).)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
-        // .replace(/(\s)(I)[,…─\-–〜](\s*)([A-z])/g, "$1$2-$4")
+            // target: ' d-d', ' f-f', ' ch-ch', ' wh-wh', '…th-th', '“C-C', '“G-G',
+            .replace(/([^\w’'])((?![aiueoAIUEO])[B-z](?![aiueoAIUEO])[B-z]?)[,…─\-–〜](\s*)\2/gi, "$1$2ah-$2")
+            .replace(/([^\w’'])([aiueoAUEO])[,…─\-–〜](\s*)\2/gi, "$1$2ah-$2")
     );
 }
 
