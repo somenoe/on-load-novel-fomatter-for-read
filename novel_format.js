@@ -411,14 +411,11 @@ function allnovelfull
     () {
     const content = document.getElementById("chapter-content").cloneNode(true);
     const title = document.getElementsByTagName("h3")[0].cloneNode(true);
-    const html = document.getElementsByTagName('html')[0];
     // cleaning other text
     clear_html();
     const body = document.body;
     // remove element style
     content.removeAttribute('style');
-    // add title
-    html.appendChild(title);
     // set margin and font
     styling(document);
     // remove original title
