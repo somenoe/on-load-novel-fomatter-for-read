@@ -222,7 +222,7 @@ function stutter(doc) {
         doc
             // target: ' d-d', ' f-f', ' ch-ch', ' wh-wh', '…th-th', '“C-C', '“G-G',
             .replace(/([^\w’'])((?![aiueoAIUEO])[B-z](?![aiueoAIUEO])[B-z]?)[,…─\-–〜](\s*)\2/gi, "$1$2ah-$2")
-            .replace(/([^\w’'])([aiueoAUEO])[,…─\-–〜](\s*)\2/gi, "$1$2ah-$2")
+            .replace(/([^\w’'])([aueoAUEO])[,…─\-–〜](\s*)\2/gi, "$1$2ah-$2")
     );
 }
 
