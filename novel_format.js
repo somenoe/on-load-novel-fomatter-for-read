@@ -13,6 +13,8 @@ function replacing(doc) {
     doc = japanese_quote_symbol(doc);
     doc = ellipsis(doc);
     doc = stutter(doc);
+    doc = stutter(doc);
+    doc = stutter(doc);
     doc = exclamation(doc);
     doc = unreadablize(doc);
     doc = wording(doc);
