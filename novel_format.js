@@ -485,6 +485,7 @@ function infinitenoveltranslations() {
 
 function getPrevChapter() {
     return [
+        document.getElementById("prev"),
         document.getElementById("prev_chap"),
         document.getElementById("prev_url"),
         document.getElementsByClassName("btn btn-prev")[0],
@@ -494,6 +495,7 @@ function getPrevChapter() {
 
 function getNextChapter() {
     return [
+        document.getElementById("next"),
         document.getElementById("next_chap"),
         document.getElementById("next_url"),
         document.getElementsByClassName("btn btn-next")[0],
@@ -508,8 +510,8 @@ function setNavigatorWithArrowKey() {
         prev_chapter = getPrevChapter().href;
         next_chapter = getNextChapter().href;
     } catch (error) {
-        console.log(error);
         let current_url = window.location.href;
+        // break point if last url not number
         let current_page = Number(current_url.match(/([0-9]+)$/g)[0]);
         current_url = current_url.replace(/([0-9]+)$/g, ``);
         next_chapter = current_url + current_page + 1;
@@ -521,6 +523,7 @@ function setNavigatorWithArrowKey() {
         if (e.key === "ArrowLeft") location = prev_chapter;
     });
 }
+
 function removeAdsElement(content) {
     [...content.getElementsByTagName('del')].forEach(e => e.remove())
 }
@@ -538,13 +541,11 @@ function process() {
     const body = document.body;
     // set margin and font
     styling(document);
-    // add header
-    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
-    // // show only content
-    // hide_all(body.children);
+    // adding title
     add_child(body, title);
+    // adding body
     add_child(body, content);
 }
 
@@ -783,45 +784,13 @@ function main() {
     add_reset_script();
     count_quote_symbol();
 
-    process();
-    return;
-
     switch (window.location.hostname) {
-        case 'ranobes.net':
-            process("dle-content", "block story shortstory", "arrticle");
-            break;
-        case 'infinitenoveltranslations.net':
-            infinitenoveltranslations();
-            break;
-        case 'towelcitytown.wordpress.com':
-            towelcitytown();
-            break;
-        case 'allnovelfull.com':
-            allnovelfull();
-            break;
-        case 'i.meguminovel.com':
-            meguminovel();
-            break;
-        case 'freewebnovel.com':
-            freewebnovel();
-            break;
-        case 'www.panda-novel.com':
-            pandanovel();
-            break;
-        case 'jhhclmfgfllimlhabjkgkeebkbiadflb':
-            epub_reader();
-            break;
         case 'www.nekopost.net':
             // delay 2 second
-            delay(2000).then(() => nekopost());
+            delay(2000).then(() => process());
             break;
-        case '':
-            if (document.getElementById('novelArticle1')) {
-                styling(document);
-                document.body.innerHTML = replacing(document.body.innerHTML);
-                return;
-            }
-            full_html_from_epub();
+        default:
+            process();
             break;
     }
 }
