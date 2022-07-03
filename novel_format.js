@@ -516,7 +516,6 @@ function setNavigatorWithArrowKey() {
         try {
             // * common breakpoint if last url not number
             let current_page = Number(current_url.match(/\/([0-9]+)$/g)[0].slice(1));
-            console.log(current_page);
             current_url = current_url.replace(/([0-9]+)$/g, '');
             next_chapter = current_url + (current_page + 1);
             prev_chapter = current_url + (current_page > 0) ? current_page - 1 : 0;
