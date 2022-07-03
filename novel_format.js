@@ -770,8 +770,8 @@ function main() {
             epub_reader();
             break;
         case 'www.nekopost.net':
-            // delay 1 second
-            delay(1000).then(() => nekopost());
+            // delay 2 second
+            delay(2000).then(() => nekopost());
             break;
         case '':
             if (document.getElementById('novelArticle1')) {
