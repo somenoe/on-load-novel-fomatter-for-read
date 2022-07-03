@@ -243,9 +243,9 @@ function exclamation(doc) {
             // [^\w\s] = not in \w, not in \s
             .replace(/Ee([^\w])/g, "Eh$1")
             .replace(/Aa([^\w])/g, "Ah$1")
-            .replace(/(Mm-hmm|Mmmhmm|Mmhmm| mmmhmm| mmhmm|Mhm)([ |?|!|\.|,|…])/g, "Uh-huh$2")
+            .replace(/([^\w])(Mm-hmm|Mmmhmm|Mmhmm|mmmhmm|mmhmm|Mhm)([ |?|!|\.|,|…])/g, "$1Uh-huh$3")
             .replace(/Hmpf|Hmph|Hmhm|Mhh|Hn/g, "Hmm")
-            .replace(/(Hm|[^\w]hm)([^\w])/g, "Hmm$2")
+            .replace(/([^\w])(Hm|hm)([^\w])/g, "$1Hmm$3")
             .replace(/Kreuk|Keuk|Kuek/g, "Kwuk")
             .replace(/[K|k]euck/g, "Kheck")
             .replace(/Krr|krr/g, "Karr")
