@@ -199,7 +199,7 @@ function unreadablize(doc) {
     return (
         doc
             // chapter name
-            .replace(/([Ee]pisode|[Cc]hapter)(\s*[0-9]+[^<>]*)</g, `${unread('$1$2')}<`)
+            .replace(/(Episode|Chapter|Ch|Part)([\s.]*[0-9]+[^<>]*)</gi, `${unread('$1$2')}<`)
             // // inside bracket()
             // .replace(/(\([^()]+\))/g, `${unread('$1')}`)
             // name front quote
@@ -603,7 +603,30 @@ function pandanovel() {
     hide_all(body.children);
     add_child(body, content);
 }
-
+function nekopost() {
+    const content = document.getElementsByClassName("svelte-1en1pmd")[7].cloneNode(true);
+    // cleaning other text
+    clear_html();
+    // get new body
+    const body = document.body;
+    // set margin and font
+    styling(document);
+    // navigator with arrow key
+    let current_url = window.location.href;
+    let current_page = Number(current_url.match(/([0-9]+)$/g)[0]);
+    let next_chapter = current_page + 1;
+    let prev_chapter = (current_page > 0) ? current_page - 1 : 0;
+    current_url = current_url.replace(/([0-9]+)$/g, ``);
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") location = current_url + next_chapter;
+        if (e.key === "ArrowLeft") location = current_url + prev_chapter;
+    });
+    // replacing
+    content.innerHTML = replacing(content.innerHTML);
+    // show only content
+    hide_all(body.children);
+    add_child(body, content);
+}
 function freewebnovel() {
     const content = document.getElementsByClassName("txt ")[0].cloneNode(true);
     const title = document.getElementsByTagName("title")[0].cloneNode(true);
@@ -739,6 +762,10 @@ function main() {
             break;
         case 'jhhclmfgfllimlhabjkgkeebkbiadflb':
             epub_reader();
+            break;
+        case 'www.nekopost.net':
+            // delay 1 second
+            delay(1000).then(() => nekopost());
             break;
         case '':
             if (document.getElementById('novelArticle1')) {
