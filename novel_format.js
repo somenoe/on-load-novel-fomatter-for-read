@@ -359,6 +359,10 @@ function ordinal_number(doc) {
         ;
 }
 
+function maxChlidenNode(tagName = 'div') {
+    return [...document.getElementsByTagName(tagName)].reduce((a, b) => (a.childElementCount > b.childElementCount) ? a : b, document.createElement(tagName))
+}
+
 function hide_all_except(children, except) {
     for (let i = 0; i < children.length; i++) {
         if (children[i] != except) hide(children[i]);
@@ -604,7 +608,8 @@ function pandanovel() {
     add_child(body, content);
 }
 function nekopost() {
-    const content = document.getElementsByClassName("svelte-1en1pmd")[7].cloneNode(true);
+    // const content = document.getElementsByClassName("svelte-1en1pmd")[7].cloneNode(true);
+    const content = maxChlidenNode().cloneNode(true);
     // cleaning other text
     clear_html();
     // get new body
