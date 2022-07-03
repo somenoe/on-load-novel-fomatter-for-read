@@ -282,7 +282,7 @@ function quote_symbol(doc) {
             .replace(/([A-z])[‘']([A-z])/g, "$1’$2")
     );
 }
-var double_close_quote, double_open_quote, single_open_quote, single_close_quote;
+let double_close_quote, double_open_quote, single_open_quote, single_close_quote;
 function count_quote_symbol() {
     try {
         double_open_quote = document.body.innerHTML.match(/“/g).length;
@@ -449,7 +449,8 @@ function infinitenoveltranslations() {
     // navigator with arrow key
     if (a_tags != null) {
         const next_chapter = a_tags[a_tags.length - 1].href;
-        if (a_tags.length >= 3) var prev_chapter = a_tags[a_tags.length - 3].href;
+        let prev_chapter;
+        if (a_tags.length >= 3) prev_chapter = a_tags[a_tags.length - 3].href;
 
         document.addEventListener("keydown", function (e) {
             if (e.key === "ArrowRight") location = next_chapter;
@@ -505,17 +506,28 @@ function getNextChapter() {
 
 function setNavigatorWithArrowKey() {
     // get link of next and previous chapter
-    var next_chapter, prev_chapter;
+    let next_chapter = '';
+    let prev_chapter = '';
     try {
         prev_chapter = getPrevChapter().href;
         next_chapter = getNextChapter().href;
     } catch (error) {
         let current_url = window.location.href;
-        // break point if last url not number
-        let current_page = Number(current_url.match(/([0-9]+)$/g)[0]);
-        current_url = current_url.replace(/([0-9]+)$/g, ``);
-        next_chapter = current_url + current_page + 1;
-        prev_chapter = current_url + (current_page > 0) ? current_page - 1 : 0;
+        try {
+            // * common breakpoint if last url not number
+            let current_page = Number(current_url.match(/\/([0-9]+)$/g)[0].slice(1));
+            console.log(current_page);
+            current_url = current_url.replace(/([0-9]+)$/g, '');
+            next_chapter = current_url + (current_page + 1);
+            prev_chapter = current_url + (current_page > 0) ? current_page - 1 : 0;
+        } catch (error) {
+            // ? no next and prev chapter
+            if (prev_chapter == '' && next_chapter == '') no_next_and_prev_chapter();
+            // first chapter
+            if (prev_chapter == '') prev_chapter = (next_chapter != '') ? current_url : '';
+            // latest chapter
+            if (next_chapter == '') next_chapter = (prev_chapter != '') ? current_url : '';
+        }
     }
     // set key Listener
     document.addEventListener("keydown", function (e) {
@@ -529,6 +541,7 @@ function removeAdsElement(content) {
 }
 
 function process() {
+    //! //BUG: no break point for non-novel-content page like: chapter list page
     const title = document.getElementsByTagName("title")[0].cloneNode(true);
     const content = getElementWithMaxChlidenNode().cloneNode(true);
     // remove ads
@@ -550,7 +563,7 @@ function process() {
 }
 
 function outerHTML_of_(target) {
-    var array = [];
+    let array = [];
     for (i = 0; i < target.length; i++) {
         array.push(target[i].outerHTML);
     }
@@ -578,7 +591,7 @@ function epub_reader() {
     // skip only image page //? load image error
     if (doc.body.className == 'nomargin center' || doc.body.getElementsByClassName('image_full').length > 0) return;
 
-    var content
+    let content
     try {
         content = frame.contentWindow.document.getElementsByClassName('main')[0];
     } catch (error) {
@@ -750,10 +763,6 @@ function diff(A, B) {
 
 function full_html_from_epub() {
     styling(document);
-    let excepts = [
-        ...document.getElementsByTagName('img'),
-        ...document.getElementsByTagName('nav')
-    ].map(e => e.parentElement);
 
     let contents = [
         ...document.getElementsByClassName('calibre'),
@@ -762,12 +771,12 @@ function full_html_from_epub() {
         ...document.getElementsByClassName('class_s3s'),
         ...document.getElementsByClassName('western'),
     ];
-    contents = diff(contents, excepts);
 
     for (let index = 0; index < contents.length; index++) {
         const content = contents[index];
         content.innerHTML = replacing(content.innerHTML);
     }
+
     document.body.innerHTML = document.body.innerHTML.replace(/([✽†♱*\$]+)/g, `${unread('$1')}`);
 }
 
@@ -788,6 +797,9 @@ function main() {
         case 'www.nekopost.net':
             // delay 2 second
             delay(2000).then(() => process());
+            break;
+        case '':
+            full_html_from_epub();
             break;
         default:
             process();
