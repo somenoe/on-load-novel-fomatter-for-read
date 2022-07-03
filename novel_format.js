@@ -359,8 +359,8 @@ function ordinal_number(doc) {
         ;
 }
 
-function maxChlidenNode(tagName = 'div') {
-    return [...document.getElementsByTagName(tagName)].reduce((a, b) => (a.childElementCount > b.childElementCount) ? a : b, document.createElement(tagName))
+function getElementWithMaxChlidenNode(tagName = 'div') {
+    return [...document.getElementsByTagName(tagName)].reduce((a, b) => (a.childElementCount > b.childElementCount) ? a : b, document.createElement(tagName));
 }
 
 function hide_all_except(children, except) {
@@ -483,19 +483,69 @@ function infinitenoveltranslations() {
     }
 }
 
-function process(parent_name, target_name, content_name) {
-    const parent = document.getElementById(parent_name);
-    const target = document.getElementsByClassName(target_name)[0];
-    const content = document.getElementById(content_name);
+function getPrevChapter() {
+    return [
+        document.getElementById("prev_chap"),
+        document.getElementById("prev_url"),
+        document.getElementsByClassName("btn btn-prev")[0],
+        document.getElementsByClassName("nav-previous")[0],
+    ].find((e) => e != null);
+}
 
+function getNextChapter() {
+    return [
+        document.getElementById("next_chap"),
+        document.getElementById("next_url"),
+        document.getElementsByClassName("btn btn-next")[0],
+        document.getElementsByClassName("nav-next")[0],
+    ].find((e) => e != null);
+}
+
+function setNavigatorWithArrowKey() {
+    // get link of next and previous chapter
+    var next_chapter, prev_chapter;
+    try {
+        prev_chapter = getPrevChapter().href;
+        next_chapter = getNextChapter().href;
+    } catch (error) {
+        console.log(error);
+        let current_url = window.location.href;
+        let current_page = Number(current_url.match(/([0-9]+)$/g)[0]);
+        current_url = current_url.replace(/([0-9]+)$/g, ``);
+        next_chapter = current_url + current_page + 1;
+        prev_chapter = current_url + (current_page > 0) ? current_page - 1 : 0;
+    }
+    // set key Listener
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") location = next_chapter;
+        if (e.key === "ArrowLeft") location = prev_chapter;
+    });
+}
+function removeAdsElement(content) {
+    [...content.getElementsByTagName('del')].forEach(e => e.remove())
+}
+
+function process() {
+    const title = document.getElementsByTagName("title")[0].cloneNode(true);
+    const content = getElementWithMaxChlidenNode().cloneNode(true);
+    // remove ads
+    removeAdsElement(content);
+    // set arrow key navigator
+    setNavigatorWithArrowKey();
+    // cleaning other text
+    clear_html();
+    // get new body
+    const body = document.body;
+    // set margin and font
+    styling(document);
+    // add header
+    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
-
-    if (parent.children[0].style.display != "none") {
-        hide_all(parent.children);
-        add_child(parent, target);
-        hide_all_except(target.children, content);
-    }
+    // // show only content
+    // hide_all(body.children);
+    add_child(body, title);
+    add_child(body, content);
 }
 
 function outerHTML_of_(target) {
@@ -565,18 +615,16 @@ function epub_reader() {
 }
 
 function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
+    [...parent.children].forEach(e => e.remove())
 }
 
 function clear_html() {
     const html = document.getElementsByTagName('html')[0];
-    const head = document.createElement('head');
-    const body = document.createElement('body');
+    const new_head = document.createElement('head');
+    const new_body = document.createElement('body');
     removeAllChildNodes(html);
-    html.appendChild(head);
-    html.appendChild(body);
+    html.appendChild(new_head);
+    html.appendChild(new_body);
 }
 
 function pandanovel() {
@@ -609,7 +657,7 @@ function pandanovel() {
 }
 function nekopost() {
     // const content = document.getElementsByClassName("svelte-1en1pmd")[7].cloneNode(true);
-    const content = maxChlidenNode().cloneNode(true);
+    const content = getElementWithMaxChlidenNode().cloneNode(true);
     // cleaning other text
     clear_html();
     // get new body
@@ -695,16 +743,6 @@ function add_reset_script() {
     document.head.appendChild(script);
 }
 
-function add_format_script() {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.innerHTML = `
-    function format() {
-       document.getElementsByTagName('html')[0].innerHTML = \`${document.getElementsByTagName('html')[0].innerHTML}\`;
-    }`;
-    document.head.appendChild(script);
-}
-
 function diff(A, B) {
     return A.filter(x => !B.includes(x));
 }
@@ -744,6 +782,10 @@ function main() {
     // Todo: use this function before function replacing()
     add_reset_script();
     count_quote_symbol();
+
+    process();
+    return;
+
     switch (window.location.hostname) {
         case 'ranobes.net':
             process("dle-content", "block story shortstory", "arrticle");
@@ -782,7 +824,6 @@ function main() {
             full_html_from_epub();
             break;
     }
-    add_format_script();
 }
 
 main();
