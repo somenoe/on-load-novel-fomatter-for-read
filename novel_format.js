@@ -736,6 +736,7 @@ function meguminovel() {
 }
 
 function main() {
+    // Todo: use this function before function replacing()
     add_reset_script();
     count_quote_symbol();
     switch (window.location.hostname) {
