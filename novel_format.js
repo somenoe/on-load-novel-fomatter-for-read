@@ -538,11 +538,18 @@ function setNavigatorWithArrowKey() {
 function removeAdsElement(content) {
     [...content.getElementsByTagName('del')].forEach(e => e.remove())
 }
-
+function countElements(element, condition) {
+    return [...element.children].reduce((total, e) => (condition(e) ? total + 1 : total), 0)
+}
 function process() {
     //! //BUG: no break point for non-novel-content page like: chapter list page
     const title = document.getElementsByTagName("title")[0].cloneNode(true);
     const content = getElementWithMaxChlidenNode().cloneNode(true);
+    // breakpoint if <p> less than 5 and <br> less than 5
+    if (countElements(content, (e) => e.tagName == 'P') < 5 && countElements(content, (e) => e.tagName == 'BR') < 5) {
+        console.log(content);
+        return;
+    }
     // remove ads
     removeAdsElement(content);
     // set arrow key navigator
