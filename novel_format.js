@@ -805,7 +805,12 @@ function main() {
             delay(2000).then(() => process());
             break;
         case '':
-            full_html_from_epub();
+            // set margin and font
+            styling(document);
+            // get content
+            const content = document.body;
+            // replacing
+            content.innerHTML = replacing(content.innerHTML);
             break;
         default:
             process();
