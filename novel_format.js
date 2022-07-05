@@ -1,10 +1,6 @@
 // TODO: make it run this script when start the seleceted web like [dark reader (ext)]
 // TODO: make test case for debug like other tech comp
-/*
-* for test on paste:
-document.body.innerHTML = document.body.innerHTML.replace(/ / g, "");
-document.body.innerHTML.match(//g);
-*/
+
 function replacing(doc) {
     doc = pre_replace(doc);
     doc = ordinal_number(doc);
@@ -363,25 +359,6 @@ function getElementWithMaxChlidenNode(tagName = 'div') {
     return [...document.getElementsByTagName(tagName)].reduce((a, b) => (a.childElementCount > b.childElementCount) ? a : b, document.createElement(tagName));
 }
 
-function hide_all_except(children, except) {
-    for (let i = 0; i < children.length; i++) {
-        if (children[i] != except) hide(children[i]);
-    }
-}
-
-function hide_all(children) {
-    for (let i = 0; i < children.length; i++) {
-        hide(children[i]);
-    }
-}
-
-function hide(doc) {
-    doc.style.display = "none";
-}
-
-function show(doc) {
-    doc.style.display = "block";
-}
 
 function styling(doc) {
     let newStyle = doc.createElement("style");
@@ -412,77 +389,11 @@ function styling(doc) {
     doc.head.appendChild(newStyle);
 }
 
-function allnovelfull() {
-    const content = document.getElementById("chapter-content").cloneNode(true);
-    const title = document.getElementsByTagName("h3")[0].cloneNode(true);
-    // cleaning other text
-    clear_html();
-    const body = document.body;
-    // remove element style
-    content.removeAttribute('style');
-    // set margin and font
-    styling(document);
-    // remove original title
-    content.getElementsByTagName("h3")[0].remove();
-    // add unread title
-    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
-    // replacing
-    content.innerHTML = replacing(content.innerHTML);
-    // show only content
-    hide_all(body.children);
-    add_child(body, content);
-
-}
 
 function add_child(parent, child) {
     parent.appendChild(child);
 }
 
-function infinitenoveltranslations() {
-    styling(document);
-    const parent = document.getElementsByTagName("body")[0];
-    const content = document.getElementsByClassName("entry-content")[0];
-    const image = content.getElementsByTagName("img")[0];
-    const footer = document.getElementsByTagName("footer")[0];
-    const a_tags = content.getElementsByTagName("a");
-    const title = document.getElementsByTagName("title")[0];
-    // navigator with arrow key
-    if (a_tags != null) {
-        const next_chapter = a_tags[a_tags.length - 1].href;
-        let prev_chapter;
-        if (a_tags.length >= 3) prev_chapter = a_tags[a_tags.length - 3].href;
-
-        document.addEventListener("keydown", function (e) {
-            if (e.key === "ArrowRight") location = next_chapter;
-            if (e.key === "ArrowLeft" && a_tags.length >= 3) location = prev_chapter;
-        });
-    }
-    // clean title text
-    document.getElementsByClassName("entry-title")[0].innerHTML = "";
-    // replacing
-    content.innerHTML = replacing(content.innerHTML);
-    // add unread title
-    content.innerHTML =
-        '<span aria-hidden="true" >' +
-        title.innerHTML +
-        "</span><hr>" +
-        content.innerHTML;
-    // fix broken image tag
-    if (image != null)
-        content.innerHTML = content.innerHTML.replace(
-            /<img .+\">/g,
-            image.outerHTML
-        );
-    // remove footer which readable
-    if (footer != null) footer.remove();
-    // show only content
-    if (parent.children[0].style.display != "none") {
-        hide_all(parent.children);
-        add_child(parent, content);
-        hide(content.children[2]);
-        hide(content.children[content.children.length - 2]);
-    }
-}
 
 function getPrevChapter() {
     return [
@@ -568,71 +479,10 @@ function process() {
     add_child(body, content);
 }
 
-function outerHTML_of_(target) {
-    let array = [];
-    for (i = 0; i < target.length; i++) {
-        array.push(target[i].outerHTML);
-    }
-    return array;
-}
-
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-function epub_reader() {
-    const frame = document.getElementById('content_frame');
-    const doc = frame.contentWindow.document;
-    // key detect
-    doc.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowLeft") {
-            console.log("<-");
-            delay(500).then(() => epub_reader());
-        }
-        if (e.key === "ArrowRight") {
-            console.log("->");
-            delay(500).then(() => epub_reader());
-        }
-    });
-    // skip only image page //? load image error
-    if (doc.body.className == 'nomargin center' || doc.body.getElementsByClassName('image_full').length > 0) return;
-
-    let content
-    try {
-        content = frame.contentWindow.document.getElementsByClassName('main')[0];
-    } catch (error) {
-        content = frame.contentWindow.document.body;
-    }
-
-    styling(doc);
-
-    const img = content.getElementsByTagName("img");
-    const img_o = outerHTML_of_(img);
-
-    const h1 = content.getElementsByTagName("h1");
-    const h1_o = outerHTML_of_(h1);
-
-    const ul = content.getElementsByTagName("ul");
-    const ul_o = outerHTML_of_(ul);
-
-    content.innerHTML = replacing(content.innerHTML);
-
-    for (let index = 0; index < img.length; index++) {
-        content.innerHTML = content.innerHTML.replace(img[index].outerHTML, img_o[index]);
-    }
-
-    for (let index = 0; index < ul.length; index++) {
-        content.innerHTML = content.innerHTML.replace(ul[index].outerHTML, ul_o[index]);
-    }
-    for (let index = 0; index < h1.length; index++) {
-        content.innerHTML = content.innerHTML.replace(h1[index].outerHTML, h1_o[index]);
-    }
-    // error image to line partition
-    let ext = doc.getElementsByClassName("ext_ch");
-    for (let i = 0; i < ext.length; i++) {
-        ext[i].innerHTML = '<hr>'
-    }
-}
 
 function removeAllChildNodes(parent) {
     [...parent.children].forEach(e => e.remove())
@@ -647,175 +497,46 @@ function clear_html() {
     html.appendChild(new_body);
 }
 
-function pandanovel() {
-    const content = document.getElementById("novelArticle1").cloneNode(true);
-    const title = document.getElementsByTagName("title")[0].cloneNode(true);
-    const prev_chapter = document.getElementsByClassName("btn btn-prev")[0].href;
-    const next_chapter = document.getElementsByClassName("btn btn-next")[0].href;
-    const html = document.getElementsByTagName('html')[0];
-    // remove 'del' tag
-    new Set(content.getElementsByTagName('del')).forEach(e => e.remove())
-    // cleaning other text
-    clear_html();
-    const body = document.body;
-    // add title
-    html.appendChild(title);
+
+function full_book() {
     // set margin and font
     styling(document);
-    // navigator with arrow key
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowRight") location = next_chapter;
-        if (e.key === "ArrowLeft") location = prev_chapter;
-    });
-    // add unread title
-    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
+    // get content
+    const content = document.body;
     // replacing
     content.innerHTML = replacing(content.innerHTML);
-    // show only content
-    hide_all(body.children);
-    add_child(body, content);
 }
-function nekopost() {
-    // const content = document.getElementsByClassName("svelte-1en1pmd")[7].cloneNode(true);
-    const content = getElementWithMaxChlidenNode().cloneNode(true);
-    // cleaning other text
-    clear_html();
-    // get new body
-    const body = document.body;
-    // set margin and font
-    styling(document);
-    // navigator with arrow key
-    let current_url = window.location.href;
-    let current_page = Number(current_url.match(/([0-9]+)$/g)[0]);
-    let next_chapter = current_page + 1;
-    let prev_chapter = (current_page > 0) ? current_page - 1 : 0;
-    current_url = current_url.replace(/([0-9]+)$/g, ``);
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowRight") location = current_url + next_chapter;
-        if (e.key === "ArrowLeft") location = current_url + prev_chapter;
-    });
-    // replacing
-    content.innerHTML = replacing(content.innerHTML);
-    // show only content
-    hide_all(body.children);
-    add_child(body, content);
-}
-function freewebnovel() {
-    const content = document.getElementsByClassName("txt ")[0].cloneNode(true);
-    const title = document.getElementsByTagName("title")[0].cloneNode(true);
-    const prev_chapter = document.getElementById("prev_url").href;
-    const next_chapter = document.getElementById("next_url").href;
-    const html = document.getElementsByTagName('html')[0];
-    // cleaning other text
-    clear_html();
-    const body = document.body;
-    // remove element style
-    content.removeAttribute('style');
-    // add title
-    html.appendChild(title);
-    // set margin and font
-    styling(document);
-    // navigator with arrow key
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowRight") location = next_chapter;
-        if (e.key === "ArrowLeft") location = prev_chapter;
-    });
-    // add unread title
-    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
-    // replacing
-    content.innerHTML = replacing(content.innerHTML);
-    // show only content
-    hide_all(body.children);
-    add_child(body, content);
-}
-
-function towelcitytown() {
-    const body = document.body;
-    const content = document.getElementsByClassName("entry-content")[0].children[0].cloneNode(true);
-    const title = document.getElementsByTagName("title")[0].innerHTML;
-    const prev_chapter = document.getElementsByClassName("nav-previous")[0].children[0].href;
-    const next_chapter = document.getElementsByClassName("nav-next")[0].children[0].href;
-    // set margin and font
-    styling(document);
-    // cleaning other text
-    body.innerHTML = ''
-    // navigator with arrow key
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowRight") location = next_chapter;
-        if (e.key === "ArrowLeft") location = prev_chapter;
-    });
-    // add unread title
-    content.innerHTML = `<p><span aria-hidden="true" > ${title.innerHTML} </span></p> <hr> ${content.innerHTML}`;
-    // replacing
-    content.innerHTML = replacing(content.innerHTML);
-    // show only content
-    hide_all(body.children);
-    add_child(body, content);
-}
-
-function add_reset_script() {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.innerHTML = `
-    function reset() {
-       document.getElementsByTagName('html')[0].innerHTML = \`${document.getElementsByTagName('html')[0].innerHTML}\`;
-    }`;
-    document.head.appendChild(script);
-}
-
-function diff(A, B) {
-    return A.filter(x => !B.includes(x));
-}
-
-function full_html_from_epub() {
-    styling(document);
-
-    let contents = [
-        ...document.getElementsByClassName('calibre'),
-        ...document.getElementsByClassName('calibre1'),
-        ...document.getElementsByClassName('class_s1k'),
-        ...document.getElementsByClassName('class_s3s'),
-        ...document.getElementsByClassName('western'),
-    ];
-
-    for (let index = 0; index < contents.length; index++) {
-        const content = contents[index];
-        content.innerHTML = replacing(content.innerHTML);
-    }
-
-    document.body.innerHTML = document.body.innerHTML.replace(/([✽†♱*\$]+)/g, `${unread('$1')}`);
-}
-
-function meguminovel() {
-    styling(document);
-    const parent = document.getElementsByTagName("body")[0];
-    const content = document.getElementsByClassName("thecontent")[0];
-    hide_all(parent.children);
-    add_child(parent, content);
-}
-
-function main() {
-    // Todo: use this function before function replacing()
-    add_reset_script();
-    count_quote_symbol();
+function main(message) {
+    console.log(message)
 
     switch (window.location.hostname) {
         case 'www.nekopost.net':
             // delay 2 second
             delay(2000).then(() => process());
             break;
-        case '':
-            // set margin and font
-            styling(document);
-            // get content
-            const content = document.body;
-            // replacing
-            content.innerHTML = replacing(content.innerHTML);
-            break;
-        default:
+        case 'ranobes.net':
+        case 'infinitenoveltranslations.net':
+        case 'towelcitytown.wordpress.com':
+        case 'allnovelfull.com':
+        case 'i.meguminovel.com':
+        case 'freewebnovel.com':
+        case 'www.panda-novel.com':
             process();
             break;
     }
 }
 
-main();
+const original_html = document.getElementsByTagName('html')[0].innerHTML;
+
+function reset() {
+    document.getElementsByTagName('html')[0].innerHTML = original_html;
+}
+
+count_quote_symbol();
+
+document.addEventListener("keydown", function (e) {
+    if (e.altKey && e.key === "1") main();
+    if (e.altKey && e.key === "2") full_book();
+    if (e.altKey && e.key === "3") reset();
+    if (e.altKey && e.key === "4") { location.reload(); delay(2000).then(() => main('main3')); }
+});
