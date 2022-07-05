@@ -1,4 +1,4 @@
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
   $("head").prepend(
     `<style>
        .slide-image {
@@ -16,7 +16,3 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   });
   sendResponse({ fromcontent: "This message is from content.js" });
 });
-// window.onload = function () {
-//   console.log("page load!");
-// }
-console.log("content");
