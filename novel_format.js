@@ -474,7 +474,7 @@ function process() {
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // adding title
-    add_child(body, title);
+    add_child(document.head, title);
     // adding body
     add_child(body, content);
 }
@@ -534,8 +534,10 @@ function reset() {
 
 count_quote_symbol();
 
+main();
+
 document.addEventListener("keydown", function (e) {
-    if (e.altKey && e.key === "1") main();
+    if (e.altKey && e.key === "1") process();
     if (e.altKey && e.key === "2") full_book();
     if (e.altKey && e.key === "3") reset();
     if (e.altKey && e.key === "4") { location.reload(); delay(2000).then(() => main('main3')); }
