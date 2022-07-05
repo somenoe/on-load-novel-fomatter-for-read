@@ -360,11 +360,12 @@ function getElementWithMaxChlidenNode(tagName = 'div') {
 }
 
 
-function styling(doc) {
-    let newStyle = doc.createElement("style");
+function styling() {
+    let newStyle = document.createElement("style");
     newStyle.innerHTML =
         `body {
             background-color: #1F2022;
+            color: papayawhip;
             font-family: "Arial" !important;
             font-size: 25px !important;
             line-height: 1.3 !important;
@@ -386,7 +387,7 @@ function styling(doc) {
             color: papayawhip;
         }`
         ;
-    doc.head.appendChild(newStyle);
+    document.head.appendChild(newStyle);
 }
 
 
@@ -470,7 +471,7 @@ function process() {
     // get new body
     const body = document.body;
     // set margin and font
-    styling(document);
+    styling();
     // replacing
     content.innerHTML = replacing(content.innerHTML);
     // adding title
@@ -500,7 +501,7 @@ function clear_html() {
 
 function full_book() {
     // set margin and font
-    styling(document);
+    styling();
     // get content
     const content = document.body;
     // replacing
