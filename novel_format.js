@@ -365,7 +365,6 @@ function styling() {
     newStyle.innerHTML =
         `body {
             background-color: #1F2022;
-            color: papayawhip;
             font-family: "Arial" !important;
             font-size: 25px !important;
             line-height: 1.3 !important;
@@ -480,9 +479,7 @@ function process() {
     add_child(body, content);
 }
 
-function delay(time) {
-    return new Promise(resolve => setTimeout(resolve, time));
-}
+function delay(time) { return new Promise(resolve => setTimeout(resolve, time)); }
 
 
 function removeAllChildNodes(parent) {
@@ -507,9 +504,40 @@ function full_book() {
     // replacing
     content.innerHTML = replacing(content.innerHTML);
 }
-function main(message) {
-    console.log(message)
 
+// BUG: cannot delete this
+
+const setCookie = (name, value, days = 7, path = '/') => {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString()
+    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
+}
+
+const getCookie = (name) => {
+    return document.cookie.split('; ').reduce((r, v) => {
+        const parts = v.split('=')
+        return parts[0] === name ? decodeURIComponent(parts[1]) : r
+    }, '')
+}
+
+const deleteCookie = (name, path) => {
+    setCookie(name, '', -1, path)
+}
+
+function deleteAllCookies() {
+    document.cookie.replace(
+        /(?<=^|;).+?(?=\=|;|$)/g,
+        name => location.hostname
+            .split(/\.(?=[^\.]+\.)/)
+            .reduceRight((acc, val, i, arr) => i ? arr[i] = '.' + val + acc : (arr[i] = '', arr), '')
+            .map(domain => document.cookie = `${name}=;max-age=0;path=/;domain=${domain}`)
+    );
+}
+
+function main() {
+    if (getCookie('reload') == 'true') {
+        deleteCookie('reload', '/')
+        return;
+    }
     switch (window.location.hostname) {
         case 'www.nekopost.net':
             // delay 2 second
@@ -527,19 +555,22 @@ function main(message) {
     }
 }
 
-const original_html = document.getElementsByTagName('html')[0].innerHTML;
-
-function reset() {
-    document.getElementsByTagName('html')[0].innerHTML = original_html;
-}
-
 count_quote_symbol();
 
 main();
 
+let transfrom_mode = false;
 document.addEventListener("keydown", function (e) {
-    if (e.altKey && e.key === "1") process();
-    if (e.altKey && e.key === "2") full_book();
-    if (e.altKey && e.key === "3") reset();
-    if (e.altKey && e.key === "4") { location.reload(); delay(2000).then(() => main('main3')); }
+    if (e.key === "w") //TODO: type mode like vimium; use cookie?
+    {
+        transfrom_mode = !transfrom_mode;
+        console.log('transfrom mode: ', transfrom_mode);
+    }
+    if (e.key === "1" && transfrom_mode) process();
+    if (e.key === "2" && transfrom_mode) full_book();
+    if (e.key === "3" && transfrom_mode) reset();
+    if (e.key === "4" && transfrom_mode) {
+        setCookie('reload', 'true', 1);
+        location.reload();
+    }
 });
