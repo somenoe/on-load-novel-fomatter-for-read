@@ -207,7 +207,7 @@ function unreadablize(doc) {
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
-            .replace(/([†♱*\$#]+)([^>]*<)/g, `${unread('$1')}$2`)
+            .replace(/([†♱*•\$#]+)([^>]*<)/g, `${unread('$1')}$2`)
             // only number
             .replace(/(<p>)([0-9\s])(<\/p>)/g, `$1${unread('$2')}$3`)
             // slash to false slash
