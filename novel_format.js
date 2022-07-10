@@ -24,6 +24,8 @@ function pre_replace(doc) {
         .replace(/<abbr .+>(\w+)<\/abbr>/g, "<i>$1</i>")
         // delete dupulicate
         .replace(/[\s]+|(&nbsp;)+/g, " ")
+        // panda ads
+        .replace(/ραꪒⅆα-ꪒꪫꪥꫀ​ꪶ/gi, '')
         // dash
         .replace(/[─]+/g, "─")
         .replace(/\.[\-—–―]+,*/g, "–")
@@ -242,12 +244,12 @@ function exclamation(doc) {
             .replace(/Aa([^\w])/g, "Ah$1")
             .replace(/([^\w])(Mm-hmm|Mmmhmm|Mmhmm|mmmhmm|mmhmm|Mhm)([ |?|!|\.|,|…])/g, "$1Uh-huh$3")
             .replace(/Hmpf|Hmph|Hmhm|Mhh|Hn/g, "Hmm")
-            .replace(/([^\w])(Hm|hm)([^\w])/g, "$1Hmm$3")
+            .replace(/([^\w])(Hr*m)([^\w])/gi, "$1Hmm$3")
             .replace(/Kreuk|Keuk|Kuek/g, "Kwuk")
             .replace(/[K|k]euck/g, "Kheck")
             .replace(/Krr|krr/g, "Karr")
             .replace(/Keugh|keugh/g, "Kugh")
-            .replace(/(Mm+|Mmhm|mmhm)([^\w])/g, "Mmm$2")
+            .replace(/([^\w])(M+r+f+|m+h*m+)([^\w])/gi, "$1Mmm$3")
             .replace(/Nn/g, "Neun")
             .replace(
                 /([^\w])([Pp]w*f+t+f*|[Pp]ff+t*f*)([^\w])/g,
