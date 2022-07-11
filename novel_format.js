@@ -156,7 +156,7 @@ function wording(doc) {
             .replace(/Imeraria/g, "Maria")
             .replace(/Kreuz/g, "Kruz")
             .replace(/Ma'am|ma'am|Ma’am|ma’am/g, "Madam")
-            .replace(/Mia([ |?|!|\.|,|…])/g, "Miah$1")
+            .replace(/Mia([^\w])/g, "Miah$1")
             .replace(/Rey/g, "Ray")
             .replace(/Roel/g, "Ro–el")
             .replace(/Runegear/g, "Rune-gear")
@@ -369,7 +369,7 @@ function styling() {
         `body {
             background-color: #1F2022;
             color: papayawhip;
-            font-family: "Arial" !important;
+            font-family: Georgia !important;
             font-size: 25px !important;
             line-height: 1.3 !important;
             margin-bottom: 100px !important;
