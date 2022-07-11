@@ -244,7 +244,7 @@ function exclamation(doc) {
             .replace(/Aa([^\w])/g, "Ah$1")
             .replace(/([^\w])(Mm-hmm|Mmmhmm|Mmhmm|mmmhmm|mmhmm|Mhm)([ |?|!|\.|,|…])/g, "$1Uh-huh$3")
             .replace(/Hmpf|Hmph|Hmhm|Mhh|Hn/g, "Hmm")
-            .replace(/([^\w])(Hr*m)([^\w])/gi, "$1Hmm$3")
+            .replace(/([^\w])(Hr*m+)([^\w])/gi, "$1Hmm$3")
             .replace(/Kreuk|Keuk|Kuek/g, "Kwuk")
             .replace(/[K|k]euck/g, "Kheck")
             .replace(/Krr|krr/g, "Karr")
