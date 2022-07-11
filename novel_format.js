@@ -368,6 +368,7 @@ function styling() {
     newStyle.innerHTML =
         `body {
             background-color: #1F2022;
+            color: papayawhip;
             font-family: "Arial" !important;
             font-size: 25px !important;
             line-height: 1.3 !important;
@@ -378,15 +379,11 @@ function styling() {
             text-align: left;
         }
         p {
-            color: papayawhip;
             margin-top: 1em !important;
             margin: 0 0 1em !important;
             padding-bottom: 0rem !important;
             text-align: left;
             text-indent: 0pt !important;
-        }
-        h1 {
-            color: papayawhip;
         }`
         ;
     document.head.appendChild(newStyle);
