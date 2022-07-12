@@ -25,7 +25,7 @@ function pre_replace(doc) {
         // delete dupulicate
         .replace(/[\s]+|(&nbsp;)+/g, " ")
         // panda ads
-        .replace(/ραꪒⅆα-ꪒꪫꪥꫀ​ꪶ/gi, '')
+        .replace(/ραꪒⅆα-ꪒꪫꪥꫀ​ꪶ|ραꪒⅆα ꪒꪫꪥꫀ​ꪶ​/gi, '')
         // dash
         .replace(/[─]+/g, "─")
         .replace(/\.[\-—–―]+,*/g, "–")
