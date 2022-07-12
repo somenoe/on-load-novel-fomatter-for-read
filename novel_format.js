@@ -197,8 +197,8 @@ function unread(text) {
 function unreadablize(doc) {
     return (
         doc
-            // chapter name
-            .replace(/(Episode|Chapter|Ch|Part)([\s.]*[0-9]+[^<>]*)</gi, `${unread('$1$2')}<`)
+            // // chapter name
+            // .replace(/(Episode|Chapter|Ch|Part)([\s.]*[0-9]+[^<>]*)</gi, `${unread('$1$2')}<`)
             // // inside bracket()
             // .replace(/(\([^()]+\))/g, `${unread('$1')}`)
             // name front quote
