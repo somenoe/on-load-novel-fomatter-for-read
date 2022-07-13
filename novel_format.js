@@ -172,6 +172,7 @@ function wording(doc) {
             .replace(/Ganbatte|Ganbattene/g, "Do your best")
             .replace(/Hifumi/g, "Hiro")
             .replace(/Mylene/g, "Malena")
+            .replace(/Yuuhi/g, "Yuna")
             .replace(/(([Nn]|[Oo]n)ii|[Aa]n)–*(san|sama|chan)/g, "Big–Bro")
             .replace(/[Ii]mouto/g, "Little-Sis")
             .replace(/[Kk]aa–*(san|sama|chan)/g, "Mom")
@@ -201,6 +202,11 @@ function unreadablize(doc) {
             // .replace(/(Episode|Chapter|Ch|Part)([\s.]*[0-9]+[^<>]*)</gi, `${unread('$1$2')}<`)
             // // inside bracket()
             // .replace(/(\([^()]+\))/g, `${unread('$1')}`)
+            // word in ()
+            .replace(/(\([^) ]+\))/g, `${unread('$1')}`)
+            // translate note
+            .replace(/(『 T. N:[^』]+』)/g, `${unread('$1')}`)
+            .replace(/(\(T.N[^)]+\))/g, ` ${unread('$1')}`)
             // name front quote
             .replace(/(>\s*)([A-Z][\wé]*:)/g, `$1${unread('$2')}`)
             // silent symbol
@@ -222,7 +228,7 @@ function stutter(doc) {
     return (
         doc
             // target: ' d-d', ' f-f', ' ch-ch', ' wh-wh', '…th-th', '“C-C', '“G-G',
-            .replace(/([^\w’'])((?![aiueoAIUEO])[B-z](?![aiueoAIUEO])[B-z]?)[,…─\-–〜](\s*)\2/gi, "$1$2ah-$2")
+            .replace(/([^\w’'])((?![aiueoAIUEO])[B-z][aiueothr]?)[,…─\-–〜](\s*)\2/gi, "$1$2ah-$2")
             .replace(/([^\w’'])([aueoAUEO])[,…─\-–〜](\s*)\2/gi, "$1$2h-$2")
     );
 }
@@ -371,7 +377,7 @@ function styling() {
             color: papayawhip;
             font-family: Georgia !important;
             font-size: 25px !important;
-            line-height: 1.3 !important;
+            line-height: 1.5 !important;
             margin-bottom: 100px !important;
             margin-left: calc(33% - 100px) !important;
             margin-right: calc(33% - 100px) !important;
