@@ -99,9 +99,9 @@ function partition(doc) {
             // solid hr
             .replace(/<hr>/g, '<hr class="solid">')
             // // partition
-            // .replace(
-            //     /<(p|span)>([\?\!\*\s\-\._…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/(p|span)>/g,
-            //     '<hr class="solid">')
+            .replace(
+                /<(p|span)>([\?\!\*\s\-\._…—–―─━~〜◇◆⍚#└│]+|–o–|&amp;|&nbsp;)<\/(p|span)>/g,
+                '<hr class="solid">')
             // delete double partition
             .replace(
                 /(hr class=\"solid\">)([\n\s]*<hr class=\"solid\">)+/g,
@@ -202,6 +202,8 @@ function unreadablize(doc) {
             // .replace(/(Episode|Chapter|Ch|Part)([\s.]*[0-9]+[^<>]*)</gi, `${unread('$1$2')}<`)
             // // inside bracket()
             // .replace(/(\([^()]+\))/g, `${unread('$1')}`)
+
+            .replace(/(==+)/g, `${unread('$1')}`)
             // word in ()
             .replace(/(\([^) ]+\))/g, `${unread('$1')}`)
             // translate note
