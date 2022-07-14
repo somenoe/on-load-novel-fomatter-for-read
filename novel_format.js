@@ -239,7 +239,7 @@ function exclamation(doc) {
     return (
         doc
             // exclamation sound
-            .replace(/([^\w.])(nn|N)([^\w])/g, "$1Neun$3")
+            // .replace(/([^\w.])(nn|N)([^\w])/g, "$1Neun$3")
             .replace(/Aa([〜|,|!|?])/g, "Ah$1")
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
