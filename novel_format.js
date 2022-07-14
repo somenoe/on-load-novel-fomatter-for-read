@@ -11,8 +11,8 @@ function replacing(doc) {
     doc = stutter(doc);
     doc = stutter(doc);
     doc = stutter(doc);
-    doc = exclamation(doc);
     doc = unreadablize(doc);
+    doc = exclamation(doc);
     doc = wording(doc);
     doc = post_arrangement(doc)
     return doc;
@@ -213,7 +213,7 @@ function unreadablize(doc) {
             .replace(/([「][^\w]+[」])/g, `${unread('$1')}`)
             // these symbol
             // .replace(/(\s[^\w][^\w][^\w]+\s)/g, `${unread('$1')}`)
-            .replace(/([†♱*•\$#]+)([^>]*<)/g, `${unread('$1')}$2`)
+            .replace(/([■–†♱*•\$#]+)([^>]*<)/g, `${unread('$1')}$2`)
             // only number
             .replace(/(<p>)([0-9\s])(<\/p>)/g, `$1${unread('$2')}$3`)
             // slash to false slash
@@ -237,7 +237,7 @@ function exclamation(doc) {
     return (
         doc
             // exclamation sound
-            // .replace(/([^\w.])(nn|N)([^\w])/g, "$1Neun$3")
+            .replace(/([^\w.])(nn|N)([^\w])/g, "$1Neun$3")
             .replace(/Aa([〜|,|!|?])/g, "Ah$1")
             .replace(/Ahk/g, "Ahhk")
             .replace(/Aht/g, "Ahhk")
