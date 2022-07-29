@@ -25,7 +25,7 @@ function pre_replace(doc) {
         // delete dupulicate
         .replace(/[\s]+|(&nbsp;)+/g, " ")
         // panda ads
-        .replace(/ραꪒⅆα-ꪒꪫꪥꫀ​ꪶ|ραꪒⅆα ꪒꪫꪥꫀ​ꪶ​/gi, '')
+        .replace(/pᴀɴᴅᴀ ɴoᴠᴇʟ|pᴀɴᴅᴀ-ɴoᴠᴇʟ|ρꪖꪕᦔꪖꪕꪫꪣꫀ​ꪶ​|ραꪒⅆα-ꪒꪫꪥꫀ​ꪶ|ραꪒⅆα ꪒꪫꪥꫀ​ꪶ​|pᴀɴᴅᴀ-ɴᴏᴠᴇʟ.ᴄᴏᴍ/gi, '')
         // dash
         .replace(/[─]+/g, "─")
         .replace(/\.[\-—–―]+,*/g, "–")
@@ -487,7 +487,17 @@ function process() {
     add_child(body, content);
 }
 
-function delay(time) { return new Promise(resolve => setTimeout(resolve, time)); }
+const second = (time) => time * 1000;
+const minute = (time) => second(time) * 60;
+const hour = (time) => minute(time) * 60;
+
+/**
+ * ### Usage:
+ * * delay(second(1)).then(() => process());
+ * * delay(minute(1) + second(2)).then(() => process());
+ * * delay(hour(1) + minute(2) + second(3)).then(() => process());
+ */
+const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
 
 
 function removeAllChildNodes(parent) {
@@ -541,6 +551,7 @@ function deleteAllCookies() {
     );
 }
 
+
 function main() {
     if (getCookie('reload') == 'true') {
         deleteCookie('reload', '/')
@@ -549,7 +560,8 @@ function main() {
     switch (window.location.hostname) {
         case 'www.nekopost.net':
             // delay 2 second
-            delay(2000).then(() => process());
+            // delay(2000).then(() => process());
+            delay(second(2)).then(() => process());
             break;
         case 'ranobes.net':
         case 'infinitenoveltranslations.net':
