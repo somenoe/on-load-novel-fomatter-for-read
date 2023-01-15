@@ -173,6 +173,7 @@ function wording(doc) {
             .replace(/Hifumi/g, "Hiro")
             .replace(/Mylene/g, "Malena")
             .replace(/Yuuhi/g, "Yuna")
+            .replace(/Cai( ?)/g, "Sia$1")
             .replace(/(([Nn]|[Oo]n)ii|[Aa]n)–*(san|sama|chan)/g, "Big–Bro")
             .replace(/[Ii]mouto/g, "Little-Sis")
             .replace(/[Kk]aa–*(san|sama|chan)/g, "Mom")
@@ -320,8 +321,8 @@ function japanese_quote_symbol(doc) {
 
     // // ! need to change all [Apostrophe] to (') first, otherwise it count as [single_close_quote]
     // mainly use english quote symbol ("")
-    let sum_double_quote = double_open_quote + double_close_quote;
-    let sum_single_quote = single_open_quote + single_close_quote;
+    let sum_double_quote = double_open_quote + double_close_quote - Math.abs(double_open_quote - double_close_quote);
+    let sum_single_quote = single_open_quote + single_close_quote - Math.abs(single_open_quote - single_close_quote);
     if ((sum_double_quote) > (sum_single_quote) || sum_double_quote + sum_single_quote == 0) {
         doc = doc.replace(/“/g, "「").replace(/”/g, "」");
     } else {
@@ -447,6 +448,9 @@ function setNavigatorWithArrowKey() {
             if (next_chapter == '') next_chapter = (prev_chapter != '') ? current_url : '';
         }
     }
+    function no_next_and_prev_chapter() {
+        console.log("no next and prev chapter");
+    }
     // set key Listener
     document.addEventListener("keydown", function (e) {
         if (e.key === "ArrowRight") location = next_chapter;
@@ -552,6 +556,8 @@ function main() {
             delay(2000).then(() => process());
             break;
         case 'ranobes.net':
+        case 'ranobes.net':
+        case 'kaystls.site':
         case 'infinitenoveltranslations.net':
         case 'towelcitytown.wordpress.com':
         case 'allnovelfull.com':
