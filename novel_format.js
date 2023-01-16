@@ -465,6 +465,8 @@ function countElements(element, condition) {
     return [...element.children].reduce((total, e) => (condition(e) ? total + 1 : total), 0)
 }
 function process() {
+    // delete all ads
+    delete_all_ads();
     //! //BUG: no break point for non-novel-content page like: chapter list page
     const title = document.getElementsByTagName("title")[0].cloneNode(true);
     const content = getElementWithMaxChlidenNode().cloneNode(true);
@@ -600,3 +602,9 @@ document.addEventListener("keydown", function (e) {
         location.reload();
     }
 });
+
+// function to delete all ads
+function delete_all_ads() {
+    const ads = document.getElementsByClassName('adsbygoogle');
+    [...ads].forEach(e => e.remove())
+}
