@@ -168,6 +168,7 @@ function wording(doc) {
             .replace(/Noa([^A-Za-z])/g, "Noah$1")
             .replace(/Yekaterina/g, "Katerina")
             // JP Name
+            .replace(/Amiyu/g, "Amy")
             .replace(/[G|g]oshujin-sama/g, "Master")
             .replace(/Ganbatte|Ganbattene/g, "Do your best")
             .replace(/Hifumi/g, "Hiro")
