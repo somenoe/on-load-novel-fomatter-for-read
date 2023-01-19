@@ -589,15 +589,15 @@ main();
 
 let transfrom_mode = false;
 document.addEventListener("keydown", function (e) {
-    if (e.key === "w") //TODO: type mode like vimium; use cookie?
+    if (e.key === "Q") //TODO: type mode like vimium; use cookie?
     {
         transfrom_mode = !transfrom_mode;
         console.log('transfrom mode: ', transfrom_mode);
     }
-    if (e.key === "1" && transfrom_mode) process();
-    if (e.key === "2" && transfrom_mode) full_book();
-    if (e.key === "3" && transfrom_mode) reset();
-    if (e.key === "4" && transfrom_mode) {
+    if (e.key === "Q" && transfrom_mode) process();
+    if (e.key === "D" && transfrom_mode) full_book();
+    if (e.key === "R" && transfrom_mode) reset();
+    if (e.key === "W" && transfrom_mode) {
         setCookie('reload', 'true', 1);
         location.reload();
     }
