@@ -170,6 +170,7 @@ function wording(doc) {
             // JP Name
             .replace(/[G|g]oshujin-sama/g, "Master")
             .replace(/Ganbatte|Ganbattene/g, "Do your best")
+            .replace(/(Amiyu|Amu)( *)/g, "Amy$2")
             .replace(/Hifumi/g, "Hiro")
             .replace(/Mylene/g, "Malena")
             .replace(/Yuuhi/g, "Yuna")
