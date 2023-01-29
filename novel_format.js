@@ -322,14 +322,14 @@ function japanese_quote_symbol(doc) {
     // doc = doc.replace(/“/g, "「 ").replace(/”/g, " 」");
 
     // // ! need to change all [Apostrophe] to (') first, otherwise it count as [single_close_quote]
-    // mainly use english quote symbol ("")
-    let sum_double_quote = double_open_quote + double_close_quote - Math.abs(double_open_quote - double_close_quote);
-    let sum_single_quote = single_open_quote + single_close_quote - Math.abs(single_open_quote - single_close_quote);
-    if ((sum_double_quote) > (sum_single_quote) || sum_double_quote + sum_single_quote == 0) {
-        doc = doc.replace(/“/g, "「").replace(/”/g, "」");
-    } else {
-        doc = doc.replace(/‘/g, "「").replace(/’/g, "」");
-    }
+    // !mainly use english quote symbol ("")
+    // let sum_double_quote = double_open_quote + double_close_quote - Math.abs(double_open_quote - double_close_quote);
+    // let sum_single_quote = single_open_quote + single_close_quote - Math.abs(single_open_quote - single_close_quote);
+    // if ((sum_double_quote) > (sum_single_quote) || sum_double_quote + sum_single_quote == 0) {
+    //     doc = doc.replace(/“/g, "「").replace(/”/g, "」");
+    // } else {
+    //     doc = doc.replace(/‘/g, "「").replace(/’/g, "」");
+    // }
     doc = doc
         .replace(/\[/g, "『")
         .replace(/\]/g, "』")
