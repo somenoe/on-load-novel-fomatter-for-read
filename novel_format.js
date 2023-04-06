@@ -606,7 +606,7 @@ function main() {
       // delay(2000).then(() => process());
       delay(second(2)).then(() => process());
       break;
-    case "ranobes.net":
+    case "ranobes.top":
     case "ranobes.net":
     case "kaystls.site":
     case "infinitenoveltranslations.net":
