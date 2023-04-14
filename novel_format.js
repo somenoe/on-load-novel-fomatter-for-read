@@ -595,7 +595,21 @@ function deleteAllCookies() {
   );
 }
 
+const removeAdIframe = () =>
+  [...document.getElementsByClassName("_adr_abp_container")].forEach((e) =>
+    e.remove()
+  );
+const removeAllScriptTag = () =>
+  [...document.getElementsByTagName("script")].forEach((e) => e.remove());
+
 function main() {
+  console.log("fromatter version: 1.0.0");
+  // removeAllScriptTag();
+  // remove ad iframe
+  delay(second(2)).then(() => {
+    console.log("removed ad iframe");
+    removeAdIframe();
+  });
   if (getCookie("reload") == "true") {
     deleteCookie("reload", "/");
     return;
