@@ -603,13 +603,20 @@ const removeAllScriptTag = () =>
   [...document.getElementsByTagName("script")].forEach((e) => e.remove());
 
 function main() {
-  console.log("fromatter version: 1.0.0");
+  console.log("fromatter version: 1.0.2");
   // removeAllScriptTag();
-  // remove ad iframe
   delay(second(2)).then(() => {
-    console.log("removed ad iframe");
     removeAdIframe();
   });
+
+  delay(second(5)).then(() => {
+    removeAdIframe();
+  });
+
+  delay(second(10)).then(() => {
+    removeAdIframe();
+  });
+
   if (getCookie("reload") == "true") {
     deleteCookie("reload", "/");
     return;
