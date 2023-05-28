@@ -596,14 +596,18 @@ function deleteAllCookies() {
 }
 
 const removeAdIframe = () =>
+  [...document.getElementsByTagName("iframe")].forEach((e) => e.remove()) +
   [...document.getElementsByClassName("_adr_abp_container")].forEach((e) =>
+    e.remove()
+  ) +
+  [...document.getElementsByClassName("_ap_apex_ad")].forEach((e) =>
     e.remove()
   );
 const removeAllScriptTag = () =>
   [...document.getElementsByTagName("script")].forEach((e) => e.remove());
 
 function main() {
-  console.log("fromatter version: 1.0.2");
+  console.log("fromatter version: 1.0.3");
   // removeAllScriptTag();
   delay(second(2)).then(() => {
     removeAdIframe();
