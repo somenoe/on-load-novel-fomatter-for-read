@@ -607,19 +607,8 @@ const removeAllScriptTag = () =>
   [...document.getElementsByTagName("script")].forEach((e) => e.remove());
 
 function main() {
-  console.log("fromatter version: 1.0.3");
+  console.log("fromatter version: 1.0.4");
   // removeAllScriptTag();
-  delay(second(2)).then(() => {
-    removeAdIframe();
-  });
-
-  delay(second(5)).then(() => {
-    removeAdIframe();
-  });
-
-  delay(second(10)).then(() => {
-    removeAdIframe();
-  });
 
   if (getCookie("reload") == "true") {
     deleteCookie("reload", "/");
@@ -641,6 +630,9 @@ function main() {
     case "freewebnovel.com":
     case "www.panda-novel.com":
       process();
+      delay(second(2)).then(() => {
+        removeAdIframe();
+      });
       break;
   }
 }
